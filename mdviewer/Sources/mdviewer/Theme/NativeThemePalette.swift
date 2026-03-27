@@ -63,6 +63,10 @@ struct NativeThemePalette {
     let textSecondary: NSColor
     let textTertiary: NSColor
 
+    // MARK: - Structural Colors
+
+    let background: NSColor
+
     // MARK: - Interactive Colors
 
     let link: NSColor

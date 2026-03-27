@@ -1,0 +1,1283 @@
+[0/1] Planning build
+[1/1] Compiling plugin SwiftFormatPlugin
+Building for debugging...
+[1/7] Write swift-version--58304C5D6DBC2206.txt
+[3/71] Compiling mdviewer SwiftMarkdownRenderer.swift
+[4/71] Compiling mdviewer SyntaxHighlighter.swift
+[5/71] Compiling mdviewer TypographyApplier.swift
+[6/71] Compiling mdviewer MarkdownRenderAttribute.swift
+[7/71] Compiling mdviewer MarkdownRendering.swift
+[8/71] Compiling mdviewer PipelineProtocols.swift
+[9/76] Compiling mdviewer MarkdownEditor.swift
+[10/76] Compiling mdviewer AppPreferences.swift
+[11/76] Compiling mdviewer Frontmatter.swift
+[12/76] Compiling mdviewer FrontmatterParser.swift
+[13/76] Compiling mdviewer MarkdownDocument.swift
+[14/76] Compiling mdviewer AppearanceMode.swift
+[15/76] Compiling mdviewer ReaderMode.swift
+[16/76] Compiling mdviewer ReaderTextSpacing.swift
+[17/76] Compiling mdviewer StoredPreference.swift
+[18/76] Compiling mdviewer TypographyPreferences.swift
+[19/76] Compiling mdviewer StarterTemplate.swift
+[20/76] Compiling mdviewer PerformanceConstants.swift
+[21/76] Compiling mdviewer RenderErrors.swift
+[22/76] Compiling mdviewer RenderRequest.swift
+[23/76] Compiling mdviewer RenderedMarkdown.swift
+[24/76] Compiling mdviewer BuiltinLanguages.swift
+[25/76] Compiling mdviewer LanguageDefinition.swift
+[26/76] Compiling mdviewer NativeSyntaxStyle.swift
+[27/76] Compiling mdviewer DefaultMarkdownAppRegistrar.swift
+[28/76] Compiling mdviewer MarkdownRenderService.swift
+[29/76] Compiling mdviewer BlockSeparatorInjector.swift
+[30/76] Compiling mdviewer EnhancedMarkdownParser.swift
+[31/76] Compiling mdviewer MarkdownParser.swift
+[32/76] Compiling mdviewer MermaidDiagramRenderer.swift
+[33/76] Compiling mdviewer AccessibilityAnnouncement.swift
+[34/76] Compiling mdviewer AccessibilityConfiguration.swift
+[35/76] Compiling mdviewer TableLayoutMetrics.swift
+[36/76] Compiling mdviewer TransitionKit.swift
+[37/76] Compiling mdviewer ViewModifiers.swift
+[38/76] Compiling mdviewer EditorActions.swift
+[39/76] Emitting module mdviewer
+[40/76] Compiling mdviewer AppTheme.swift
+[41/76] Compiling mdviewer DesignTokens.swift
+[42/76] Compiling mdviewer NativeThemePalette.swift
+[43/76] Compiling mdviewer ThemeData.swift
+[44/76] Compiling mdviewer ThemeDefinitions.swift
+[45/76] Compiling mdviewer ThemePalette.swift
+[46/76] Compiling mdviewer FontFamilyPicker.swift
+[47/76] Compiling mdviewer GlassPanelModifier.swift
+[48/76] Compiling mdviewer LiquidBackground.swift
+[49/76] Compiling mdviewer ThemePreview.swift
+[50/76] Compiling mdviewer ToolbarVisibilityController.swift
+[51/76] Compiling mdviewer FolderSidebarView.swift
+[52/76] Compiling mdviewer TableOfContentsView.swift
+[53/76] Compiling mdviewer RawMarkdownEditor.swift
+[54/76] Compiling mdviewer KeybindingsView.swift
+[55/76] Compiling mdviewer LineNumberRulerView.swift
+[56/76] Compiling mdviewer ReaderLayoutManager.swift
+[57/76] Compiling mdviewer ReaderTextView.swift
+[58/76] Compiling mdviewer NativeMarkdownTextView.swift
+[59/76] Compiling mdviewer SettingsView.swift
+[60/76] Compiling mdviewer mdviewerApp.swift
+[61/76] Compiling mdviewer CodeFontSize.swift
+[62/76] Compiling mdviewer LargeFileThreshold.swift
+[63/76] Compiling mdviewer ReaderColumnWidth.swift
+[64/76] Compiling mdviewer ReaderContentPadding.swift
+[65/76] Compiling mdviewer ReaderFontFamily.swift
+[66/76] Compiling mdviewer ReaderFontSize.swift
+[67/76] Compiling mdviewer TypographySettingsSection.swift
+[68/76] Compiling mdviewer WelcomeStartView.swift
+[69/76] Compiling mdviewer ContentToolbar.swift
+[70/76] Compiling mdviewer ContentView.swift
+[71/76] Compiling mdviewer DocumentOperations.swift
+[71/75] Linking mdviewer
+[72/75] Applying mdviewer
+[74/112] Compiling mdviewerTests ReaderLayoutManagerGeometryTests.swift
+[75/112] Compiling mdviewerTests RendererPerformanceTests.swift
+[76/112] Compiling mdviewerTests RenderingSanityTests.swift
+[77/115] Compiling mdviewerTests FrontmatterPresentationTests.swift
+[78/115] Compiling mdviewerTests FrontmatterValueTypeTests.swift
+[79/115] Compiling mdviewerTests HorizontalRuleRenderingTests.swift
+[80/115] Compiling mdviewerTests LargeFileThresholdTests.swift
+[81/115] Compiling mdviewerTests ListRenderingStabilityTests.swift
+[82/115] Compiling mdviewerTests MarkdownDocumentTests.swift
+[83/115] Compiling mdviewerTests E2EInspectorTests.swift
+[84/115] Compiling mdviewerTests E2ERenderingTests.swift
+[85/115] Compiling mdviewerTests E2EToolbarTests.swift
+[86/115] Compiling mdviewerTests EditorPreferencesTests.swift
+[87/115] Emitting module mdviewerTests
+[88/115] Compiling mdviewerTests AccessibilityEnhancementTests.swift
+[89/115] Compiling mdviewerTests AccessibilityTests.swift
+[90/115] Compiling mdviewerTests DefaultMarkdownAppRegistrarTests.swift
+[91/115] Compiling mdviewerTests DesignSystemTests.swift
+[92/115] Compiling mdviewerTests RenderingStabilityTests.swift
+[93/115] Compiling mdviewerTests SettingsAccessibilityTests.swift
+[94/115] Compiling mdviewerTests SettingsFunctionalTests.swift
+[95/115] Compiling mdviewerTests MermaidDiagramRendererTests.swift
+[96/115] Compiling mdviewerTests ModeChangeAccessibilityTests.swift
+[97/115] Compiling mdviewerTests RawViewLineNumberTests.swift
+[98/115] Compiling mdviewerTests SyntaxHighlighterTests.swift
+[99/115] Compiling mdviewerTests TableColumnDividerOpacityTests.swift
+[100/115] Compiling mdviewerTests ThemeApplicationTests.swift
+[101/115] Compiling mdviewerTests ThemeSpacingTests.swift
+[102/115] Compiling mdviewerTests ToolbarVisibilityTests.swift
+[103/115] Compiling mdviewerTests ViewBuilderPerformanceTests.swift
+[104/115] Compiling mdviewerTests FileSizeWarningTests.swift
+[105/115] Compiling mdviewerTests FolderSidebarViewTests.swift
+[106/115] Compiling mdviewerTests FrontmatterParserEdgeCaseTests.swift
+[107/115] Compiling mdviewerTests FrontmatterParserTests.swift
+[108/115] Compiling mdviewerTests MarkdownRenderIntegrationTests.swift
+[109/115] Compiling mdviewerTests MarkdownRenderLineBreakTests.swift
+[110/115] Compiling mdviewerTests MarkdownRenderVisualTests.swift
+[111/115] Compiling mdviewerTests VisualRegressionTests.swift
+[112/115] Compiling mdviewerTests VoiceOverNavigationTests.swift
+[113/115] Compiling mdviewerTests mdviewerTests.swift
+[114/117] Compiling mdviewerPackageTests runner.swift
+[115/117] Emitting module mdviewerPackageTests
+[115/116] Linking mdviewerPackageTests
+Build complete! (44.94s)
+Test Suite 'All tests' started at 2026-03-25 18:17:17.855.
+Test Suite 'mdviewerPackageTests.xctest' started at 2026-03-25 18:17:17.858.
+Test Suite 'AccessibilityEnhancementTests' started at 2026-03-25 18:17:17.858.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAccessibilityDescriptionsAreDescriptive]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAccessibilityDescriptionsAreDescriptive]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAccessibilityValueFormats]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAccessibilityValueFormats]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAccessibleAnimationModifier]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAccessibleAnimationModifier]' passed (0.014 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAccessibleTransitionModifier]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAccessibleTransitionModifier]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAdaptiveEaseInOutWithReduceMotion]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAdaptiveEaseInOutWithReduceMotion]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAdaptiveSpringWithReduceMotion]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAdaptiveSpringWithReduceMotion]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAdaptiveTransitionWithReduceMotion]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAdaptiveTransitionWithReduceMotion]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAnimationMultiplierWithReduceMotion]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testAnimationMultiplierWithReduceMotion]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testContentViewAccessibility]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testContentViewAccessibility]' passed (0.015 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testEditorAccessibilityIdentifiers]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testEditorAccessibilityIdentifiers]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testEmptyMetadataAccessibility]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testEmptyMetadataAccessibility]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testKeyboardShortcutsDefined]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testKeyboardShortcutsDefined]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testLineNumberAccessibilityLabel]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testLineNumberAccessibilityLabel]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testMetadataRowAccessibilityLabel]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testMetadataRowAccessibilityLabel]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testRawMarkdownEditorAccessibilityConfiguration]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testRawMarkdownEditorAccessibilityConfiguration]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testSemanticColorContrast]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testSemanticColorContrast]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testVoiceOverNavigationActions]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testVoiceOverNavigationActions]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testWelcomeStartViewAccessibility]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testWelcomeStartViewAccessibility]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testWelcomeViewHeadingTrait]' started.
+Test Case '-[mdviewerTests.AccessibilityEnhancementTests testWelcomeViewHeadingTrait]' passed (0.002 seconds).
+Test Suite 'AccessibilityEnhancementTests' passed at 2026-03-25 18:17:17.907.
+	 Executed 19 tests, with 0 failures (0 unexpected) in 0.045 (0.049) seconds
+Test Suite 'AccessibilityTests' started at 2026-03-25 18:17:17.907.
+Test Case '-[mdviewerTests.AccessibilityTests testAccessibilityActionNamesAreDescriptive]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testAccessibilityActionNamesAreDescriptive]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testAccessibilityHintsAreDescriptive]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testAccessibilityHintsAreDescriptive]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testAccessibilityIdentifiersAreSet]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testAccessibilityIdentifiersAreSet]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testAccessibilityLabelsAreNotEmpty]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testAccessibilityLabelsAreNotEmpty]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testContentToolbarHasAccessibilityLabels]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testContentToolbarHasAccessibilityLabels]' passed (0.006 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testHeadingInfoEquality]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testHeadingInfoEquality]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testHeadingLevelAttributeKeyExists]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testHeadingLevelAttributeKeyExists]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testLineNumbersToggleHasAccessibility]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testLineNumbersToggleHasAccessibility]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testRawMarkdownEditorHasAccessibilityConfiguration]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testRawMarkdownEditorHasAccessibilityConfiguration]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testRotorLabelsAreDescriptive]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testRotorLabelsAreDescriptive]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testThemePickerHasAccessibility]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testThemePickerHasAccessibility]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testToolbarModePickerHasAccessibilityLabel]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testToolbarModePickerHasAccessibilityLabel]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testWelcomeButtonsHaveAccessibilityLabels]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testWelcomeButtonsHaveAccessibilityLabels]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.AccessibilityTests testWelcomeStartViewHasAccessibilityLabels]' started.
+Test Case '-[mdviewerTests.AccessibilityTests testWelcomeStartViewHasAccessibilityLabels]' passed (0.001 seconds).
+Test Suite 'AccessibilityTests' passed at 2026-03-25 18:17:17.931.
+	 Executed 14 tests, with 0 failures (0 unexpected) in 0.022 (0.025) seconds
+Test Suite 'DefaultMarkdownAppRegistrarTests' started at 2026-03-25 18:17:17.931.
+Test Case '-[mdviewerTests.DefaultMarkdownAppRegistrarTests testRegistersCanonicalAndExtensionResolvedMarkdownContentTypes]' started.
+Test Case '-[mdviewerTests.DefaultMarkdownAppRegistrarTests testRegistersCanonicalAndExtensionResolvedMarkdownContentTypes]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.DefaultMarkdownAppRegistrarTests testThrowsWhenLaunchServicesDoesNotPersistMdContentTypeHandler]' started.
+Test Case '-[mdviewerTests.DefaultMarkdownAppRegistrarTests testThrowsWhenLaunchServicesDoesNotPersistMdContentTypeHandler]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DefaultMarkdownAppRegistrarTests testThrowsWhenMdContentTypeRegistrationFails]' started.
+Test Case '-[mdviewerTests.DefaultMarkdownAppRegistrarTests testThrowsWhenMdContentTypeRegistrationFails]' passed (0.000 seconds).
+Test Suite 'DefaultMarkdownAppRegistrarTests' passed at 2026-03-25 18:17:17.933.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'DesignSystemTests' started at 2026-03-25 18:17:17.933.
+Test Case '-[mdviewerTests.DesignSystemTests testAnimationDurationTokensExist]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testAnimationDurationTokensExist]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testAnimationTimingConsistency]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testAnimationTimingConsistency]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testBouncyAnimationExtension]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testBouncyAnimationExtension]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testCornerRadiiTokensArePositive]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testCornerRadiiTokensArePositive]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testDesignTokensMatchDocumentation]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testDesignTokensMatchDocumentation]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testDesignTokensWorkWithRenderer]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testDesignTokensWorkWithRenderer]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testDesignTokensWorkWithThemes]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testDesignTokensWorkWithThemes]' passed (0.042 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testElegantSlideTransitionExists]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testElegantSlideTransitionExists]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testElevationModifierCompiles]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testElevationModifierCompiles]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testFontSizesScale]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testFontSizesScale]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testInteractiveModifierCompiles]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testInteractiveModifierCompiles]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testLayoutConstantsArePositive]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testLayoutConstantsArePositive]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testLiquidAnimationExtension]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testLiquidAnimationExtension]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testLoadingModifierCompiles]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testLoadingModifierCompiles]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testOpacityTokensAreValid]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testOpacityTokensAreValid]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testPopupScaleTransitionExists]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testPopupScaleTransitionExists]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testShadowValuesAreConsistent]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testShadowValuesAreConsistent]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testSmoothAnimationExtension]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testSmoothAnimationExtension]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testSmootVisibilityModifierCompiles]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testSmootVisibilityModifierCompiles]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testSpacingRatios]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testSpacingRatios]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testSpacingTokensAreMonotonic]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testSpacingTokensAreMonotonic]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testSpacingTokensMatchDocumentation]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testSpacingTokensMatchDocumentation]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testSpringParametersAreConsistent]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testSpringParametersAreConsistent]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testThemePaletteGeneratesColors]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testThemePaletteGeneratesColors]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testThemePaletteRespondsToColorScheme]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testThemePaletteRespondsToColorScheme]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testTransitionsAreSmooth]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testTransitionsAreSmooth]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.DesignSystemTests testTypographyTokensAreConsistent]' started.
+Test Case '-[mdviewerTests.DesignSystemTests testTypographyTokensAreConsistent]' passed (0.000 seconds).
+Test Suite 'DesignSystemTests' passed at 2026-03-25 18:17:17.991.
+	 Executed 27 tests, with 0 failures (0 unexpected) in 0.054 (0.057) seconds
+Test Suite 'E2EInspectorTests' started at 2026-03-25 18:17:17.991.
+Test Case '-[mdviewerTests.E2EInspectorTests testEmptyInspectorRendersQuickly]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/E2EInspectorTests.swift:39: Test Case '-[mdviewerTests.E2EInspectorTests testEmptyInspectorRendersQuickly]' measured [Time, seconds] average: 0.000, relative standard deviation: 236.403%, values: [0.000562, 0.000028, 0.000015, 0.000014, 0.000013, 0.000012, 0.000013, 0.000012, 0.000013, 0.000013], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[mdviewerTests.E2EInspectorTests testEmptyInspectorRendersQuickly]' passed (0.523 seconds).
+Test Case '-[mdviewerTests.E2EInspectorTests testInspectorDisplaysAllFrontmatterEntries]' started.
+Test Case '-[mdviewerTests.E2EInspectorTests testInspectorDisplaysAllFrontmatterEntries]' passed (0.013 seconds).
+Test Case '-[mdviewerTests.E2EInspectorTests testInspectorHandlesLargeFrontmatter]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/E2EInspectorTests.swift:84: Test Case '-[mdviewerTests.E2EInspectorTests testInspectorHandlesLargeFrontmatter]' measured [Time, seconds] average: 0.000, relative standard deviation: 72.226%, values: [0.000210, 0.000071, 0.000095, 0.000049, 0.000039, 0.000049, 0.000043, 0.000044, 0.000048, 0.000043], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[mdviewerTests.E2EInspectorTests testInspectorHandlesLargeFrontmatter]' passed (0.352 seconds).
+Test Case '-[mdviewerTests.E2EInspectorTests testInspectorRendersQuickly]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/E2EInspectorTests.swift:31: Test Case '-[mdviewerTests.E2EInspectorTests testInspectorRendersQuickly]' measured [Time, seconds] average: 0.000, relative standard deviation: 128.266%, values: [0.000132, 0.000020, 0.000015, 0.000014, 0.000020, 0.000014, 0.000014, 0.000014, 0.000013, 0.000015], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[mdviewerTests.E2EInspectorTests testInspectorRendersQuickly]' passed (0.347 seconds).
+Test Case '-[mdviewerTests.E2EInspectorTests testInspectorRespectsSizeConstraints]' started.
+Test Case '-[mdviewerTests.E2EInspectorTests testInspectorRespectsSizeConstraints]' passed (0.002 seconds).
+Test Suite 'E2EInspectorTests' passed at 2026-03-25 18:17:19.228.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 1.237 (1.238) seconds
+Test Suite 'E2ERenderingTests' started at 2026-03-25 18:17:19.228.
+Test Case '-[mdviewerTests.E2ERenderingTests testAllThemesRenderWithoutErrors]' started.
+Test Case '-[mdviewerTests.E2ERenderingTests testAllThemesRenderWithoutErrors]' passed (0.034 seconds).
+Test Case '-[mdviewerTests.E2ERenderingTests testDocumentWithOnlyFrontmatter]' started.
+Test Case '-[mdviewerTests.E2ERenderingTests testDocumentWithOnlyFrontmatter]' passed (0.008 seconds).
+Test Case '-[mdviewerTests.E2ERenderingTests testDocumentWithSpecialCharacters]' started.
+Test Case '-[mdviewerTests.E2ERenderingTests testDocumentWithSpecialCharacters]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.E2ERenderingTests testEmptyDocumentRendering]' started.
+Test Case '-[mdviewerTests.E2ERenderingTests testEmptyDocumentRendering]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.E2ERenderingTests testFullDocumentRendering]' started.
+Test Case '-[mdviewerTests.E2ERenderingTests testFullDocumentRendering]' passed (0.015 seconds).
+Test Case '-[mdviewerTests.E2ERenderingTests testRenderingIsCached]' started.
+Test Case '-[mdviewerTests.E2ERenderingTests testRenderingIsCached]' passed (0.002 seconds).
+Test Suite 'E2ERenderingTests' passed at 2026-03-25 18:17:19.294.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.064 (0.065) seconds
+Test Suite 'E2EToolbarTests' started at 2026-03-25 18:17:19.294.
+Test Case '-[mdviewerTests.E2EToolbarTests testModePickerUsesSegmentedStyle]' started.
+Test Case '-[mdviewerTests.E2EToolbarTests testModePickerUsesSegmentedStyle]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.E2EToolbarTests testModeSwitchingChangesReaderMode]' started.
+Test Case '-[mdviewerTests.E2EToolbarTests testModeSwitchingChangesReaderMode]' passed (0.018 seconds).
+Test Case '-[mdviewerTests.E2EToolbarTests testToolbarBindingPropagation]' started.
+Test Case '-[mdviewerTests.E2EToolbarTests testToolbarBindingPropagation]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.E2EToolbarTests testToolbarButtonsUseSFSymbols]' started.
+Test Case '-[mdviewerTests.E2EToolbarTests testToolbarButtonsUseSFSymbols]' passed (0.026 seconds).
+Test Case '-[mdviewerTests.E2EToolbarTests testToolbarItemsHaveCorrectIdentifiers]' started.
+Test Case '-[mdviewerTests.E2EToolbarTests testToolbarItemsHaveCorrectIdentifiers]' passed (0.000 seconds).
+Test Suite 'E2EToolbarTests' passed at 2026-03-25 18:17:19.343.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.048 (0.049) seconds
+Test Suite 'EditorPreferencesTests' started at 2026-03-25 18:17:19.343.
+Test Case '-[mdviewerTests.EditorPreferencesTests testAllFontFamiliesResolveToNonNilFont]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testAllFontFamiliesResolveToNonNilFont]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testBoldTraitApplied]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testBoldTraitApplied]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testCodeFontSizeFromKnown]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testCodeFontSizeFromKnown]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testCodeFontSizeFromUnknownDefaultsMedium]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testCodeFontSizeFromUnknownDefaultsMedium]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testCodeFontSizePointsMatchRawValue]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testCodeFontSizePointsMatchRawValue]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testCodeFontSizePointValues]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testCodeFontSizePointValues]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testColumnWidthOrderPreserved]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testColumnWidthOrderPreserved]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testColumnWidthPoints]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testColumnWidthPoints]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testContentPaddingFromUnknownDefaultsNormal]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testContentPaddingFromUnknownDefaultsNormal]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testContentPaddingOrderPreserved]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testContentPaddingOrderPreserved]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testContentPaddingPoints]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testContentPaddingPoints]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testFontSizePointValues]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testFontSizePointValues]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testFullWidthClampedToWindowWidth]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testFullWidthClampedToWindowWidth]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testHyphenationFactorValues]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testHyphenationFactorValues]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testKernMonotonicallyIncreases]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testKernMonotonicallyIncreases]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testKernValues]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testKernValues]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingBalancedAt16pt]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingBalancedAt16pt]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingCompactAt16pt]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingCompactAt16pt]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingNeverNegative]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingNeverNegative]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingRelaxedAt16pt]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingRelaxedAt16pt]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingScalesProportionally]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testLineSpacingScalesProportionally]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testMonospacedFontHasMonospaceDesign]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testMonospacedFontHasMonospaceDesign]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testParagraphSpacingBalancedAt16pt]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testParagraphSpacingBalancedAt16pt]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testParagraphSpacingCompactAt16pt]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testParagraphSpacingCompactAt16pt]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testParagraphSpacingOrderPreserved]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testParagraphSpacingOrderPreserved]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.EditorPreferencesTests testParagraphSpacingRelaxedAt16pt]' started.
+Test Case '-[mdviewerTests.EditorPreferencesTests testParagraphSpacingRelaxedAt16pt]' passed (0.000 seconds).
+Test Suite 'EditorPreferencesTests' passed at 2026-03-25 18:17:19.361.
+	 Executed 26 tests, with 0 failures (0 unexpected) in 0.014 (0.018) seconds
+Test Suite 'FileSizeWarningTests' started at 2026-03-25 18:17:19.361.
+Test Case '-[mdviewerTests.FileSizeWarningTests testFileSizeFormatting]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testFileSizeFormatting]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testFileSizeFormattingLargeFiles]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testFileSizeFormattingLargeFiles]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testFilesOverThreshold]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testFilesOverThreshold]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testFilesUnderThreshold]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testFilesUnderThreshold]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileAlertAccessibilityLabels]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileAlertAccessibilityLabels]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileAlertButtonLabels]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileAlertButtonLabels]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileAlertTitle]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileAlertTitle]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileThresholdIs1MB]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileThresholdIs1MB]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileWarningMessageFormat]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testLargeFileWarningMessageFormat]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testVeryLargeFile]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testVeryLargeFile]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FileSizeWarningTests testZeroByteFile]' started.
+Test Case '-[mdviewerTests.FileSizeWarningTests testZeroByteFile]' passed (0.000 seconds).
+Test Suite 'FileSizeWarningTests' passed at 2026-03-25 18:17:19.370.
+	 Executed 11 tests, with 0 failures (0 unexpected) in 0.006 (0.009) seconds
+Test Suite 'FolderSidebarViewTests' started at 2026-03-25 18:17:19.370.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemAccessibilityLabels]' started.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemAccessibilityLabels]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemCreationPerformance]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/FolderSidebarViewTests.swift:109: Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemCreationPerformance]' measured [Time, seconds] average: 0.002, relative standard deviation: 25.567%, values: [0.002047, 0.001677, 0.001680, 0.002314, 0.001747, 0.001636, 0.002052, 0.001721, 0.001747, 0.003405], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemCreationPerformance]' passed (0.370 seconds).
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemDirectoryAccessibility]' started.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemDirectoryAccessibility]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemDirectoryInitialization]' started.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemDirectoryInitialization]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemEquality]' started.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemEquality]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemInequality]' started.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemInequality]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemInitialization]' started.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemInitialization]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemSendable]' started.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderItemSendable]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderSidebarViewInitialization]' started.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderSidebarViewInitialization]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderSidebarViewWithCallback]' started.
+Test Case '-[mdviewerTests.FolderSidebarViewTests testFolderSidebarViewWithCallback]' passed (0.001 seconds).
+Test Suite 'FolderSidebarViewTests' passed at 2026-03-25 18:17:19.746.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.375 (0.376) seconds
+Test Suite 'FrontmatterParserEdgeCaseTests' started at 2026-03-25 18:17:19.746.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testCrlfLineEndingsInFrontmatter]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testCrlfLineEndingsInFrontmatter]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testDuplicateKeysLastValueWins]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testDuplicateKeysLastValueWins]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testEmptyValueIsPreservedAsEntry]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testEmptyValueIsPreservedAsEntry]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testFrontmatterImmediatelyFollowedByCodeFence]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testFrontmatterImmediatelyFollowedByCodeFence]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testFrontmatterWithNoBodyProducesEmptyRenderedMarkdown]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testFrontmatterWithNoBodyProducesEmptyRenderedMarkdown]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testHtmlCommentInsideCodeFenceIsNotStripped]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testHtmlCommentInsideCodeFenceIsNotStripped]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testInlineHtmlCommentOnSameLineIsStripped]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testInlineHtmlCommentOnSameLineIsStripped]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testManyEntriesPreserveInsertionOrder]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testManyEntriesPreserveInsertionOrder]' passed (0.010 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testMultiLineHtmlCommentIsStripped]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testMultiLineHtmlCommentIsStripped]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testOnlyFirstFrontmatterBlockIsParsed]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testOnlyFirstFrontmatterBlockIsParsed]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesColonInValue]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesColonInValue]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesDoubleQuotedValues]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesDoubleQuotedValues]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesEmptyFrontmatterBlock]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesEmptyFrontmatterBlock]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesSingleQuotedValues]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesSingleQuotedValues]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesYamlCommentLines]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testParsesYamlCommentLines]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testTildeFencePreservesHtmlComment]' started.
+Test Case '-[mdviewerTests.FrontmatterParserEdgeCaseTests testTildeFencePreservesHtmlComment]' passed (0.002 seconds).
+Test Suite 'FrontmatterParserEdgeCaseTests' passed at 2026-03-25 18:17:19.782.
+	 Executed 16 tests, with 0 failures (0 unexpected) in 0.034 (0.036) seconds
+Test Suite 'FrontmatterParserTests' started at 2026-03-25 18:17:19.782.
+Test Case '-[mdviewerTests.FrontmatterParserTests testKeepsFrontmatterForNestedYamlStructures]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testKeepsFrontmatterForNestedYamlStructures]' passed (0.005 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserTests testLeavesMarkdownUnchangedWhenNoFrontmatter]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testLeavesMarkdownUnchangedWhenNoFrontmatter]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserTests testLeavesMarkdownUnchangedWithoutClosingFence]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testLeavesMarkdownUnchangedWithoutClosingFence]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesDotDelimiterVariant]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesDotDelimiterVariant]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesFrontmatterAfterLeadingBlankLines]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesFrontmatterAfterLeadingBlankLines]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesFrontmatterWhenFileStartsWithUTF8BOM]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesFrontmatterWhenFileStartsWithUTF8BOM]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesValidFrontmatterAndExtractsBody]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesValidFrontmatterAndExtractsBody]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesWrappedYamlValueLines]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesWrappedYamlValueLines]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesYamlListAsCommaSeparatedValue]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testParsesYamlListAsCommaSeparatedValue]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FrontmatterParserTests testStripsHtmlCommentLinesFromRenderedMarkdown]' started.
+Test Case '-[mdviewerTests.FrontmatterParserTests testStripsHtmlCommentLinesFromRenderedMarkdown]' passed (0.001 seconds).
+Test Suite 'FrontmatterParserTests' passed at 2026-03-25 18:17:19.805.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.020 (0.023) seconds
+Test Suite 'FrontmatterPresentationTests' started at 2026-03-25 18:17:19.805.
+Test Case '-[mdviewerTests.FrontmatterPresentationTests testFrontmatterKeepsOrderedEntriesForDynamicRendering]' started.
+Test Case '-[mdviewerTests.FrontmatterPresentationTests testFrontmatterKeepsOrderedEntriesForDynamicRendering]' passed (0.006 seconds).
+Test Case '-[mdviewerTests.FrontmatterPresentationTests testFrontmatterMetadataRemainsAccessibleByKey]' started.
+Test Case '-[mdviewerTests.FrontmatterPresentationTests testFrontmatterMetadataRemainsAccessibleByKey]' passed (0.001 seconds).
+Test Suite 'FrontmatterPresentationTests' passed at 2026-03-25 18:17:19.812.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.007 (0.007) seconds
+Test Suite 'FrontmatterValueTypeTests' started at 2026-03-25 18:17:19.812.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsDecimal]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsDecimal]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsFalseBoolean]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsFalseBoolean]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsHTTPSURLs]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsHTTPSURLs]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsHTTPURLs]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsHTTPURLs]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsInteger]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsInteger]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsISO8601Date]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsISO8601Date]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsISODateWithTime]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsISODateWithTime]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsISODateWithTimezone]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsISODateWithTimezone]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsMailtoURLs]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsMailtoURLs]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsTrueBoolean]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsTrueBoolean]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsYAMLList]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsYAMLList]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsYesNoBooleans]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDetectsYesNoBooleans]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayKeyCapitalizes]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayKeyCapitalizes]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayKeyFormatsDashes]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayKeyFormatsDashes]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayKeyFormatsUnderscores]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayKeyFormatsUnderscores]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForBooleanFalse]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForBooleanFalse]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForBooleanTrue]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForBooleanTrue]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForDecimal]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForDecimal]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForInteger]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForInteger]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForList]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForList]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForURL]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testDisplayValueForURL]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testPlainTextNotDetectedAsURL]' started.
+Test Case '-[mdviewerTests.FrontmatterValueTypeTests testPlainTextNotDetectedAsURL]' passed (0.002 seconds).
+Test Suite 'FrontmatterValueTypeTests' passed at 2026-03-25 18:17:19.830.
+	 Executed 22 tests, with 0 failures (0 unexpected) in 0.014 (0.018) seconds
+Test Suite 'HorizontalRuleRenderingTests' started at 2026-03-25 18:17:19.831.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testAllVariantsProduceSingleGlyph]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testAllVariantsProduceSingleGlyph]' passed (0.010 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testAsteriskRuleEmitsThreeEmDash]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testAsteriskRuleEmitsThreeEmDash]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testAsteriskRuleHasHorizontalRuleAttribute]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testAsteriskRuleHasHorizontalRuleAttribute]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testCodeBlockDashesAreNotTagged]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testCodeBlockDashesAreNotTagged]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testDashRuleEmitsThreeEmDash]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testDashRuleEmitsThreeEmDash]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testDashRuleHasHorizontalRuleAttribute]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testDashRuleHasHorizontalRuleAttribute]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testExtendedDashRuleEmitsThreeEmDash]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testExtendedDashRuleEmitsThreeEmDash]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHeadingAfterHRIsNotCentreAligned]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHeadingAfterHRIsNotCentreAligned]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHorizontalRuleAppearsInDarkMode]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHorizontalRuleAppearsInDarkMode]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHorizontalRuleAttributeIsColor]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHorizontalRuleAttributeIsColor]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHorizontalRuleColorDiffersAcrossThemes]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHorizontalRuleColorDiffersAcrossThemes]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHorizontalRuleGlyphsAreHidden]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHorizontalRuleGlyphsAreHidden]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRFontIsSmall]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRFontIsSmall]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRGlyphAndFollowingHeadingAreInSeparateParagraphs]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRGlyphAndFollowingHeadingAreInSeparateParagraphs]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRGlyphAndFollowingParagraphAreInSeparateParagraphs]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRGlyphAndFollowingParagraphAreInSeparateParagraphs]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRHasParagraphSpacingAfter]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRHasParagraphSpacingAfter]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRHasParagraphSpacingBefore]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testHRHasParagraphSpacingBefore]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testLongerDashRuleIsDetected]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testLongerDashRuleIsDetected]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testMultipleHRsAreEachInOwnParagraph]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testMultipleHRsAreEachInOwnParagraph]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testNormalTextHasNoHorizontalRuleAttribute]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testNormalTextHasNoHorizontalRuleAttribute]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testSpacedDashRuleEmitsThreeEmDash]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testSpacedDashRuleEmitsThreeEmDash]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testUnderscoreRuleEmitsThreeEmDash]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testUnderscoreRuleEmitsThreeEmDash]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testUnderscoreRuleHasHorizontalRuleAttribute]' started.
+Test Case '-[mdviewerTests.HorizontalRuleRenderingTests testUnderscoreRuleHasHorizontalRuleAttribute]' passed (0.002 seconds).
+Test Suite 'HorizontalRuleRenderingTests' passed at 2026-03-25 18:17:19.878.
+	 Executed 23 tests, with 0 failures (0 unexpected) in 0.043 (0.048) seconds
+Test Suite 'LargeFileThresholdTests' started at 2026-03-25 18:17:19.878.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testAllCasesExist]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testAllCasesExist]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testBytes]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testBytes]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testDefaultThresholdForInvalidValue]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testDefaultThresholdForInvalidValue]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testFromInvalidRawValue]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testFromInvalidRawValue]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testFromRawValue]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testFromRawValue]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testLabels]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testLabels]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testPreferencesHasLargeFileThreshold]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testPreferencesHasLargeFileThreshold]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testRawValues]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testRawValues]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testShouldWarn10MB]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testShouldWarn10MB]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testShouldWarn1MB]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testShouldWarn1MB]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testShouldWarn500KB]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testShouldWarn500KB]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.LargeFileThresholdTests testShouldWarnNever]' started.
+Test Case '-[mdviewerTests.LargeFileThresholdTests testShouldWarnNever]' passed (0.000 seconds).
+Test Suite 'LargeFileThresholdTests' passed at 2026-03-25 18:17:19.883.
+	 Executed 12 tests, with 0 failures (0 unexpected) in 0.003 (0.004) seconds
+Test Suite 'ListRenderingStabilityTests' started at 2026-03-25 18:17:19.883.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testCodeBlocksInLists]' started.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testCodeBlocksInLists]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testFencedCodeBlockInsideOrderedListHasNoOrdinalMarkers]' started.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testFencedCodeBlockInsideOrderedListHasNoOrdinalMarkers]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testFencedCodeBlockInsideUnorderedListHasNoBulletMarkers]' started.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testFencedCodeBlockInsideUnorderedListHasNoBulletMarkers]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testListItemsDoNotOverlap]' started.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testListItemsDoNotOverlap]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testListItemsHaveTabStops]' started.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testListItemsHaveTabStops]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testNestedListIndentation]' started.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testNestedListIndentation]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testOrderedListNumbersAreSeparatedFromContent]' started.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testOrderedListNumbersAreSeparatedFromContent]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testParagraphAfterList]' started.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testParagraphAfterList]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testUnorderedListMarkersAreSeparatedFromContent]' started.
+Test Case '-[mdviewerTests.ListRenderingStabilityTests testUnorderedListMarkersAreSeparatedFromContent]' passed (0.002 seconds).
+Test Suite 'ListRenderingStabilityTests' passed at 2026-03-25 18:17:19.904.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.019 (0.021) seconds
+Test Suite 'MarkdownDocumentTests' started at 2026-03-25 18:17:19.904.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeDecodesUTF16]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeDecodesUTF16]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeDecodesUTF16BigEndianWithBOM]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeDecodesUTF16BigEndianWithBOM]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeDecodesUTF16LittleEndianWithBOM]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeDecodesUTF16LittleEndianWithBOM]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeDecodesUTF32WithBOM]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeDecodesUTF32WithBOM]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeHandlesAsciiData]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeHandlesAsciiData]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeHandlesEmptyData]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeHandlesEmptyData]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeReturnsNilForGarbageData]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeReturnsNilForGarbageData]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeStripsUTF8BOM]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDecodeStripsUTF8BOM]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDefaultInitializationStartsEmptyDocument]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testDefaultInitializationStartsEmptyDocument]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testFileWrapperWritesUtf8Data]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testFileWrapperWritesUtf8Data]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testInitializationPersistsText]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testInitializationPersistsText]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testIsEffectivelyEmptyUsesTrimmedContent]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testIsEffectivelyEmptyUsesTrimmedContent]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownDocumentTests testMaxFileSizeLimitConstantIsEightMegabytes]' started.
+Test Case '-[mdviewerTests.MarkdownDocumentTests testMaxFileSizeLimitConstantIsEightMegabytes]' passed (0.000 seconds).
+Test Suite 'MarkdownDocumentTests' passed at 2026-03-25 18:17:19.909.
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.003 (0.005) seconds
+Test Suite 'MarkdownRenderIntegrationTests' started at 2026-03-25 18:17:19.909.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllFontFamiliesRenderWithoutCrash]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllFontFamiliesRenderWithoutCrash]' passed (0.012 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllFontSizesRenderWithoutCrash]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllFontSizesRenderWithoutCrash]' passed (0.008 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllSpacingPresetsRenderWithoutCrash]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllSpacingPresetsRenderWithoutCrash]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllThemesRenderSwiftCode]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllThemesRenderSwiftCode]' passed (0.008 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllThemesRenderWithoutCrash]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testAllThemesRenderWithoutCrash]' passed (0.008 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testDifferentColorSchemesProduceDifferentCacheKeys]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testDifferentColorSchemesProduceDifferentCacheKeys]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testDifferentFontFamiliesProduceDifferentCacheKeys]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testDifferentFontFamiliesProduceDifferentCacheKeys]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testDifferentReadableWidthsProduceDifferentCacheKeys]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testDifferentReadableWidthsProduceDifferentCacheKeys]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testDifferentThemesProduceDifferentCacheKeys]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testDifferentThemesProduceDifferentCacheKeys]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testEmptyDocumentRendersWithoutCrash]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testEmptyDocumentRendersWithoutCrash]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testFullDocumentPipelineProducesAllBlocks]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testFullDocumentPipelineProducesAllBlocks]' passed (0.005 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testMapleMono_bodyTextHasNoBackgroundColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testMapleMono_bodyTextHasNoBackgroundColor]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testMapleMono_fencedCodeHasBackgroundColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testMapleMono_fencedCodeHasBackgroundColor]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testMapleMono_inlineCodeHasBackgroundColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testMapleMono_inlineCodeHasBackgroundColor]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testNoFontFamilyStampsBackgroundOnBodyText]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testNoFontFamilyStampsBackgroundOnBodyText]' passed (0.005 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testOrderedListAppearsInOutput]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testOrderedListAppearsInOutput]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testOrderedListItemsAreIndented]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testOrderedListItemsAreIndented]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testTaskListBreaksLinesAndIndentsNestedItems]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testTaskListBreaksLinesAndIndentsNestedItems]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testVeryLongLineRendersWithoutCrash]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testVeryLongLineRendersWithoutCrash]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testWhitespaceOnlyDocumentRendersWithoutCrash]' started.
+Test Case '-[mdviewerTests.MarkdownRenderIntegrationTests testWhitespaceOnlyDocumentRendersWithoutCrash]' passed (0.001 seconds).
+Test Suite 'MarkdownRenderIntegrationTests' passed at 2026-03-25 18:17:19.982.
+	 Executed 20 tests, with 0 failures (0 unexpected) in 0.068 (0.073) seconds
+Test Suite 'MarkdownRenderLineBreakTests' started at 2026-03-25 18:17:19.982.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testBackslashRendersHardLineBreak]' started.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testBackslashRendersHardLineBreak]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testHardBreakNotInjectedInsideCodeFence]' started.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testHardBreakNotInjectedInsideCodeFence]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testHardBreakNotInjectedInsideTildeFence]' started.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testHardBreakNotInjectedInsideTildeFence]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testKernAppliedToAllSpacingPreferences]' started.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testKernAppliedToAllSpacingPreferences]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testLineSpacingAppliedToBodyText]' started.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testLineSpacingAppliedToBodyText]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testRenderBlockquoteLinesArePresentInOutput]' started.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testRenderBlockquoteLinesArePresentInOutput]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testRenderDoesNotForceLineBreaksBeforeListItems]' started.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testRenderDoesNotForceLineBreaksBeforeListItems]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testRenderMergesSoftWrappedLinesIntoOneParagraph]' started.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testRenderMergesSoftWrappedLinesIntoOneParagraph]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testTrailingSpacesRenderHardLineBreak]' started.
+Test Case '-[mdviewerTests.MarkdownRenderLineBreakTests testTrailingSpacesRenderHardLineBreak]' passed (0.001 seconds).
+Test Suite 'MarkdownRenderLineBreakTests' passed at 2026-03-25 18:17:19.999.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.016 (0.017) seconds
+Test Suite 'MarkdownRenderVisualTests' started at 2026-03-25 18:17:19.999.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testAllFontFamiliesPreserveBoldAndItalicTraits]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testAllFontFamiliesPreserveBoldAndItalicTraits]' passed (0.007 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testAllFontFamiliesRenderValidBodyFont]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testAllFontFamiliesRenderValidBodyFont]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBlockquoteHasAccentColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBlockquoteHasAccentColor]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBlockquoteHasBackground]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBlockquoteHasBackground]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBlockquoteHasDepthAttribute]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBlockquoteHasDepthAttribute]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBlockquoteUsesThemeBlockquoteTextColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBlockquoteUsesThemeBlockquoteTextColor]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBodyParagraphGetsPositiveParagraphSpacingBeforeForReadability]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/MarkdownRenderVisualTests.swift:800: error: -[mdviewerTests.MarkdownRenderVisualTests testBodyParagraphGetsPositiveParagraphSpacingBeforeForReadability] : XCTAssertGreaterThan failed: ("0.0") is not greater than ("0.0") - Body paragraphs should have positive paragraphSpacingBefore for better scan rhythm
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBodyParagraphGetsPositiveParagraphSpacingBeforeForReadability]' failed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBodyTextReceivesLabelColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBodyTextReceivesLabelColor]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBoldItalicCombinedTextHasBothTraits]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBoldItalicCombinedTextHasBothTraits]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBoldTextHasBoldFontTrait]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testBoldTextHasBoldFontTrait]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testCodeFenceHasBackgroundColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testCodeFenceHasBackgroundColor]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testCodeFenceUsesMonospaceFont]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testCodeFenceUsesMonospaceFont]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testDarkModeCodeBackgroundDifferentFromLight]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testDarkModeCodeBackgroundDifferentFromLight]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testFontSizeScalesWithReaderPreference]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testFontSizeScalesWithReaderPreference]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testFootnoteDefinitionDoesNotRenderRawSyntax]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testFootnoteDefinitionDoesNotRenderRawSyntax]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testFootnoteReferenceRendersAsSuperscriptMarker]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testFootnoteReferenceRendersAsSuperscriptMarker]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testFrontmatterNotInRenderedOutput]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testFrontmatterNotInRenderedOutput]' passed (0.007 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testGitHubThemeCodeBackgroundDiffersFromBasic]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testGitHubThemeCodeBackgroundDiffersFromBasic]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testH1FontSizeIs1Point75TimesBody]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testH1FontSizeIs1Point75TimesBody]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testH2FontSizeIs1Point5TimesBody]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testH2FontSizeIs1Point5TimesBody]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testH3FontSizeIs1Point3TimesBody]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testH3FontSizeIs1Point3TimesBody]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testH4FontSizeIs1Point15TimesBody]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testH4FontSizeIs1Point15TimesBody]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testHeadingFontSizeProgression]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testHeadingFontSizeProgression]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testHeadingLevelsUseDistinctColors]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testHeadingLevelsUseDistinctColors]' passed (0.005 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testHeadingsDifferentAcrossThemes]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testHeadingsDifferentAcrossThemes]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testHeadingsHaveThemeColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testHeadingsHaveThemeColor]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testInlineCodeHasBackgroundColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testInlineCodeHasBackgroundColor]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testInlineCodeHasDistinctBackgroundFromFenced]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testInlineCodeHasDistinctBackgroundFromFenced]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testInlineCodeUsesThemeCodeForegroundColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testInlineCodeUsesThemeCodeForegroundColor]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testItalicTextHasItalicFontTrait]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testItalicTextHasItalicFontTrait]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testKernAppliedToRenderedBodyText]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testKernAppliedToRenderedBodyText]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testLinksDifferentAcrossThemes]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testLinksDifferentAcrossThemes]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testLinksHaveThemeColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testLinksHaveThemeColor]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testListItemWithHeadingSyntaxDoesNotBecomeRenderedHeading]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testListItemWithHeadingSyntaxDoesNotBecomeRenderedHeading]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testNestedBlockquotesUseSeparateDepths]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testNestedBlockquotesUseSeparateDepths]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testSwiftSyntaxHighlightingKeywordColor]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testSwiftSyntaxHighlightingKeywordColor]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testSyntaxColorDoesNotLeakIntoBodyText]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testSyntaxColorDoesNotLeakIntoBodyText]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testTableParagraphStyleUsesEnhancedSpacingAndInset]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testTableParagraphStyleUsesEnhancedSpacingAndInset]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testTableRowsCarryThemeAttributes]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testTableRowsCarryThemeAttributes]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testTaskListUsesThemeAwareCheckboxStyling]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testTaskListUsesThemeAwareCheckboxStyling]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testUserLineSpacingAppliedToBodyText]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testUserLineSpacingAppliedToBodyText]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testUserLineSpacingAppliedToHeadings]' started.
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testUserLineSpacingAppliedToHeadings]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testUserLineSpacingAppliedToListItems]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/MarkdownRenderVisualTests.swift:348: error: -[mdviewerTests.MarkdownRenderVisualTests testUserLineSpacingAppliedToListItems] : XCTAssertEqualWithAccuracy failed: ("4.59") is not equal to ("6.885") +/- ("0.1")
+Test Case '-[mdviewerTests.MarkdownRenderVisualTests testUserLineSpacingAppliedToListItems]' failed (0.002 seconds).
+Test Suite 'MarkdownRenderVisualTests' failed at 2026-03-25 18:17:20.105.
+	 Executed 43 tests, with 2 failures (0 unexpected) in 0.098 (0.105) seconds
+Test Suite 'MermaidDiagramRendererTests' started at 2026-03-25 18:17:20.105.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testAllAppThemesProduceAttachmentInDarkMode]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testAllAppThemesProduceAttachmentInDarkMode]' passed (0.094 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testAllAppThemesProduceAttachmentInLightMode]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testAllAppThemesProduceAttachmentInLightMode]' passed (0.080 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testAllFiveDiagramTypesRenderWithoutCrash]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testAllFiveDiagramTypesRenderWithoutCrash]' passed (0.066 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testClassDiagramRenders]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testClassDiagramRenders]' passed (0.020 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testDarkAndLightThemesDifferForTheSameAppTheme]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testDarkAndLightThemesDifferForTheSameAppTheme]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testEmptyMermaidBlockDoesNotCrash]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testEmptyMermaidBlockDoesNotCrash]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testErDiagramRenders]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testErDiagramRenders]' passed (0.043 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testInvalidMermaidFallsBackToCodeBlock]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testInvalidMermaidFallsBackToCodeBlock]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testLargeMermaidDocumentStressRenders]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testLargeMermaidDocumentStressRenders]' passed (67.618 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMermaidBlockAttachmentContainsImage]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMermaidBlockAttachmentContainsImage]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMermaidBlockCarriesNoSyntaxColourAttributes]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMermaidBlockCarriesNoSyntaxColourAttributes]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMermaidBlockIsReplacedWithAttachment]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMermaidBlockIsReplacedWithAttachment]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMermaidSourceIsRemovedFromString]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMermaidSourceIsRemovedFromString]' passed (0.013 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMultipleMermaidBlocksAreAllReplaced]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testMultipleMermaidBlocksAreAllReplaced]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testNonMermaidCodeBlockIsNotAttachment]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testNonMermaidCodeBlockIsNotAttachment]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testParagraphTextSurroundingMermaidIsPreserved]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testParagraphTextSurroundingMermaidIsPreserved]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testSequenceDiagramRenders]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testSequenceDiagramRenders]' passed (0.064 seconds).
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testStateDiagramRenders]' started.
+Test Case '-[mdviewerTests.MermaidDiagramRendererTests testStateDiagramRenders]' passed (0.036 seconds).
+Test Suite 'MermaidDiagramRendererTests' passed at 2026-03-25 18:18:28.152.
+	 Executed 18 tests, with 0 failures (0 unexpected) in 68.043 (68.047) seconds
+Test Suite 'ModeChangeAccessibilityTests' started at 2026-03-25 18:18:28.152.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testAccessibilityAnnouncementMethodsExist]' started.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testAccessibilityAnnouncementMethodsExist]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testContentViewHasModeChangeHandler]' started.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testContentViewHasModeChangeHandler]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testDocumentLoadedMessageFormats]' started.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testDocumentLoadedMessageFormats]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testDocumentLoadingMessages]' started.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testDocumentLoadingMessages]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testModeChangedToRawAnnouncement]' started.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testModeChangedToRawAnnouncement]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testModeChangedToRenderedAnnouncement]' started.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testModeChangedToRenderedAnnouncement]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testModeChangeHandlerExists]' started.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testModeChangeHandlerExists]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testModeChangeMessageFormat]' started.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testModeChangeMessageFormat]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testSettingChangedMessageFormat]' started.
+Test Case '-[mdviewerTests.ModeChangeAccessibilityTests testSettingChangedMessageFormat]' passed (0.000 seconds).
+Test Suite 'ModeChangeAccessibilityTests' passed at 2026-03-25 18:18:28.159.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.005 (0.007) seconds
+Test Suite 'RawViewLineNumberTests' started at 2026-03-25 18:18:28.159.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testBoundsCheckedCharacterAccess]' started.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testBoundsCheckedCharacterAccess]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.RawViewLineNumberTests testCharacterAccessAtBoundaries]' started.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testCharacterAccessAtBoundaries]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.RawViewLineNumberTests testEfficientCountWithTrailingNewlineAdjustment]' started.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testEfficientCountWithTrailingNewlineAdjustment]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.RawViewLineNumberTests testEfficientNewlineCountMatchesComponentsSplit]' started.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testEfficientNewlineCountMatchesComponentsSplit]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.RawViewLineNumberTests testLineNumberCalculation]' started.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testLineNumberCalculation]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.RawViewLineNumberTests testLineNumberingWithLongLines]' started.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testLineNumberingWithLongLines]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.RawViewLineNumberTests testLineNumbersWithUnicodeContent]' started.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testLineNumbersWithUnicodeContent]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.RawViewLineNumberTests testMixedLineEndings]' started.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testMixedLineEndings]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.RawViewLineNumberTests testNewlineDetectionOnEmptyString]' started.
+Test Case '-[mdviewerTests.RawViewLineNumberTests testNewlineDetectionOnEmptyString]' passed (0.000 seconds).
+Test Suite 'RawViewLineNumberTests' passed at 2026-03-25 18:18:28.166.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.006 (0.007) seconds
+Test Suite 'ReaderLayoutManagerGeometryTests' started at 2026-03-25 18:18:28.166.
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testBlockquoteDrawRectDoesNotSubtractCenteredOriginFromWidth]' started.
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testBlockquoteDrawRectDoesNotSubtractCenteredOriginFromWidth]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testDividerLocationLeavesPaddingBeforeNextColumnText]' started.
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testDividerLocationLeavesPaddingBeforeNextColumnText]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testNestedBlockquoteDrawRectOnlyReducesWidthByNestingInset]' started.
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testNestedBlockquoteDrawRectOnlyReducesWidthByNestingInset]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testTableRowDrawRectIgnoresOverwideUsedRectFromLongCellContent]' started.
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testTableRowDrawRectIgnoresOverwideUsedRectFromLongCellContent]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testTableRowDrawRectUsesNaturalColumnWidthInsteadOfFullContainerWidth]' started.
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testTableRowDrawRectUsesNaturalColumnWidthInsteadOfFullContainerWidth]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testTerminalTableRowKeepsCompactBottomPadding]' started.
+Test Case '-[mdviewerTests.ReaderLayoutManagerGeometryTests testTerminalTableRowKeepsCompactBottomPadding]' passed (0.001 seconds).
+Test Suite 'ReaderLayoutManagerGeometryTests' passed at 2026-03-25 18:18:28.171.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 0.004 (0.004) seconds
+Test Suite 'RendererPerformanceTests' started at 2026-03-25 18:18:28.171.
+Test Case '-[mdviewerTests.RendererPerformanceTests testPrewarmDoesNotPolluteRenderStats]' started.
+Test Case '-[mdviewerTests.RendererPerformanceTests testPrewarmDoesNotPolluteRenderStats]' passed (0.346 seconds).
+Test Case '-[mdviewerTests.RendererPerformanceTests testRenderBudgetsForLargeDocument]' started.
+Test Case '-[mdviewerTests.RendererPerformanceTests testRenderBudgetsForLargeDocument]' passed (0.381 seconds).
+Test Suite 'RendererPerformanceTests' passed at 2026-03-25 18:18:28.899.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.727 (0.728) seconds
+Test Suite 'RenderingSanityTests' started at 2026-03-25 18:18:28.899.
+Test Case '-[mdviewerTests.RenderingSanityTests testFencedCodePreservesLineStructure]' started.
+Test Case '-[mdviewerTests.RenderingSanityTests testFencedCodePreservesLineStructure]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.RenderingSanityTests testRenderedOutputAppliesCoreStyles]' started.
+Test Case '-[mdviewerTests.RenderingSanityTests testRenderedOutputAppliesCoreStyles]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.RenderingSanityTests testRenderedOutputKeepsBlockBoundaries]' started.
+Test Case '-[mdviewerTests.RenderingSanityTests testRenderedOutputKeepsBlockBoundaries]' passed (0.002 seconds).
+Test Suite 'RenderingSanityTests' passed at 2026-03-25 18:18:28.907.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.007 (0.008) seconds
+Test Suite 'RenderingStabilityTests' started at 2026-03-25 18:18:28.907.
+Test Case '-[mdviewerTests.RenderingStabilityTests testBlockSeparatorInjectorIsSafeWithEmojiContent]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testBlockSeparatorInjectorIsSafeWithEmojiContent]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testBlockSeparatorInjectorSeparatesAdjacentParagraphBlocks]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testBlockSeparatorInjectorSeparatesAdjacentParagraphBlocks]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testBlockSeparatorInjectorSeparatesTableCellsWithTabs]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testBlockSeparatorInjectorSeparatesTableCellsWithTabs]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testBlockSpacingViaParagraphStyle]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testBlockSpacingViaParagraphStyle]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testCodeBlockWithLineNumbers]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testCodeBlockWithLineNumbers]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testConsecutiveParagraphsHaveConsistentSpacing]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testConsecutiveParagraphsHaveConsistentSpacing]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testEmptyDocumentRenders]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testEmptyDocumentRenders]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testHeadersWithBalancedSpacing]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testHeadersWithBalancedSpacing]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testLineNumberDrawingWithVariousDocumentLengths]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testLineNumberDrawingWithVariousDocumentLengths]' passed (0.005 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testLineNumberRulerHandlesEmptyDocument]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testLineNumberRulerHandlesEmptyDocument]' passed (0.017 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testListItemsHaveTightSpacing]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testListItemsHaveTightSpacing]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testMixedContentSpacing]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testMixedContentSpacing]' passed (0.006 seconds).
+Test Case '-[mdviewerTests.RenderingStabilityTests testSpacingPresetsProduceProportionalGaps]' started.
+Test Case '-[mdviewerTests.RenderingStabilityTests testSpacingPresetsProduceProportionalGaps]' passed (0.005 seconds).
+Test Suite 'RenderingStabilityTests' passed at 2026-03-25 18:18:28.954.
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.045 (0.047) seconds
+Test Suite 'SettingsAccessibilityTests' started at 2026-03-25 18:18:28.954.
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testAllPickerAccessibilityLabels]' started.
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testAllPickerAccessibilityLabels]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSectionAccessibilityLabelFormat]' started.
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSectionAccessibilityLabelFormat]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsSectionHeaders]' started.
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsSectionHeaders]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsViewAccessibilityIdentifier]' started.
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsViewAccessibilityIdentifier]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsViewAccessibilityLabel]' started.
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsViewAccessibilityLabel]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsViewExists]' started.
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsViewExists]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsWindowSize]' started.
+Test Case '-[mdviewerTests.SettingsAccessibilityTests testSettingsWindowSize]' passed (0.000 seconds).
+Test Suite 'SettingsAccessibilityTests' passed at 2026-03-25 18:18:28.958.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.003 (0.004) seconds
+Test Suite 'SettingsFunctionalTests' started at 2026-03-25 18:18:28.958.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testAppearanceModeSetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testAppearanceModeSetting]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testCodeFontSizeSetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testCodeFontSizeSetting]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testColumnWidthOrder]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testColumnWidthOrder]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testColumnWidthSetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testColumnWidthSetting]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testFontFamilySetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testFontFamilySetting]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testFontSizeIncreaseDecrease]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testFontSizeIncreaseDecrease]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testFontSizeOrder]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testFontSizeOrder]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testFontSizeSetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testFontSizeSetting]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testLargeFileThresholdSetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testLargeFileThresholdSetting]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testReaderModeSetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testReaderModeSetting]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testSettingsPersistence]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testSettingsPersistence]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testSidebarModeSetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testSidebarModeSetting]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testTextSpacingSetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testTextSpacingSetting]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testThemeSetting]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testThemeSetting]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.SettingsFunctionalTests testTypographySpacingOrder]' started.
+Test Case '-[mdviewerTests.SettingsFunctionalTests testTypographySpacingOrder]' passed (0.000 seconds).
+Test Suite 'SettingsFunctionalTests' passed at 2026-03-25 18:18:28.977.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.017 (0.019) seconds
+Test Suite 'SyntaxHighlighterTests' started at 2026-03-25 18:18:28.977.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testAutoDetectsJSON]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testAutoDetectsJSON]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testAutoDetectsSwiftCode]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testAutoDetectsSwiftCode]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testConcurrentRenderRequestsReturnConsistentOutput]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testConcurrentRenderRequestsReturnConsistentOutput]' passed (0.007 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testJavaScriptSyntaxHighlighting]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testJavaScriptSyntaxHighlighting]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testJSONSyntaxHighlighting]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testJSONSyntaxHighlighting]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionFromContent]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionFromContent]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionFromShebang]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionFromShebang]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionHTML]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionHTML]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionJSON]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionJSON]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionYAML]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageDetectionYAML]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageRegistryLookup]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testLanguageRegistryLookup]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testPythonSyntaxHighlighting]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testPythonSyntaxHighlighting]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testRenderRequestCacheKeyIsDeterministic]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testRenderRequestCacheKeyIsDeterministic]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlighterCodeBlockPerformance200Lines]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/SyntaxHighlighterTests.swift:38: Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlighterCodeBlockPerformance200Lines]' measured [Clock Monotonic Time, s] average: 0.011, relative standard deviation: 6.566%, values: [0.009510, 0.010764, 0.011640, 0.010690, 0.011146], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlighterCodeBlockPerformance200Lines]' passed (0.082 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlighterCodeBlockPerformance400Lines]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/SyntaxHighlighterTests.swift:38: Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlighterCodeBlockPerformance400Lines]' measured [Clock Monotonic Time, s] average: 0.022, relative standard deviation: 5.609%, values: [0.020513, 0.022625, 0.021590, 0.023962, 0.021015], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlighterCodeBlockPerformance400Lines]' passed (0.141 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlighterCodeBlockPerformance50Lines]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/SyntaxHighlighterTests.swift:38: Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlighterCodeBlockPerformance50Lines]' measured [Clock Monotonic Time, s] average: 0.003, relative standard deviation: 32.072%, values: [0.004006, 0.003826, 0.002012, 0.002285, 0.001967], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlighterCodeBlockPerformance50Lines]' passed (0.020 seconds).
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlightRespectsCommentAndStringPriority]' started.
+Test Case '-[mdviewerTests.SyntaxHighlighterTests testSyntaxHighlightRespectsCommentAndStringPriority]' passed (0.002 seconds).
+Test Suite 'SyntaxHighlighterTests' passed at 2026-03-25 18:18:29.250.
+	 Executed 17 tests, with 0 failures (0 unexpected) in 0.269 (0.273) seconds
+Test Suite 'TableColumnDividerOpacityTests' started at 2026-03-25 18:18:29.250.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testColumnDividerOpacityIsHigherForVividDarkThemes]' started.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testColumnDividerOpacityIsHigherForVividDarkThemes]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testColumnDividerOpacityMultiplierIsValidRangeForAllThemes]' started.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testColumnDividerOpacityMultiplierIsValidRangeForAllThemes]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testDarkModeHasHigherMultiplierThanLightModeForSameTheme]' started.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testDarkModeHasHigherMultiplierThanLightModeForSameTheme]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testEachTableMarksItsOwnTerminalRowForLayoutClosure]' started.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testEachTableMarksItsOwnTerminalRowForLayoutClosure]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTableBodyRowCarriesColumnDividerOpacityAttribute]' started.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTableBodyRowCarriesColumnDividerOpacityAttribute]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTableHeaderRowCarriesColumnDividerOpacityAttribute]' started.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTableHeaderRowCarriesColumnDividerOpacityAttribute]' passed (0.005 seconds).
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTableRowParagraphSpacingIsScaledWithFontSize]' started.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTableRowParagraphSpacingIsScaledWithFontSize]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTableRowsCacheResolvedColumnCountForLayoutPass]' started.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTableRowsCacheResolvedColumnCountForLayoutPass]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTerminalTableRowUsesBodyParagraphSpacingForExitRhythm]' started.
+Test Case '-[mdviewerTests.TableColumnDividerOpacityTests testTerminalTableRowUsesBodyParagraphSpacingForExitRhythm]' passed (0.002 seconds).
+Test Suite 'TableColumnDividerOpacityTests' passed at 2026-03-25 18:18:29.280.
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.029 (0.030) seconds
+Test Suite 'ThemeApplicationTests' started at 2026-03-25 18:18:29.280.
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemeSchemeCombinationsCanBeCached]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemeSchemeCombinationsCanBeCached]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveOpaqueTextColors]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveOpaqueTextColors]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveValidAccentColors]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveValidAccentColors]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveValidCodeBackgrounds]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveValidCodeBackgrounds]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveValidHeadingColors]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveValidHeadingColors]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveValidSelectionColors]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesHaveValidSelectionColors]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesRenderWithoutErrors]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testAllThemesRenderWithoutErrors]' passed (0.031 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testDifferentThemesReturnDifferentPalettes]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testDifferentThemesReturnDifferentPalettes]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testFormattedHeadingColorsExist]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testFormattedHeadingColorsExist]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testLinkColorsAreDistinctFromText]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testLinkColorsAreDistinctFromText]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testPaletteCachingPerformance]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ThemeApplicationTests.swift:361: Test Case '-[mdviewerTests.ThemeApplicationTests testPaletteCachingPerformance]' measured [Time, seconds] average: 0.007, relative standard deviation: 22.762%, values: [0.005136, 0.008816, 0.005343, 0.008821, 0.005735, 0.006968, 0.007825, 0.005172, 0.008618, 0.005215], performanceMetricID:com.apple.XCTPerformanceMetric_WallClockTime, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.100, maxStandardDeviation: 0.100
+Test Case '-[mdviewerTests.ThemeApplicationTests testPaletteCachingPerformance]' passed (0.420 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testPaletteCachingReturnsSameInstance]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testPaletteCachingReturnsSameInstance]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testTableFormattingColorsExist]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testTableFormattingColorsExist]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testThemeColorsAreAppliedToRenderedText]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testThemeColorsAreAppliedToRenderedText]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.ThemeApplicationTests testThemeSwitchProducesDifferentColors]' started.
+Test Case '-[mdviewerTests.ThemeApplicationTests testThemeSwitchProducesDifferentColors]' passed (0.002 seconds).
+Test Suite 'ThemeApplicationTests' passed at 2026-03-25 18:18:29.742.
+	 Executed 15 tests, with 0 failures (0 unexpected) in 0.460 (0.462) seconds
+Test Suite 'ThemeSpacingTests' started at 2026-03-25 18:18:29.742.
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesAreRegistered]' started.
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesAreRegistered]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesHaveDescriptions]' started.
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesHaveDescriptions]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesRenderWithProperSpacingDark]' started.
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesRenderWithProperSpacingDark]' passed (0.012 seconds).
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesRenderWithProperSpacingLight]' started.
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesRenderWithProperSpacingLight]' passed (0.018 seconds).
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesWithAllSpacingPreferences]' started.
+Test Case '-[mdviewerTests.ThemeSpacingTests testAllThemesWithAllSpacingPreferences]' passed (0.026 seconds).
+Test Case '-[mdviewerTests.ThemeSpacingTests testBlockquoteStylingAcrossThemes]' started.
+Test Case '-[mdviewerTests.ThemeSpacingTests testBlockquoteStylingAcrossThemes]' passed (0.018 seconds).
+Test Case '-[mdviewerTests.ThemeSpacingTests testCodeBlockColorsAcrossThemes]' started.
+Test Case '-[mdviewerTests.ThemeSpacingTests testCodeBlockColorsAcrossThemes]' passed (0.022 seconds).
+Test Suite 'ThemeSpacingTests' passed at 2026-03-25 18:18:29.839.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.095 (0.097) seconds
+Test Suite 'ToolbarVisibilityTests' started at 2026-03-25 18:18:29.839.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testImmediateShowAtTop]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testImmediateShowAtTop]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testNoMicroUpdates]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testNoMicroUpdates]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testOnVisibilityProgressChangeCalled]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testOnVisibilityProgressChangeCalled]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testProgressiveShrinking]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testProgressiveShrinking]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testResetRestoresVisibility]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testResetRestoresVisibility]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testShowExplicitly]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testShowExplicitly]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testToolbarShowsWhenScrollingUp]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testToolbarShowsWhenScrollingUp]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testToolbarShrinksWhenScrollingDown]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testToolbarShrinksWhenScrollingDown]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testToolbarStaysVisibleBelowHideThreshold]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testToolbarStaysVisibleBelowHideThreshold]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testToolbarVisibleAtTop]' started.
+Test Case '-[mdviewerTests.ToolbarVisibilityTests testToolbarVisibleAtTop]' passed (0.000 seconds).
+Test Suite 'ToolbarVisibilityTests' passed at 2026-03-25 18:18:29.842.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 0.002 (0.003) seconds
+Test Suite 'ViewBuilderPerformanceTests' started at 2026-03-25 18:18:29.842.
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testComplexTypedFrontmatter]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:142: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testComplexTypedFrontmatter]' measured [Clock Monotonic Time, s] average: 0.000, relative standard deviation: 27.300%, values: [0.000085, 0.000095, 0.000055, 0.000051, 0.000053], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testComplexTypedFrontmatter]' passed (0.006 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testEmptyMetadataStateBodyEvaluation]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:63: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testEmptyMetadataStateBodyEvaluation]' measured [Clock Monotonic Time, s] average: 0.000, relative standard deviation: 14.051%, values: [0.000015, 0.000012, 0.000009, 0.000012, 0.000013], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testEmptyMetadataStateBodyEvaluation]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarBodyEvaluation]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:39: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarBodyEvaluation]' measured [Clock Monotonic Time, s] average: 0.000, relative standard deviation: 114.220%, values: [0.000182, 0.000020, 0.000026, 0.000028, 0.000021], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarBodyEvaluation]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarCPUTime]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:236: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarCPUTime]' measured [CPU Time, s] average: 0.001, relative standard deviation: 41.857%, values: [0.000389, 0.000393, 0.000356, 0.000652, 0.000958], performanceMetricID:com.apple.dt.XCTMetric_CPU.time, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:236: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarCPUTime]' measured [CPU Instructions Retired, kI] average: 2119.154, relative standard deviation: 0.289%, values: [2130.961000, 2114.881000, 2114.755000, 2115.930000, 2119.245000], performanceMetricID:com.apple.dt.XCTMetric_CPU.instructions_retired, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:236: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarCPUTime]' measured [CPU Cycles, kC] average: 908.666, relative standard deviation: 3.993%, values: [945.687000, 959.128000, 870.811000, 882.924000, 884.778000], performanceMetricID:com.apple.dt.XCTMetric_CPU.cycles, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarCPUTime]' passed (0.014 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarMemoryAllocations]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:165: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarMemoryAllocations]' measured [Memory Physical, kB] average: 0.000, relative standard deviation: 0.000%, values: [0.000000, 0.000000, 0.000000, 0.000000, 0.000000], performanceMetricID:com.apple.dt.XCTMetric_Memory.physical, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:165: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarMemoryAllocations]' measured [Memory Peak Physical, kB] average: 3714372.360, relative standard deviation: 0.000%, values: [3714372.360000, 3714372.360000, 3714372.360000, 3714372.360000, 3714372.360000], performanceMetricID:com.apple.dt.XCTMetric_Memory.physical_peak, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarMemoryAllocations]' passed (0.008 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarStorageImpact]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:259: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarStorageImpact]' measured [Disk Logical Writes, kB] average: 0.000, relative standard deviation: 0.000%, values: [0.000000, 0.000000, 0.000000, 0.000000, 0.000000], performanceMetricID:com.apple.dt.XCTMetric_Disk.logical_writes, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testInspectorSidebarStorageImpact]' passed (0.006 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testIsolatedSubviewsPerformance]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:117: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testIsolatedSubviewsPerformance]' measured [Clock Monotonic Time, s] average: 0.000, relative standard deviation: 18.985%, values: [0.000006, 0.000004, 0.000004, 0.000004, 0.000003], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testIsolatedSubviewsPerformance]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testLazyVStackContainerPerformance]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:81: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testLazyVStackContainerPerformance]' measured [Clock Monotonic Time, s] average: 0.000, relative standard deviation: 13.482%, values: [0.000007, 0.000005, 0.000005, 0.000006, 0.000005], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testLazyVStackContainerPerformance]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testLazyVStackMemoryVsVStack]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:196: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testLazyVStackMemoryVsVStack]' measured [Memory Physical, kB] average: 0.000, relative standard deviation: 0.000%, values: [0.000000, 0.000000, 0.000000, 0.000000, 0.000000], performanceMetricID:com.apple.dt.XCTMetric_Memory.physical, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:196: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testLazyVStackMemoryVsVStack]' measured [Memory Peak Physical, kB] average: 3714372.360, relative standard deviation: 0.000%, values: [3714372.360000, 3714372.360000, 3714372.360000, 3714372.360000, 3714372.360000], performanceMetricID:com.apple.dt.XCTMetric_Memory.physical_peak, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testLazyVStackMemoryVsVStack]' passed (0.005 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testMetadataRowBodyEvaluation]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:54: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testMetadataRowBodyEvaluation]' measured [Clock Monotonic Time, s] average: 0.000, relative standard deviation: 22.090%, values: [0.000015, 0.000019, 0.000011, 0.000014, 0.000010], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testMetadataRowBodyEvaluation]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testMetadataRowMemoryAllocations]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:179: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testMetadataRowMemoryAllocations]' measured [Memory Physical, kB] average: 0.000, relative standard deviation: 0.000%, values: [0.000000, 0.000000, 0.000000, 0.000000, 0.000000], performanceMetricID:com.apple.dt.XCTMetric_Memory.physical, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:179: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testMetadataRowMemoryAllocations]' measured [Memory Peak Physical, kB] average: 3714372.360, relative standard deviation: 0.000%, values: [3714372.360000, 3714372.360000, 3714372.360000, 3714372.360000, 3714372.360000], performanceMetricID:com.apple.dt.XCTMetric_Memory.physical_peak, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testMetadataRowMemoryAllocations]' passed (0.007 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testRegularVStackContainerPerformance]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:98: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testRegularVStackContainerPerformance]' measured [Clock Monotonic Time, s] average: 0.000, relative standard deviation: 14.039%, values: [0.000006, 0.000004, 0.000005, 0.000004, 0.000004], performanceMetricID:com.apple.dt.XCTMetric_Clock.time.monotonic, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testRegularVStackContainerPerformance]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testRegularVStackMemoryVsLazy]' started.
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:213: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testRegularVStackMemoryVsLazy]' measured [Memory Physical, kB] average: 0.000, relative standard deviation: 0.000%, values: [0.000000, 0.000000, 0.000000, 0.000000, 0.000000], performanceMetricID:com.apple.dt.XCTMetric_Memory.physical, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+/Users/meka/projects/md/mdviewer/Tests/mdviewerTests/ViewBuilderPerformanceTests.swift:213: Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testRegularVStackMemoryVsLazy]' measured [Memory Peak Physical, kB] average: 3714372.360, relative standard deviation: 0.000%, values: [3714372.360000, 3714372.360000, 3714372.360000, 3714372.360000, 3714372.360000], performanceMetricID:com.apple.dt.XCTMetric_Memory.physical_peak, baselineName: "", baselineAverage: , polarity: prefers smaller, maxPercentRegression: 10.000%, maxPercentRelativeStandardDeviation: 10.000%, maxRegression: 0.000, maxStandardDeviation: 0.000
+Test Case '-[mdviewerTests.ViewBuilderPerformanceTests testRegularVStackMemoryVsLazy]' passed (0.008 seconds).
+Test Suite 'ViewBuilderPerformanceTests' passed at 2026-03-25 18:18:29.915.
+	 Executed 13 tests, with 0 failures (0 unexpected) in 0.070 (0.073) seconds
+Test Suite 'VisualRegressionTests' started at 2026-03-25 18:18:29.915.
+Test Case '-[mdviewerTests.VisualRegressionTests testAllFontFamiliesProduceValidTypography]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testAllFontFamiliesProduceValidTypography]' passed (0.009 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testAllSpacingPresetsApplyCorrectLineSpacing]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testAllSpacingPresetsApplyCorrectLineSpacing]' passed (0.006 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testBlockquotesHaveVisualStyling]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testBlockquotesHaveVisualStyling]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testCodeBlocksHaveBackgroundColor]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testCodeBlocksHaveBackgroundColor]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testCodeBlocksPreserveLineBreaks]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testCodeBlocksPreserveLineBreaks]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testCodeBlocksUseMonospaceFont]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testCodeBlocksUseMonospaceFont]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testComplexDocumentRendersAllElements]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testComplexDocumentRendersAllElements]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testFontSizeChangeProducesDifferentSizes]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testFontSizeChangeProducesDifferentSizes]' passed (0.005 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testHeadingsHaveProperVerticalSpacing]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testHeadingsHaveProperVerticalSpacing]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testKernAppliedPerSpacingPreset]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testKernAppliedPerSpacingPreset]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testLargeDocumentAttributeConsistency]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testLargeDocumentAttributeConsistency]' passed (0.076 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testLineBreaksWithinParagraphsAreSoft]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testLineBreaksWithinParagraphsAreSoft]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testListItemsHaveProperIndentation]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testListItemsHaveProperIndentation]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testOrderedListItemsAreNumbered]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testOrderedListItemsAreNumbered]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testParagraphsHaveProperSpacingBetweenThem]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testParagraphsHaveProperSpacingBetweenThem]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testRealisticMultiSectionDocument]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testRealisticMultiSectionDocument]' passed (0.013 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testSpacingPresetsAreMonotonicallyOrdered]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testSpacingPresetsAreMonotonicallyOrdered]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testThemeChangeProducesDifferentHeadingColors]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testThemeChangeProducesDifferentHeadingColors]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testUnicodeContentRendersCorrectly]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testUnicodeContentRendersCorrectly]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.VisualRegressionTests testVerticalRhythmFixture]' started.
+Test Case '-[mdviewerTests.VisualRegressionTests testVerticalRhythmFixture]' passed (0.016 seconds).
+Test Suite 'VisualRegressionTests' passed at 2026-03-25 18:18:30.076.
+	 Executed 20 tests, with 0 failures (0 unexpected) in 0.157 (0.161) seconds
+Test Suite 'VoiceOverNavigationTests' started at 2026-03-25 18:18:30.076.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testAllAccessibilityActionNames]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testAllAccessibilityActionNames]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testContentToolbarAccessibility]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testContentToolbarAccessibility]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testContentViewHasAccessibilityConfiguration]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testContentViewHasAccessibilityConfiguration]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testDocumentAccessibilityValueFormats]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testDocumentAccessibilityValueFormats]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testEmptyMetadataAccessibility]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testEmptyMetadataAccessibility]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testHeadingInfoEquality]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testHeadingInfoEquality]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testHeadingInfoProperties]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testHeadingInfoProperties]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testLiquidBackgroundIsAccessibilityHidden]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testLiquidBackgroundIsAccessibilityHidden]' passed (0.002 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testMetadataInspectorAccessibilityLabels]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testMetadataInspectorAccessibilityLabels]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testNativeMarkdownTextViewExists]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testNativeMarkdownTextViewExists]' passed (0.001 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testOutlineNavigationTargetFallsBackToLineIndex]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testOutlineNavigationTargetFallsBackToLineIndex]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testOutlineNavigationTargetPrefersHeadingIndex]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testOutlineNavigationTargetPrefersHeadingIndex]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testRawEditorAccessibilityValue]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testRawEditorAccessibilityValue]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testRawMarkdownEditorExists]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testRawMarkdownEditorExists]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testReaderTextViewExists]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testReaderTextViewExists]' passed (0.004 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testReaderTextViewHeadingActionsWithContent]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testReaderTextViewHeadingActionsWithContent]' passed (0.157 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testReaderTextViewHeadingCacheInitiallyEmpty]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testReaderTextViewHeadingCacheInitiallyEmpty]' passed (0.003 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testVoiceOverRotorLabels]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testVoiceOverRotorLabels]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testWelcomeStartViewAccessibilityLabels]' started.
+Test Case '-[mdviewerTests.VoiceOverNavigationTests testWelcomeStartViewAccessibilityLabels]' passed (0.001 seconds).
+Test Suite 'VoiceOverNavigationTests' passed at 2026-03-25 18:18:30.254.
+	 Executed 19 tests, with 0 failures (0 unexpected) in 0.175 (0.178) seconds
+Test Suite 'mdviewerTests' started at 2026-03-25 18:18:30.254.
+Test Case '-[mdviewerTests.mdviewerTests testAppearanceModeFromUnknownDefaultsAuto]' started.
+Test Case '-[mdviewerTests.mdviewerTests testAppearanceModeFromUnknownDefaultsAuto]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.mdviewerTests testAppearanceModePreferredColorScheme]' started.
+Test Case '-[mdviewerTests.mdviewerTests testAppearanceModePreferredColorScheme]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.mdviewerTests testAppThemeRawValuesRemainStable]' started.
+Test Case '-[mdviewerTests.mdviewerTests testAppThemeRawValuesRemainStable]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.mdviewerTests testReaderColumnWidthFromUnknownDefaultsBalanced]' started.
+Test Case '-[mdviewerTests.mdviewerTests testReaderColumnWidthFromUnknownDefaultsBalanced]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.mdviewerTests testReaderFontFamilyFromUnknownDefaultsNewYork]' started.
+Test Case '-[mdviewerTests.mdviewerTests testReaderFontFamilyFromUnknownDefaultsNewYork]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.mdviewerTests testReaderFontSizeFromUnknownDefaultsStandard]' started.
+Test Case '-[mdviewerTests.mdviewerTests testReaderFontSizeFromUnknownDefaultsStandard]' passed (0.000 seconds).
+Test Case '-[mdviewerTests.mdviewerTests testReaderTextSpacingFromUnknownDefaultsBalanced]' started.
+Test Case '-[mdviewerTests.mdviewerTests testReaderTextSpacingFromUnknownDefaultsBalanced]' passed (0.000 seconds).
+Test Suite 'mdviewerTests' passed at 2026-03-25 18:18:30.256.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'mdviewerPackageTests.xctest' failed at 2026-03-25 18:18:30.257.
+	 Executed 504 tests, with 2 failures (0 unexpected) in 72.307 (72.399) seconds
+Test Suite 'All tests' failed at 2026-03-25 18:18:30.257.
+	 Executed 504 tests, with 2 failures (0 unexpected) in 72.307 (72.402) seconds
+􀟈  Test run started.
+􀄵  Testing Library Version: 1501
+􀄵  Target Platform: arm64e-apple-macos14.0
+􁁛  Test run with 0 tests in 0 suites passed after 0.001 seconds.

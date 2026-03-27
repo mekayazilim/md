@@ -146,6 +146,12 @@ enum AppTheme: String, CaseIterable, Identifiable {
         private func p3(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1.0) -> NSColor {
             NSColor(displayP3Red: r, green: g, blue: b, alpha: a)
         }
+
+        /// Returns the theme's color data for the given color scheme.
+        func colorData(for scheme: ColorScheme) -> ThemeColorData {
+            let data = ThemeRegistry.allThemes.first { $0.name == rawValue } ?? ThemeRegistry.basic
+            return scheme == .dark ? data.dark : data.light
+        }
     #endif
 }
 

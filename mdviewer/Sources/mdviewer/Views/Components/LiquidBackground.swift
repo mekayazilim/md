@@ -18,9 +18,6 @@ struct LiquidBackground: View {
 
     var body: some View {
         ZStack {
-            // Instant solid color for the first frame
-            Color(nsColor: .windowBackgroundColor)
-
             if isReady {
                 meshGradientView
             }

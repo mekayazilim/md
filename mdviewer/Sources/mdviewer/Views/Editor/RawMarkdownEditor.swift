@@ -127,7 +127,7 @@ private struct RawEditorRepresentable: NSViewRepresentable {
         textView.isVerticallyResizable = true
         textView.isHorizontallyResizable = false
         textView.autoresizingMask = [.width]
-        
+
         // Explicitly set text container width tracking to prevent NSLayoutManager hangs
         if let textContainer = textView.textContainer {
             textContainer.widthTracksTextView = true
@@ -210,25 +210,17 @@ private struct RawEditorRepresentable: NSViewRepresentable {
         let previousAllowsUndo = textView.allowsUndo
         textView.allowsUndo = false
         textView.string = value
-        applyHighlighting(to: textView)
+        Self.applyHighlighting(to: textView, colorScheme: colorScheme, fontSize: fontSize)
         textView.undoManager?.removeAllActions()
         textView.allowsUndo = previousAllowsUndo
         coordinator.isApplyingProgrammaticText = false
     }
 
-    private func applyHighlighting(to textView: NSTextView) {
-        guard let storage = textView.textStorage else {
-            logger.error("No text storage available")
-            return
-        }
+    fileprivate static func applyHighlighting(to textView: NSTextView, colorScheme: ColorScheme, fontSize: CGFloat) {
+        guard let storage = textView.textStorage else { return }
 
         let fullRange = NSRange(location: 0, length: storage.length)
-        guard fullRange.length > 0 else {
-            logger.debug("Empty text, skipping highlighting")
-            return
-        }
-
-        logger.debug("Applying highlighting to \(fullRange.length) characters")
+        guard fullRange.length > 0 else { return }
 
         let isDark = colorScheme == .dark
 
@@ -239,12 +231,11 @@ private struct RawEditorRepresentable: NSViewRepresentable {
         let linkColor = isDark ? NSColor.systemIndigo : NSColor.systemIndigo
         let listColor = isDark ? NSColor.systemYellow : NSColor.systemOrange
 
-        // Step 1: Apply base font and color to ENTIRE text first
+        // Step 1: Apply base font and color to ENTIRE text first, and clear stale backgrounds
         let baseFont = NSFont.monospacedSystemFont(ofSize: fontSize, weight: .regular)
         storage.addAttribute(.font, value: baseFont, range: fullRange)
         storage.addAttribute(.foregroundColor, value: baseColor, range: fullRange)
-
-        logger.debug("Base attributes applied")
+        storage.removeAttribute(.backgroundColor, range: fullRange)
 
         // Step 2: Find and highlight code blocks FIRST (they have highest priority)
         highlightCodeBlocks(in: storage, fullRange: fullRange, codeColor: codeColor, baseFont: baseFont)
@@ -252,7 +243,6 @@ private struct RawEditorRepresentable: NSViewRepresentable {
         // Step 3: Headers (full line matches)
         if let headerPattern = try? NSRegularExpression(pattern: #"^#{1,6}\s+.+$"#, options: .anchorsMatchLines) {
             let matches = headerPattern.matches(in: storage.string, options: [], range: fullRange)
-            logger.debug("Found \(matches.count) headers")
             for match in matches {
                 // Only apply if not already colored as code
                 if !isRangeInCodeBlock(match.range, in: storage) {
@@ -266,7 +256,6 @@ private struct RawEditorRepresentable: NSViewRepresentable {
         // Step 4: Links
         if let linkPattern = try? NSRegularExpression(pattern: #"\[[^\]]+\]\([^)]+\)"#) {
             let matches = linkPattern.matches(in: storage.string, options: [], range: fullRange)
-            logger.debug("Found \(matches.count) links")
             for match in matches {
                 if !isRangeInCodeBlock(match.range, in: storage) {
                     storage.addAttribute(.foregroundColor, value: linkColor, range: match.range)
@@ -277,7 +266,6 @@ private struct RawEditorRepresentable: NSViewRepresentable {
         // Step 5: Bold
         if let boldPattern = try? NSRegularExpression(pattern: #"\*\*[^*]+\*\*|__[^_]+__"#) {
             let matches = boldPattern.matches(in: storage.string, options: [], range: fullRange)
-            logger.debug("Found \(matches.count) bold sections")
             for match in matches {
                 if !isRangeInCodeBlock(match.range, in: storage) {
                     let boldFont = NSFontManager.shared.convert(baseFont, toHaveTrait: .boldFontMask)
@@ -289,19 +277,16 @@ private struct RawEditorRepresentable: NSViewRepresentable {
         // Step 6: List markers
         if let listPattern = try? NSRegularExpression(pattern: #"^[\s]*[-*+]\s"#, options: .anchorsMatchLines) {
             let matches = listPattern.matches(in: storage.string, options: [], range: fullRange)
-            logger.debug("Found \(matches.count) list markers")
             for match in matches {
                 if !isRangeInCodeBlock(match.range, in: storage) {
                     storage.addAttribute(.foregroundColor, value: listColor, range: match.range)
                 }
             }
         }
-
-        logger.debug("Highlighting complete")
     }
 
     /// Highlights code blocks and tracks their ranges to prevent other highlighting.
-    private func highlightCodeBlocks(
+    private static func highlightCodeBlocks(
         in storage: NSTextStorage,
         fullRange: NSRange,
         codeColor: NSColor,
@@ -312,13 +297,12 @@ private struct RawEditorRepresentable: NSViewRepresentable {
         // Find code fence pairs (``` or ~~~)
         guard
             let fencePattern = try? NSRegularExpression(
-                pattern: #"^```|~~~[a-zA-Z]*$"#,
+                pattern: #"^(`{3,}|~~~+)[a-zA-Z]*$"#,
                 options: .anchorsMatchLines
             )
         else { return }
 
         let fenceMatches = fencePattern.matches(in: storage.string, options: [], range: fullRange)
-        logger.debug("Found \(fenceMatches.count) code fences")
 
         // Process fence pairs
         var i = 0
@@ -330,17 +314,33 @@ private struct RawEditorRepresentable: NSViewRepresentable {
             let openLine = nsString.lineRange(for: openFence.range)
             let closeLine = nsString.lineRange(for: closeFence.range)
 
-            // Calculate the range between fences (including the fences themselves)
+            // Calculate the range between fences
             let codeStart = openLine.location
-            let codeEnd = closeLine.location + closeLine.length
-            let codeLength = codeEnd - codeStart
+            var codeEnd = closeLine.location + closeLine.length
 
-            guard codeLength > 0 else {
+            // Strictly exclude ALL trailing newlines to prevent attribute leakage
+            // Character by character check from the end
+            while codeEnd > codeStart {
+                let char = nsString.character(at: codeEnd - 1)
+                if char == 0x0A || char == 0x0D {
+                    codeEnd -= 1
+                } else {
+                    break
+                }
+            }
+
+            // Also exclude the newline immediately following the opening fence
+            // so the background starts exactly on the first code line.
+            // This matches CommonMark expectations for fenced blocks.
+            // (Optional: depends on if we want fences highlighted too)
+            // For now, keep the fences highlighted as requested before.
+
+            guard codeEnd > codeStart else {
                 i += 1
                 continue
             }
 
-            let codeRange = NSRange(location: codeStart, length: codeLength)
+            let codeRange = NSRange(location: codeStart, length: codeEnd - codeStart)
 
             // Apply code highlighting
             storage.addAttribute(.foregroundColor, value: codeColor, range: codeRange)
@@ -353,14 +353,12 @@ private struct RawEditorRepresentable: NSViewRepresentable {
                 range: codeRange
             )
 
-            logger.debug("Highlighted code block: \(codeRange.location)-\(codeRange.location + codeRange.length)")
-
             i += 2 // Skip to next pair
         }
     }
 
     /// Checks if a range overlaps with an already-highlighted code block.
-    private func isRangeInCodeBlock(_ range: NSRange, in storage: NSTextStorage) -> Bool {
+    private static func isRangeInCodeBlock(_ range: NSRange, in storage: NSTextStorage) -> Bool {
         // Check if this range has the code block background color
         if range.location >= storage.length { return false }
 
@@ -393,12 +391,34 @@ private struct RawEditorRepresentable: NSViewRepresentable {
             self.text = text
         }
 
+        func textView(_ textView: NSTextView, shouldChangeTextIn affectedCharRange: NSRange, replacementString: String?) -> Bool {
+            if replacementString == "\n" {
+                // Force reset typing attributes for the new line to prevent leakage
+                var attrs = textView.typingAttributes
+                attrs.removeValue(forKey: .backgroundColor)
+                textView.typingAttributes = attrs
+            }
+            return true
+        }
+
         func textDidChange(_ notification: Notification) {
             guard !isApplyingProgrammaticText else { return }
-            guard let textView = notification.object as? NSTextView else { return }
+            guard let textView = notification.object as? RawEditorTextView else { return }
             let latestText = textView.string
             guard text.wrappedValue != latestText else { return }
             text.wrappedValue = latestText
+
+            // Clear background from typing attributes to prevent leakage
+            var attrs = textView.typingAttributes
+            attrs.removeValue(forKey: .backgroundColor)
+            textView.typingAttributes = attrs
+
+            // Re-apply highlighting during typing to ensure live updates
+            RawEditorRepresentable.applyHighlighting(
+                to: textView,
+                colorScheme: textView.colorScheme,
+                fontSize: textView.fontSize
+            )
         }
     }
 }
@@ -584,7 +604,7 @@ private final class RawLineNumberRulerView: NSRulerView {
 
         // Get the visible glyph range
         let visibleRect = scrollView?.documentVisibleRect ?? rect
-        
+
         // Offset the bounding rect for glyph calculation to account for the top padding
         let layoutRect = NSRect(
             x: visibleRect.origin.x,
@@ -592,7 +612,7 @@ private final class RawLineNumberRulerView: NSRulerView {
             width: visibleRect.width,
             height: visibleRect.height
         )
-        
+
         let visibleGlyphRange = layoutManager.glyphRange(forBoundingRect: layoutRect, in: textContainer)
 
         // Get the character range for visible glyphs
@@ -606,7 +626,7 @@ private final class RawLineNumberRulerView: NSRulerView {
             guard let self else { return }
 
             // Convert to ruler coordinates
-            // lineRect is relative to text container. 
+            // lineRect is relative to text container.
             // textView draws text container at textContainerInset.height.
             let rulerY = (lineRect.minY + textView.textContainerInset.height) - visibleRect.minY
 

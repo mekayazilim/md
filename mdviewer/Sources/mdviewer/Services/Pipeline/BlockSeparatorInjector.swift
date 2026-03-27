@@ -38,6 +38,8 @@ struct BlockSeparatorInjector: BlockSeparatorInjecting {
             }
         }
 
+        let nsString = text.string as NSString
+
         // 2. Process transitions and indentation
         for i in 0 ..< intents.count {
             let curr = intents[i].intent
@@ -48,7 +50,16 @@ struct BlockSeparatorInjector: BlockSeparatorInjecting {
                 let prev = intents[i - 1].intent
 
                 if let sep = detectSeparator(prev: prev, curr: curr, newlineAttr: newlineAttr, tabAttr: tabAttr) {
-                    mutations.append((currRange.location, sep))
+                    // Avoid double-spacing: don't insert a newline if one already exists
+                    if sep.string == "\n" {
+                        let loc = currRange.location
+                        let alreadyHasNewline = loc > 0 && nsString.character(at: loc - 1) == 0x0A
+                        if !alreadyHasNewline {
+                            mutations.append((loc, sep))
+                        }
+                    } else {
+                        mutations.append((currRange.location, sep))
+                    }
                 }
             }
 

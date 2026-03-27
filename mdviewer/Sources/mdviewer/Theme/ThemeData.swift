@@ -23,6 +23,7 @@ struct ThemeColorData {
     let linkHover: NSColor
     let accent: NSColor
     let heading: NSColor
+    let background: NSColor
     let codeBackground: NSColor
     let codeBorder: NSColor
     let inlineCodeBackground: NSColor
@@ -64,6 +65,7 @@ enum ThemeRegistry {
             linkHover: .linkColor,
             accent: .linkColor,
             heading: .labelColor,
+            background: .windowBackgroundColor,
             codeBackground: p3Color(r: 0.95, g: 0.95, b: 0.95),
             codeBorder: p3Color(r: 0.88, g: 0.88, b: 0.88),
             inlineCodeBackground: p3Color(r: 0.55, g: 0.55, b: 0.55, a: 0.08),
@@ -89,6 +91,7 @@ enum ThemeRegistry {
             linkHover: .linkColor,
             accent: .linkColor,
             heading: .labelColor,
+            background: .windowBackgroundColor,
             codeBackground: p3Color(r: 0.20, g: 0.20, b: 0.20),
             codeBorder: p3Color(r: 0.30, g: 0.30, b: 0.30),
             inlineCodeBackground: p3Color(r: 0.45, g: 0.45, b: 0.45, a: 0.08),
@@ -118,6 +121,7 @@ enum ThemeRegistry {
             linkHover: p3Color(r: 0.10, g: 0.46, b: 0.82),
             accent: p3Color(r: 0.10, g: 0.46, b: 0.82),
             heading: p3Color(r: 0.06, g: 0.08, b: 0.12),
+            background: .white,
             codeBackground: p3Color(r: 0.96, g: 0.96, b: 0.96),
             codeBorder: p3Color(r: 0.88, g: 0.88, b: 0.88),
             inlineCodeBackground: p3Color(r: 0.22, g: 0.51, b: 0.82, a: 0.08),
@@ -143,6 +147,7 @@ enum ThemeRegistry {
             linkHover: p3Color(r: 0.53, g: 0.75, b: 0.98),
             accent: p3Color(r: 0.53, g: 0.75, b: 0.98),
             heading: p3Color(r: 0.95, g: 0.96, b: 0.98),
+            background: p3Color(r: 0.05, g: 0.07, b: 0.10),
             codeBackground: p3Color(r: 0.17, g: 0.18, b: 0.20),
             codeBorder: p3Color(r: 0.28, g: 0.29, b: 0.32),
             inlineCodeBackground: p3Color(r: 0.35, g: 0.62, b: 0.90, a: 0.10),
@@ -172,6 +177,7 @@ enum ThemeRegistry {
             linkHover: p3Color(r: 0.00, g: 0.48, b: 1.00),
             accent: p3Color(r: 0.00, g: 0.48, b: 1.00),
             heading: p3Color(r: 0.05, g: 0.05, b: 0.08),
+            background: .white,
             codeBackground: p3Color(r: 0.95, g: 0.95, b: 0.96),
             codeBorder: p3Color(r: 0.88, g: 0.88, b: 0.90),
             inlineCodeBackground: p3Color(r: 0.00, g: 0.48, b: 1.00, a: 0.08),
@@ -197,6 +203,7 @@ enum ThemeRegistry {
             linkHover: p3Color(r: 0.25, g: 0.60, b: 1.00),
             accent: p3Color(r: 0.25, g: 0.60, b: 1.00),
             heading: p3Color(r: 0.97, g: 0.97, b: 0.98),
+            background: p3Color(r: 0.08, g: 0.09, b: 0.11),
             codeBackground: p3Color(r: 0.14, g: 0.15, b: 0.17),
             codeBorder: p3Color(r: 0.26, g: 0.27, b: 0.30),
             inlineCodeBackground: p3Color(r: 0.25, g: 0.60, b: 1.00, a: 0.10),
@@ -324,6 +331,7 @@ enum ThemeRegistry {
             linkHover: p3Color(r: lightAccent.r, g: lightAccent.g, b: lightAccent.b),
             accent: p3Color(r: lightAccent.r, g: lightAccent.g, b: lightAccent.b),
             heading: p3Color(r: lightHeading.r, g: lightHeading.g, b: lightHeading.b),
+            background: p3Color(r: lightCodeBg.r + 0.02, g: lightCodeBg.g + 0.02, b: lightCodeBg.b + 0.02),
             codeBackground: p3Color(r: lightCodeBg.r, g: lightCodeBg.g, b: lightCodeBg.b),
             codeBorder: p3Color(r: lightCodeBg.r - 0.08, g: lightCodeBg.g - 0.08, b: lightCodeBg.b - 0.08),
             inlineCodeBackground: p3Color(r: lightAccent.r, g: lightAccent.g, b: lightAccent.b, a: 0.08),
@@ -350,6 +358,7 @@ enum ThemeRegistry {
             linkHover: p3Color(r: darkAccent.r, g: darkAccent.g, b: darkAccent.b),
             accent: p3Color(r: darkAccent.r, g: darkAccent.g, b: darkAccent.b),
             heading: p3Color(r: darkHeading.r, g: darkHeading.g, b: darkHeading.b),
+            background: p3Color(r: darkCodeBg.r - 0.02, g: darkCodeBg.g - 0.02, b: darkCodeBg.b - 0.02),
             codeBackground: p3Color(r: darkCodeBg.r, g: darkCodeBg.g, b: darkCodeBg.b),
             codeBorder: p3Color(r: darkCodeBg.r + 0.12, g: darkCodeBg.g + 0.12, b: darkCodeBg.b + 0.12),
             inlineCodeBackground: p3Color(r: darkAccent.r, g: darkAccent.g, b: darkAccent.b, a: 0.10),

@@ -25,6 +25,8 @@ struct mdviewerApp: App {
         DocumentGroup(newDocument: MarkdownDocument()) { file in
             ContentView(document: file.$document, fileURL: file.fileURL)
                 .frame(minWidth: 600, minHeight: 400)
+                .toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
+                .containerBackground(.ultraThinMaterial, for: .window)
                 .environment(\.preferences, AppPreferences.shared)
                 .sheet(isPresented: $showingKeybindings) {
                     KeybindingsView()
@@ -32,8 +34,10 @@ struct mdviewerApp: App {
         }
         .defaultSize(width: 900, height: 700)
         #if os(macOS)
-            .windowResizability(.contentMinSize)
+            .windowStyle(.automatic)
             .windowToolbarStyle(.unified)
+            .windowBackgroundDragBehavior(.enabled)
+            .windowResizability(.contentMinSize)
             .commands {
                 // Edit Menu - Markdown editing commands using focused values
                 CommandMenu("Edit") {
@@ -325,8 +329,19 @@ struct mdviewerApp: App {
 
         private func configureWindow(_ window: NSWindow) {
             window.tabbingMode = .preferred
-            window.titlebarAppearsTransparent = true
-            window.styleMask.insert(.fullSizeContentView)
+            
+            // Defer property changes that trigger layout to avoid constraint crashes
+            DispatchQueue.main.async { [weak window] in
+                guard let window else { return }
+                window.titlebarAppearsTransparent = true
+                window.titlebarSeparatorStyle = .none
+                if !window.styleMask.contains(.fullSizeContentView) {
+                    window.styleMask.insert(.fullSizeContentView)
+                }
+                
+                // Allow dragging from any empty background area
+                window.isMovableByWindowBackground = true
+            }
         }
     }
 #endif

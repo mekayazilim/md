@@ -118,17 +118,17 @@
                 let lineHeight = headingSize * spacing.lineHeightMultiplier
 
                 // Space before: larger headings get more space (section breaks)
-                // H1: 1.5×, H2: 1.25×, H3: 1.0×, H4+: 0.75×
+                // H1: 1.1x, H2: 1.0x, H3: 0.9x, H4+: 0.8x
                 let spaceBeforeMultiplier: CGFloat
                 switch level {
-                case 1: spaceBeforeMultiplier = 1.5
-                case 2: spaceBeforeMultiplier = 1.25
-                case 3: spaceBeforeMultiplier = 1.0
-                default: spaceBeforeMultiplier = 0.75
+                case 1: spaceBeforeMultiplier = 1.1
+                case 2: spaceBeforeMultiplier = 1.0
+                case 3: spaceBeforeMultiplier = 0.9
+                default: spaceBeforeMultiplier = 0.8
                 }
 
-                // Space after: half of space before (connects heading to content)
-                let spaceAfterMultiplier = spaceBeforeMultiplier * 0.5
+                // Space after: fixed at 0.5x
+                let spaceAfterMultiplier = 0.5
 
                 return (lineHeight * spaceAfterMultiplier, lineHeight * spaceBeforeMultiplier)
             }
@@ -275,7 +275,7 @@
                 let expectedQuoteSpacing = bodyLineHeight * 0.75
                 let expectedQuoteBefore = bodyLineHeight * 0.5625
 
-                // Code block spacing: removed paragraph-level spacing in favor of tighter in-block rhythm.
+                // Code block spacing: 0.0 internal spacing (separation handled by block separators)
                 let expectedCodeSpacing = 0.0
                 let expectedCodeLineSpacing = 14 * DesignTokens.TypographySpacing.codeBlockLineMultiplier
 

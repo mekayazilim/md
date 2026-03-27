@@ -36,6 +36,10 @@
         private var decorationCache: CachedDecoration?
         private var decorationCacheGeneration = 0
 
+        deinit {
+            decorationCache = nil
+        }
+
         // MARK: - Decoration Span Types
 
         private struct TableDecoration: Hashable {
@@ -178,8 +182,10 @@
                 guard span.charEnd > charRange.location, span.charStart < NSMaxRange(charRange) else { continue }
                 guard case .code(let bg) = span.kind else { continue }
 
-                let rect = cachedUsedRect(for: span, usedRects: &usedRects, origin: origin)
-                guard !rect.isNull else { continue }
+                let glyphRange = glyphRange(
+                    forCharacterRange: NSRange(location: span.charStart, length: span.charEnd - span.charStart),
+                    actualCharacterRange: nil
+                )
 
                 let hasLineNumbers = ts.attribute(
                     MarkdownRenderAttribute.codeBlock,
@@ -194,21 +200,34 @@
                     gutterWidth = 0
                 }
 
-                let drawRect = CGRect(
-                    x: origin.x,
-                    y: rect.minY - Self.codeVPad,
-                    width: containerWidth,
-                    height: rect.height + Self.codeVPad * 2
-                )
                 ctx.saveGState()
                 bg.setFill()
-                ctx.addPath(CGPath(
-                    roundedRect: drawRect,
-                    cornerWidth: Self.codeCornerRadius,
-                    cornerHeight: Self.codeCornerRadius,
-                    transform: nil
-                ))
-                ctx.fillPath()
+
+                var blockRect = CGRect.null
+                enumerateEnclosingRects(
+                    forGlyphRange: glyphRange,
+                    withinSelectedGlyphRange: NSRange(location: NSNotFound, length: 0),
+                    in: textContainers[0]
+                ) { rect, _ in
+                    blockRect = blockRect.isNull ? rect : blockRect.union(rect)
+                }
+
+                if !blockRect.isNull {
+                    // Normalize the rect to include origin and padding
+                    let drawRect = CGRect(
+                        x: blockRect.minX + origin.x,
+                        y: blockRect.minY + origin.y - Self.codeVPad,
+                        width: containerWidth - blockRect.minX,
+                        height: blockRect.height + Self.codeVPad * 2
+                    )
+                    ctx.addPath(CGPath(
+                        roundedRect: drawRect,
+                        cornerWidth: Self.codeCornerRadius,
+                        cornerHeight: Self.codeCornerRadius,
+                        transform: nil
+                    ))
+                    ctx.fillPath()
+                }
 
                 if hasLineNumbers {
                     drawLineNumbers(

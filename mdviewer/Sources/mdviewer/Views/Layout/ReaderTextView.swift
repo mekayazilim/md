@@ -100,20 +100,45 @@
         /// Cached accessibility elements for headings
         private var accessibilityHeadings: [AccessibilityHeading] = []
 
-        /// Triggered when the view is added to the window hierarchy — the scroll view
-        /// is guaranteed to exist here, so we can do the initial geometry pass.
+        /// Triggered when the view is added to or removed from a window hierarchy.
+        override func viewWillMove(toWindow newWindow: NSWindow?) {
+            super.viewWillMove(toWindow: newWindow)
+
+            // Remove existing observer before potentially adding a new one or closing
+            NotificationCenter.default.removeObserver(
+                self,
+                name: NSNotification.Name("JumpToLine"),
+                object: nil
+            )
+
+            if newWindow != nil {
+                // Moving to a new window
+                NotificationCenter.default.addObserver(
+                    self,
+                    selector: #selector(handleJumpToLine),
+                    name: NSNotification.Name("JumpToLine"),
+                    object: nil
+                )
+            } else {
+                // Removing from window - cancel any pending background tasks
+                deferredHeightRecomputeTask?.cancel()
+                deferredHeightRecomputeTask = nil
+
+                // Safely break associations during dismantle pass
+                delegate = nil
+            }
+        }
+
         override func viewDidMoveToWindow() {
             super.viewDidMoveToWindow()
             guard window != nil else { return }
             recomputeGeometry(force: true)
             scheduleHeadingCacheUpdate()
+        }
 
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(handleJumpToLine),
-                name: NSNotification.Name("JumpToLine"),
-                object: nil
-            )
+        deinit {
+            deferredHeightRecomputeTask?.cancel()
+            NotificationCenter.default.removeObserver(self)
         }
 
         override func layout() {

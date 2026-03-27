@@ -29,7 +29,8 @@ struct TypographyApplier: TypographyApplying {
             .foregroundColor: palette.textPrimary,
             .paragraphStyle: createBaseParagraphStyle(
                 lineSpacing: request.textSpacing.lineSpacing(for: request.readerFontSize),
-                paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize),
+                paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize) * 1.1,
+                paragraphSpacingBefore: request.textSpacing.paragraphSpacingBefore(for: request.readerFontSize) * 1.1,
                 hyphenationFactor: request.typographyPreferences.hyphenation ? request.textSpacing
                     .hyphenationFactor : 0,
                 alignment: request.typographyPreferences.justification.nsAlignment
@@ -208,6 +209,14 @@ struct TypographyApplier: TypographyApplying {
                 var isHeading = false
                 var headingLevel = 0
                 var isBlockQuote = false
+
+                // Pre-calculate list depth for consistent indentation
+                let listDepth = intent.components.filter {
+                    if case .unorderedList = $0.kind { return true }
+                    if case .orderedList = $0.kind { return true }
+                    return false
+                }.count
+
                 let hasListItem = intent.components.contains {
                     if case .listItem = $0.kind { return true }
                     return false
@@ -222,14 +231,14 @@ struct TypographyApplier: TypographyApplying {
                         applyHeadingStyle(to: text, range: range, request: request, level: level, palette: palette)
                     case .codeBlock:
                         isCodeBlock = true
-                        applyCodeBlockStyle(to: text, range: range, request: request, palette: palette)
+                        applyCodeBlockStyle(to: text, range: range, request: request, palette: palette, depth: listDepth)
                     case .blockQuote:
                         isBlockQuote = true
                         applyBlockquoteStyle(to: text, range: range, request: request, palette: palette, intent: intent)
                     case .paragraph:
-                        applyParagraphStyle(to: text, range: range, request: request)
+                        applyParagraphStyle(to: text, range: range, request: request, depth: listDepth)
                     case .unorderedList, .orderedList:
-                        applyListParagraphStyle(to: text, range: range, request: request)
+                        applyListParagraphStyle(to: text, range: range, request: request, depth: listDepth)
                     case .tableHeaderRow:
                         applyTableHeaderStyle(
                             to: text,
@@ -325,7 +334,8 @@ struct TypographyApplier: TypographyApplying {
         to text: NSMutableAttributedString,
         range: NSRange,
         request: RenderRequest,
-        palette: NativeThemePalette
+        palette: NativeThemePalette,
+        depth: Int
     ) {
         let codeFont = request.readerFontFamily.nsFont(size: request.codeFontSize, monospaced: true)
         text.addAttributes([
@@ -336,7 +346,13 @@ struct TypographyApplier: TypographyApplying {
         if request.showLineNumbers {
             text.addAttribute(MarkdownRenderAttribute.codeBlock, value: true, range: range)
         }
-        applyCodeBlockParagraphStyle(to: text, range: range, request: request, hasLineNumbers: request.showLineNumbers)
+        applyCodeBlockParagraphStyle(
+            to: text,
+            range: range,
+            request: request,
+            hasLineNumbers: request.showLineNumbers,
+            depth: depth
+        )
     }
 
     private func applyBlockquoteStyle(
@@ -480,27 +496,43 @@ struct TypographyApplier: TypographyApplying {
         text.addAttribute(.paragraphStyle, value: style, range: range)
     }
 
-    private func applyParagraphStyle(to text: NSMutableAttributedString, range: NSRange, request: RenderRequest) {
+    private func applyParagraphStyle(
+        to text: NSMutableAttributedString,
+        range: NSRange,
+        request: RenderRequest,
+        depth: Int
+    ) {
         let style = createBaseParagraphStyle(
             lineSpacing: request.textSpacing.lineSpacing(for: request.readerFontSize),
-            paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize),
+            paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize) * 1.1,
+            paragraphSpacingBefore: request.textSpacing.paragraphSpacingBefore(for: request.readerFontSize) * 1.1,
             hyphenationFactor: request.typographyPreferences.hyphenation ? max(
                 0,
                 request.textSpacing.hyphenationFactor - 0.05
             ) : 0,
             alignment: request.typographyPreferences.justification.nsAlignment
         )
+        let indent = CGFloat(max(0, depth)) * 24
+        style.headIndent = indent
+        style.firstLineHeadIndent = indent
         text.addAttribute(.paragraphStyle, value: style, range: range)
     }
 
-    private func applyListParagraphStyle(to text: NSMutableAttributedString, range: NSRange, request: RenderRequest) {
+    private func applyListParagraphStyle(
+        to text: NSMutableAttributedString,
+        range: NSRange,
+        request: RenderRequest,
+        depth: Int
+    ) {
+        let lineHeight = request.readerFontSize * request.textSpacing.lineHeightMultiplier
         let style = createBaseParagraphStyle(
             lineSpacing: request.textSpacing.lineSpacing(for: request.readerFontSize),
-            paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize) * 0.5,
+            paragraphSpacing: lineHeight * 0.375,
             alignment: request.typographyPreferences.justification.nsAlignment
         )
-        style.headIndent = 24
-        style.firstLineHeadIndent = 0
+        let indent = CGFloat(max(1, depth)) * 24
+        style.headIndent = indent
+        style.firstLineHeadIndent = 0 // List markers use tab to align
         text.addAttribute(.paragraphStyle, value: style, range: range)
     }
 
@@ -593,12 +625,25 @@ struct TypographyApplier: TypographyApplying {
         level: Int
     ) {
         let headingSize = fontSizeForHeader(level: level, baseSize: request.readerFontSize)
-        let baseSpacing = request.textSpacing.paragraphSpacing(for: headingSize)
-        let mult: CGFloat = level == 1 ? 0.72 : (level == 2 ? 0.62 : (level == 3 ? 0.54 : 0.46))
+        let lineHeight = headingSize * request.textSpacing.lineHeightMultiplier
+
+        // Space before: Switch to more moderate multipliers (1.1x to 0.8x)
+        // H1: 1.1x, H2: 1.0x, H3: 0.9x, H4+: 0.8x
+        let spaceBeforeMultiplier: CGFloat
+        switch level {
+        case 1: spaceBeforeMultiplier = 1.1
+        case 2: spaceBeforeMultiplier = 1.0
+        case 3: spaceBeforeMultiplier = 0.9
+        default: spaceBeforeMultiplier = 0.8
+        }
+
+        // Space after: half of space before (connects heading to content)
+        let spaceAfterMultiplier = 0.5
+
         text.addAttribute(.paragraphStyle, value: createBaseParagraphStyle(
             lineSpacing: request.textSpacing.lineSpacing(for: headingSize),
-            paragraphSpacing: baseSpacing * mult,
-            paragraphSpacingBefore: baseSpacing * mult,
+            paragraphSpacing: lineHeight * spaceAfterMultiplier,
+            paragraphSpacingBefore: lineHeight * spaceBeforeMultiplier,
             alignment: request.typographyPreferences.justification.nsAlignment
         ), range: range)
     }
@@ -613,21 +658,33 @@ struct TypographyApplier: TypographyApplying {
         to text: NSMutableAttributedString,
         range: NSRange,
         request: RenderRequest,
-        hasLineNumbers: Bool
+        hasLineNumbers: Bool,
+        depth: Int
     ) {
         let style = createBaseParagraphStyle(
-            lineSpacing: request.codeFontSize * DesignTokens.TypographySpacing.codeBlockLineMultiplier,
-            paragraphSpacing: 0,
+            lineSpacing: 0, // Zero line spacing for code blocks to preserve ASCII art
+            paragraphSpacing: 0, // NO spacing between lines!
             paragraphSpacingBefore: 0
         )
-        // Enable soft word wrapping for code blocks (matching reference image)
+        // Set fixed line height to ensure ASCII alignment with some breathing room (1.4x)
+        let adjustedLineHeight = request.codeFontSize * 1.4
+        style.minimumLineHeight = adjustedLineHeight
+        style.maximumLineHeight = adjustedLineHeight
+        style.lineHeightMultiple = 1.0
+
+        // Enable soft word wrapping for code blocks
         style.lineBreakMode = .byWordWrapping
+        // Indent code blocks to match list content (depth * 24)
+        let indent = CGFloat(max(0, depth)) * 24
         if hasLineNumbers {
             let gutter = (request.codeFontSize * DesignTokens.TypographySpacing
                 .codeBlockCharWidthMultiplier * DesignTokens.TypographySpacing.codeBlockGutterChars) +
                 (request.codeFontSize * DesignTokens.TypographySpacing.codeBlockGutterPaddingMultiplier)
-            style.headIndent = gutter
-            style.firstLineHeadIndent = gutter
+            style.headIndent = gutter + indent
+            style.firstLineHeadIndent = gutter + indent
+        } else {
+            style.headIndent = indent
+            style.firstLineHeadIndent = indent
         }
         text.addAttribute(.paragraphStyle, value: style, range: range)
     }
