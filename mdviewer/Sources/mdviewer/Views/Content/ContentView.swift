@@ -635,8 +635,10 @@ private struct SidebarPanelBackgroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if #available(macOS 26.0, *) {
+            // Use ultra thin material for sidebar panels to avoid expensive backdrop sampling on large areas
+            // Prefer background(.ultraThinMaterial) for large or dynamic regions to maintain smooth scrolling.
             content
-                .glassEffect(.regular, in: .rect)
+                .background(.ultraThinMaterial)
         } else {
             content
                 .background(.ultraThinMaterial)
