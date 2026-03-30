@@ -776,7 +776,11 @@ struct HeaderBlurContainerModifier: ViewModifier {
             .onScrollGeometryChange(for: CGFloat.self) { geometry in
                 geometry.contentOffset.y
             } action: { _, newOffset in
-                scrollOffset = newOffset
+                // Gate small changes to avoid layout thrashing during fast scrolls.
+                let delta = abs(newOffset - scrollOffset)
+                if delta >= 1.0 {
+                    scrollOffset = newOffset
+                }
             }
             .background(
                 GeometryReader { _ in
