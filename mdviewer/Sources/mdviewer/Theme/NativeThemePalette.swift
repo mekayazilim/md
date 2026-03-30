@@ -23,19 +23,24 @@ private final class PaletteCache: @unchecked Sendable {
             return cached
         }
 
-        // Slow path: create palette and insert under a barrier to avoid races.
-        let palette = NativeThemePalette(theme: theme, scheme: scheme)
-        queue.sync(flags: .barrier) {
-            if cache[key] == nil {
-                cache[key] = palette
+        // Slow path: take a barrier and create/insert the palette synchronously
+        // This avoids duplicate allocations and race conditions by ensuring
+        // only one thread performs the creation and insertion.
+        return queue.sync(flags: .barrier) {
+            if let existing = cache[key] {
+                return existing
             }
+            let newPalette = NativeThemePalette(theme: theme, scheme: scheme)
+            cache[key] = newPalette
+            return newPalette
         }
-        return queue.sync { cache[key]! }
     }
 
     func clear() {
-        queue.async(flags: .barrier) { [weak self] in
-            self?.cache.removeAll()
+        // Make clear synchronous to ensure callers who expect the cache to be empty
+        // immediately after calling clear() do not race with pending async removals.
+        queue.sync(flags: .barrier) {
+            cache.removeAll()
         }
     }
 }
