@@ -3,10 +3,10 @@
 //  mdviewer
 //
 
-import SwiftUI
+internal import SwiftUI
 
 #if os(macOS)
-import AppKit
+internal import AppKit
 #endif
 
 extension View {
