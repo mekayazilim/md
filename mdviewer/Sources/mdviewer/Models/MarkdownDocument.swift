@@ -39,9 +39,6 @@ struct MarkdownDocument: FileDocument {
     /// Enable autosave in place for seamless document versioning
     static var autosavesInPlace: Bool { true }
 
-    /// Autosave every 30 seconds when there are changes
-    static var autosaveBeforeExternalChanges: Bool { true }
-
     static var readableContentTypes: [UTType] {
         // Limit to built-in types to avoid requiring custom UTI declarations
         var seen = Set<String>()

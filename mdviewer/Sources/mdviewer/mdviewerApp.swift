@@ -25,6 +25,7 @@ struct mdviewerApp: App {
         DocumentGroup(newDocument: MarkdownDocument()) { file in
             ContentView(document: file.$document, fileURL: file.fileURL)
                 .frame(minWidth: 600, minHeight: 400)
+                .configureNativeWindow()
                 .toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
                 .containerBackground(.ultraThinMaterial, for: .window)
                 .environment(\.preferences, AppPreferences.shared)
@@ -198,10 +199,6 @@ struct mdviewerApp: App {
     final class AppDelegate: NSObject, NSApplicationDelegate {
         func applicationDidFinishLaunching(_ notification: Notification) {
             NSWindow.allowsAutomaticWindowTabbing = true
-            // Configure default window to support tabbing
-            if let window = NSApplication.shared.windows.first {
-                configureWindow(window)
-            }
 
             // Yield the first frame, then prewarm heavy services at utility priority.
             Task(priority: .utility) {
@@ -217,85 +214,13 @@ struct mdviewerApp: App {
             openDocumentFromCLIIfNeeded()
         }
 
-        func application(_ application: NSApplication, didCreateWindow window: NSWindow) {
-            configureWindow(window)
-        }
-
-        func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-            if !flag {
-                NSDocumentController.shared.newDocument(nil)
-            }
-            return true
-        }
-
-        func application(_ application: NSApplication, open urls: [URL]) {
-            for url in urls {
-                // Check file size before opening
-                checkFileSizeAndOpen(url: url)
-            }
-        }
-
         private func openDocumentFromCLIIfNeeded() {
             guard let url = cliDocumentURL() else {
                 return
             }
 
-            // Check file size before opening from CLI
-            checkFileSizeAndOpen(url: url)
-        }
-
-        /// Checks file size and shows warning for large files before opening.
-        /// Uses the user's configured threshold from AppPreferences.
-        /// - Parameter url: The file URL to check
-        private func checkFileSizeAndOpen(url: URL) {
-            do {
-                let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
-                let fileSize = attributes[.size] as? Int64 ?? 0
-
-                // Use user's configured threshold
-                let threshold = AppPreferences.shared.largeFileThreshold
-
-                if threshold.shouldWarn(for: fileSize) {
-                    showLargeFileWarningAndOpen(url: url, fileSize: fileSize)
-                } else {
-                    openDocument(url: url)
-                }
-            } catch {
-                // If we can't get file size, proceed anyway
-                openDocument(url: url)
-            }
-        }
-
-        /// Shows a warning alert for large files.
-        /// - Parameters:
-        ///   - url: The file URL
-        ///   - fileSize: The file size in bytes
-        private func showLargeFileWarningAndOpen(url: URL, fileSize: Int64) {
-            let sizeInMB = Double(fileSize) / 1_048_576.0
-            let formattedSize = String(format: "%.1f MB", sizeInMB)
-
-            let alert = NSAlert()
-            alert.messageText = "Large File"
-            alert.informativeText = "This file is \(formattedSize). Opening may take a moment and could affect performance. Do you want to continue?"
-            alert.alertStyle = .warning
-
-            let continueButton = alert.addButton(withTitle: "Continue")
-            let cancelButton = alert.addButton(withTitle: "Cancel")
-
-            // Set accessibility labels
-            continueButton.setAccessibilityLabel("Continue opening large file")
-            cancelButton.setAccessibilityLabel("Cancel opening file")
-
-            let response = alert.runModal()
-
-            if response == .alertFirstButtonReturn {
-                openDocument(url: url)
-            }
-        }
-
-        /// Opens the document.
-        /// - Parameter url: The file URL to open
-        private func openDocument(url: URL) {
+            // For CLI opening, we use the standard NSDocumentController flow.
+            // Large file checks are handled by MarkdownDocument itself.
             NSDocumentController.shared.openDocument(withContentsOf: url, display: true) { _, _, error in
                 if let error {
                     NSApplication.shared.presentError(error)
@@ -327,9 +252,13 @@ struct mdviewerApp: App {
             return URL(fileURLWithPath: resolvedPath)
         }
 
-        private func configureWindow(_ window: NSWindow) {
+        func configureWindow(_ window: NSWindow) {
+            // Ignore system windows like the Open/Save panels
+            let className = window.className
+            guard className != "NSOpenPanel", className != "NSSavePanel" else { return }
+
             window.tabbingMode = .preferred
-            
+
             // Defer property changes that trigger layout to avoid constraint crashes
             DispatchQueue.main.async { [weak window] in
                 guard let window else { return }
@@ -338,7 +267,7 @@ struct mdviewerApp: App {
                 if !window.styleMask.contains(.fullSizeContentView) {
                     window.styleMask.insert(.fullSizeContentView)
                 }
-                
+
                 // Allow dragging from any empty background area
                 window.isMovableByWindowBackground = true
             }

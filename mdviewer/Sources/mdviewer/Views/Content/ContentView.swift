@@ -65,13 +65,10 @@ struct ContentView: View {
         debouncedTheme ?? preferences.theme
     }
 
-    /// Effective parsed document state, ensures we always have a valid result
-    private var currentParsed: ParsedMarkdown {
-        if let current = parsedMarkdown {
-            return current
-        }
-        // Fallback to synchronous parse for immediate initial rendering
-        return FrontmatterParser.parse(document.text)
+    /// Effective parsed document state, ensures we always have a valid result.
+    /// If nil, it means we are in the middle of an initial or updated parse.
+    private var currentParsed: ParsedMarkdown? {
+        parsedMarkdown
     }
 
     // MARK: - Helpers
@@ -114,59 +111,9 @@ struct ContentView: View {
     // MARK: - Body
 
     var body: some View {
-        let parsed = currentParsed
-        scaffoldContainer(parsed: parsed)
-            .onChange(of: document.text) { _, newValue in
-                // Debounce frontmatter parsing during rapid edits to avoid
-                // blocking the main thread every keystroke.
-                parseDebounceTask?.cancel()
-                parseDebounceTask = Task { @MainActor in
-                    try? await Task.sleep(for: .milliseconds(150))
-                    guard !Task.isCancelled else { return }
-                    parsedMarkdown = FrontmatterParser.parse(newValue)
-                }
-            }
-            .task(id: fileURL) {
-                // Re-parse when switching files to ensure metadata is fresh
-                parsedMarkdown = FrontmatterParser.parse(document.text)
-            }
-            .onChange(of: windowReaderMode) { _, newMode in
-                AccessibilityAnnouncement.modeChanged(to: newMode == .rendered)
-            }
-            .onChange(of: fileURL) { _, newURL in
-                activeFileURL = newURL
-                if sidebarRootFileURL == nil {
-                    sidebarRootFileURL = newURL
-                }
-                FolderSidebarPreloader.prewarmIfNeeded(fileURL: newURL)
-            }
-            .onChange(of: sidebarMode) { _, newMode in
-                if preferences.sidebarMode != newMode {
-                    preferences.sidebarMode = newMode
-                }
-            }
-            .onChange(of: preferences.theme) { _, newTheme in
-                // Debounce theme changes to prevent rapid re-renders when cycling themes.
-                // This improves performance across multiple windows.
-                themeDebounceTask?.cancel()
-                themeDebounceTask = Task { @MainActor in
-                    try? await Task.sleep(for: .milliseconds(150))
-                    guard !Task.isCancelled else { return }
-                    debouncedTheme = newTheme
-                }
-            }
-            .toolbar {
-                ContentToolbar(
-                    readerMode: Binding(
-                        get: { windowReaderMode },
-                        set: { windowReaderMode = $0 }
-                    ),
-                    showMetadataInspector: $showMetadataInspector,
-                    sidebarMode: $sidebarMode,
-                    documentText: document.text,
-                    hasFrontmatter: currentParsed.frontmatter != nil,
-                    fileURL: activeFileURL
-                )
+        mainInterface
+            .task(id: document.text) {
+                parsedMarkdown = await performAsyncParse(document.text)
             }
             .focusedSceneValue(\.editorActions, editorActions)
             .onAppear(perform: handleOnAppear)
@@ -178,19 +125,64 @@ struct ContentView: View {
     }
 
     @ViewBuilder
+    private var mainInterface: some View {
+        Group {
+            if let parsed = currentParsed {
+                scaffoldContainer(parsed: parsed)
+            } else {
+                // Fallback for initial parse
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.ultraThinMaterial)
+            }
+        }
+        .onChange(of: windowReaderMode) { _, newMode in
+            AccessibilityAnnouncement.modeChanged(to: newMode == .rendered)
+        }
+        .onChange(of: fileURL) { _, newURL in
+            activeFileURL = newURL
+            if sidebarRootFileURL == nil {
+                sidebarRootFileURL = newURL
+            }
+            FolderSidebarPreloader.prewarmIfNeeded(fileURL: newURL)
+        }
+        .onChange(of: sidebarMode) { _, newMode in
+            if preferences.sidebarMode != newMode {
+                preferences.sidebarMode = newMode
+            }
+        }
+        .onChange(of: preferences.theme) { _, newTheme in
+            // Debounce theme changes to prevent rapid re-renders when cycling themes.
+            // This improves performance across multiple windows.
+            themeDebounceTask?.cancel()
+            themeDebounceTask = Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(150))
+                guard !Task.isCancelled else { return }
+                debouncedTheme = newTheme
+            }
+        }
+    }
+
+    @ViewBuilder
     private func scaffoldContainer(parsed: ParsedMarkdown) -> some View {
         contentScaffold(parsed: parsed)
-            .background(.ultraThinMaterial)
-            .ignoresSafeArea(.all, edges: .top)
+            .toolbar {
+                ContentToolbar(
+                    readerMode: Binding(
+                        get: { windowReaderMode },
+                        set: { windowReaderMode = $0 }
+                    ),
+                    showMetadataInspector: $showMetadataInspector,
+                    sidebarMode: $sidebarMode,
+                    documentText: document.text,
+                    hasFrontmatter: parsed.frontmatter != nil,
+                    fileURL: activeFileURL
+                )
+            }
             .preferredColorScheme(preferences.effectiveColorScheme)
     }
 
     private func handleOnAppear() {
-        // Force immediate parse of existing document text to fix startup rendering bug
-        if parsedMarkdown == nil || parsedMarkdown?.source != document.text {
-            parsedMarkdown = FrontmatterParser.parse(document.text)
-        }
-
         if windowReaderModeRaw.isEmpty {
             windowReaderModeRaw = preferences.readerMode.rawValue
         }
@@ -224,27 +216,18 @@ struct ContentView: View {
             mainContentLayer(parsed: parsed, palette: palette)
             sidebarLayer(parsed: parsed)
         }
-        .safeAreaInset(edge: .top, spacing: 0) {
-            Color.clear.frame(height: 0)
-        }
     }
 
     @ViewBuilder
     private func mainContentLayer(parsed: ParsedMarkdown, palette: NativeThemePalette) -> some View {
         ZStack {
-            // Theme background that respects safe areas (preserving glass title bar)
             Color(nsColor: palette.background)
 
             mainContent(parsed: parsed)
-                .ignoresSafeArea() // Content and scrollbar flow under title bar
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.trailing, showMetadataInspector ? sidebarWidth : 0)
         .animation(nil, value: showMetadataInspector)
-        .task(id: document.text) {
-            // Ensure document is parsed immediately on launch/change to fix startup bug
-            parsedMarkdown = FrontmatterParser.parse(document.text)
-        }
     }
 
     @ViewBuilder
@@ -281,6 +264,12 @@ struct ContentView: View {
             return "Hide Sidebar"
         }
         return "Show Sidebar"
+    }
+
+    private func performAsyncParse(_ text: String) async -> ParsedMarkdown {
+        await Task.detached(priority: .userInitiated) {
+            FrontmatterParser.parse(text)
+        }.value
     }
 
     // MARK: - File Opening

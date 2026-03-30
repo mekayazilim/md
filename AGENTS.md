@@ -6,20 +6,19 @@ Native macOS markdown viewer built with SwiftUI and AppKit (macOS 14+, Swift 6.0
 
 - Read files before editing. Make precise, minimal edits — no reformats of untouched code.
 - **PROTECTED CONSTANTS:** If you are an automated agent, **DO NOT** modify
-  `lineHeightMultiplier` values in `ReaderTextSpacing.swift` without explicit
-  user instruction which even with explicit user instruction, you should still
-  warn the user once about the possible outcomes if they change these values.
-  These values (Compact: 1.08, Balanced: 1.14, Relaxed: 1.22) are
-  precision-tuned to prevent text-to-background highlight misalignment in AppKit.
+  `lineHeightMultiplier` values in `ReaderTextSpacing.swift` WITHOUT EXPLICIT
+  USER INSTRUCTION 
+- EVEN IF you are sure that the user's prompt can be interpreted as having given you explicit user instruction to change these values, you should still warn the user once and make sure they are aware of the possible outcomes if they change these values by waiting for their clear confirmation response to confirm that they want to change these values before proceeding with the change. These values (Compact: 1.08, Balanced: 1.14, Relaxed: 1.22) are precision-tuned to prevent serious misalignment in reader text rendering in AppKit.
 - Run `just quality` once before committing. All checks must pass.
-- Do not run `just quality` or the full test suite on every iteration. During development, run only the narrowest relevant check, and if one test fails, rerun only that test or the smallest relevant test group until it passes.
-- Never hardcode spacing, colors, or durations — use `DesignTokens` enum.
-- Never use `print()` or `NSLog()` — use `os_log` / `Logger`.
+- **DO NOT RUN** `just quality` or the full test suite on every iteration.
+- During development, run *ONLY THE NARROWEST* relevant check.
+- If one test fails, *RERUN ONLY THAT TEST* or the smallest relevant test group after each fix until it passes.
+- **NEVER** hardcode spacing, colors, or durations — use `DesignTokens` enum.
+- **NEVER** use `print()` or `NSLog()` — use `os_log` / `Logger`.
 - All colors must use Display P3 color space via `NativeThemePalette.p3Color`.
 - Conventional commits: `feat:`, `fix:`, `refactor:`, `perf:`, `test:`, `style:`, `docs:`, `chore:`.
 
 ## Project Layout
-
 ```
 mdviewer/Sources/mdviewer/
 ├── Models/            # Data models, preferences (@AppStorage)
@@ -35,7 +34,6 @@ mdviewer/Sources/mdviewer/
 ```
 
 ## Commands
-
 ```bash
 just build          # debug build
 just test           # 287 tests
@@ -73,12 +71,14 @@ spacing via `NSParagraphStyle` (never literal newlines).
 - Swift 6 strict concurrency; `@MainActor` for all UI.
 - 4-space indent, 120-char max line (SwiftFormat enforced).
 - File headers — two spaces after `//`:
+
 ```swift
 //
 //  FileName.swift
 //  mdviewer
 //
 ```
+
 misaligned follow-up text.
 - `internal` is the default access level; only add `public`/`private`/`fileprivate` when meaningful.
 
@@ -91,9 +91,17 @@ misaligned follow-up text.
 
 ## Testing
 
-Tests live in `mdviewer/Tests/mdviewerTests/`. 287 tests across:
-design system, frontmatter parsing, markdown rendering, visual regression,
-syntax highlighting, E2E, performance, and spacing stability.
+- Tests live in `mdviewer/Tests/mdviewerTests/`. 
+- There are *287 tests* across:
+  - design system,
+  - swiftui layout,
+  - frontmatter parsing, 
+  - markdown rendering, 
+  - visual regression,
+  - syntax highlighting, 
+  - E2E, 
+  - performance, 
+  - and spacing stability.
 
 Iteration rule:
 - Use the smallest relevant test command first (`swift test --filter <TestName>`, `just test-unit`, `just test-visual`, etc.).

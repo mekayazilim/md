@@ -39,7 +39,7 @@ The project uses `just` for task automation.
 - During development, run only the narrowest relevant check first.
 - If one test fails, rerun only that test or the smallest relevant test group after each fix until it passes.
 - Use targeted commands such as `cd mdviewer && swift test --filter <TestName>`, `just test-unit`, `just test-visual`, or another smallest relevant subset.
-- When implementing or changing a feature for interactive verification, run `just install-open` after each iteration unless the user explicitly says not to.
+- When implementing or changing a feature for interactive verification, RUN `just install-open` AFTER EACH ITERATION unless the user explicitly says not to.
 - Run `just quality` once, immediately before commit, push, or handoff that depends on a clean gate.
 
 ## Development Conventions
