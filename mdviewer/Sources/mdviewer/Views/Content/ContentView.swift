@@ -166,8 +166,8 @@ struct ContentView: View {
     @ViewBuilder
     private func scaffoldContainer(parsed: ParsedMarkdown) -> some View {
         contentScaffold(parsed: parsed)
-            .toolbar {
-                ContentToolbar(
+            .overlay(alignment: .top) {
+                TitlebarOverlay(
                     readerMode: Binding(
                         get: { windowReaderMode },
                         set: { windowReaderMode = $0 }
