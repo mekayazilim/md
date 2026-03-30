@@ -35,6 +35,13 @@
 
         private var decorationCache: CachedDecoration?
         private var decorationCacheGeneration = 0
+        /// When true, skip drawing heavy block decorations (used during active scroll).
+        private var suspendDecorationDrawing = false
+
+        /// Temporarily suspend or resume decoration drawing (e.g., while tracking scroll).
+        func setDecorationDrawingSuspended(_ suspended: Bool) {
+            suspendDecorationDrawing = suspended
+        }
 
         deinit {
             decorationCache = nil
@@ -149,6 +156,11 @@
             guard totalLen > 0 else { return }
 
             let containerWidth = container.containerSize.width
+
+            // If decoration drawing is suspended (e.g., while actively scrolling), skip heavy work.
+            if suspendDecorationDrawing {
+                return
+            }
 
             // ── Validate and Update Cache ────────────────────────────────────────
             let spans: DecorationSpans

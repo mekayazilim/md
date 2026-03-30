@@ -760,6 +760,12 @@ private final class ScrollTrackingScrollView: NSScrollView {
     private func boundsDidChange() {
         let isFirstScroll = !isScrolling
         isScrolling = true
+
+        // Suspend decoration drawing in ReaderLayoutManager to avoid heavy computation during active scroll.
+        if let lm = documentView?.layoutManager as? ReaderLayoutManager {
+            lm.setDecorationDrawingSuspended(true)
+        }
+
         reportScrollPosition(force: isFirstScroll)
         scheduleScrollEndDetection()
     }
@@ -770,6 +776,12 @@ private final class ScrollTrackingScrollView: NSScrollView {
             try? await Task.sleep(for: .seconds(PerformanceConstants.scrollSettleDelay))
             guard !Task.isCancelled, let self else { return }
             isScrolling = false
+
+            // Resume decoration drawing and invalidate cache so decorations reappear after scroll settles.
+            if let lm = documentView?.layoutManager as? ReaderLayoutManager {
+                lm.setDecorationDrawingSuspended(false)
+                lm.invalidateDecorationCache()
+            }
         }
     }
 
