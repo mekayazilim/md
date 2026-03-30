@@ -17,6 +17,8 @@ struct TitlebarOverlay: View {
     let documentText: String
     let hasFrontmatter: Bool
     let fileURL: URL?
+    /// Whether the document content is currently being scrolled. When true, we avoid live backdrop sampling.
+    var isScrolling: Bool = false
 
     // Dynamic titlebar height measured from the hosting NSWindow so the overlay
     // fully covers the native titlebar / toolbar area across toolbar styles.
@@ -24,16 +26,23 @@ struct TitlebarOverlay: View {
 
     var body: some View {
         ZStack {
-            if #available(macOS 26.0, *) {
-                // Use native Liquid Glass when available
-                Rectangle()
-                    .foregroundStyle(.clear)
-                    .background(.ultraThinMaterial)
-            } else {
-                // Fallback to ultra thin material
+            if isScrolling {
+                // During active scroll, use static window background color to avoid per-frame backdrop sampling
                 Rectangle()
                     .foregroundColor(.clear)
-                    .background(.ultraThinMaterial)
+                    .background(Color(nsColor: .windowBackgroundColor))
+            } else {
+                if #available(macOS 26.0, *) {
+                    // Use native Liquid Glass when available
+                    Rectangle()
+                        .foregroundStyle(.clear)
+                        .background(.ultraThinMaterial)
+                } else {
+                    // Fallback to ultra thin material
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .background(.ultraThinMaterial)
+                }
             }
 
             HStack {

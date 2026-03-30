@@ -50,6 +50,8 @@ struct ContentView: View {
     @State private var parsedMarkdown: ParsedMarkdown?
     @State private var debouncedTheme: AppTheme?
     @State private var themeDebounceTask: Task<Void, Never>?
+    @State private var isScrolling: Bool = false
+    @State private var scrollEndTask: Task<Void, Never>? = nil
     @SceneStorage("windowReaderMode") private var windowReaderModeRaw = ReaderMode.rendered.rawValue
 
     private let logger = Logger(subsystem: "mdviewer", category: "ui")
@@ -176,7 +178,8 @@ struct ContentView: View {
                     sidebarMode: $sidebarMode,
                     documentText: document.text,
                     hasFrontmatter: parsed.frontmatter != nil,
-                    fileURL: activeFileURL
+                    fileURL: activeFileURL,
+                    isScrolling: isScrolling
                 )
             }
             .preferredColorScheme(preferences.effectiveColorScheme)
@@ -356,7 +359,17 @@ struct ContentView: View {
                     readerMode: Binding(get: { windowReaderMode }, set: { windowReaderMode = $0 }),
                     colorScheme: colorScheme,
                     reduceMotion: reduceMotion,
-                    onScroll: { _, _, _ in },
+                    onScroll: { _, _, _ in
+                        // Mark active scrolling for the titlebar material optimization.
+                        scrollEndTask?.cancel()
+                        isScrolling = true
+                        scrollEndTask = Task { @MainActor in
+                            try? await Task.sleep(for: .seconds(PerformanceConstants.scrollSettleDelay))
+                            guard !Task.isCancelled else { return }
+                            isScrolling = false
+                            scrollEndTask = nil
+                        }
+                    },
                     appTheme: effectiveTheme
                 )
                 .transition(.opacity)
