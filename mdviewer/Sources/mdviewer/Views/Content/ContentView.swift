@@ -595,7 +595,7 @@ private struct InspectorSidebar: View {
     @ViewBuilder
     private var metadataContent: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
+            LazyVStack(alignment: .leading, spacing: 0) {
                 if let frontmatter {
                     ForEach(frontmatter.entries, id: \.key) { entry in
                         MetadataRow(entry: entry)
