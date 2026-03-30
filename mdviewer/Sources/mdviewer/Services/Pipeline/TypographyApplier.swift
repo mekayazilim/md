@@ -779,15 +779,32 @@ struct TypographyApplier: TypographyApplying {
         return max(1, tabCount + 1)
     }
 
-    private nonisolated(unsafe) static let fontCache = NSCache<NSString, NSFont>()
+    // Use a plain static NSCache and ensure any AppKit interactions (NSFont
+    // creation / caching) happen on the main thread to avoid thread-safety
+    // issues. Access is synchronous to preserve the existing API.
+    private static let fontCache = NSCache<NSString, NSFont>()
     private func cachedFontByApplyingTraits(_ base: NSFont, bold: Bool, italic: Bool) -> NSFont {
         let key = "\(base.fontName)-\(base.pointSize)-\(bold)-\(italic)" as NSString
         if let c = Self.fontCache.object(forKey: key) { return c }
-        var traits = base.fontDescriptor.symbolicTraits
-        if bold { traits.insert(.bold) }
-        if italic { traits.insert(.italic) }
-        let f = NSFont(descriptor: base.fontDescriptor.withSymbolicTraits(traits), size: base.pointSize) ?? base
-        Self.fontCache.setObject(f, forKey: key); return f
+
+        // Ensure NSFont creation and cache mutations run on the main thread.
+        if Thread.isMainThread {
+            var traits = base.fontDescriptor.symbolicTraits
+            if bold { traits.insert(.bold) }
+            if italic { traits.insert(.italic) }
+            let f = NSFont(descriptor: base.fontDescriptor.withSymbolicTraits(traits), size: base.pointSize) ?? base
+            Self.fontCache.setObject(f, forKey: key)
+            return f
+        } else {
+            return DispatchQueue.main.sync {
+                var traits = base.fontDescriptor.symbolicTraits
+                if bold { traits.insert(.bold) }
+                if italic { traits.insert(.italic) }
+                let f = NSFont(descriptor: base.fontDescriptor.withSymbolicTraits(traits), size: base.pointSize) ?? base
+                Self.fontCache.setObject(f, forKey: key)
+                return f
+            }
+        }
     }
 
     /// Pre-compiled regex for task list checkbox detection.

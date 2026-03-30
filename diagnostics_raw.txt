@@ -1,0 +1,1121 @@
+=== xcode-select -p ===
+/Applications/Xcode.app/Contents/Developer
+\n=== xcodebuild -version ===
+Xcode 26.4
+Build version 17E192
+\n=== xcrun --find swiftc && xcrun swift --version ===
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc
+swift-driver version: 1.148.6 Apple Swift version 6.3 (swiftlang-6.3.0.123.5 clang-2100.0.123.102)
+Target: arm64-apple-macosx26.0
+\n=== which swift && swift --version ===
+/Users/meka/.swiftly/bin/swift
+Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)
+Target: arm64-apple-macosx16.0
+\n=== env | grep -i DEVELOPER_DIR ===
+\n=== ls -la /Applications/Xcode.app/Contents/Developer/Toolchains ===
+total 0
+drwxr-xr-x  3 meka  staff   96 Mar 29  2023 .
+drwxr-xr-x  9 meka  staff  288 Mar 17 14:09 ..
+drwxr-xr-x  5 meka  staff  160 Mar 27 17:38 XcodeDefault.xctoolchain
+\n=== ls -la /Library/Developer/Toolchains ===
+ls: /Library/Developer/Toolchains: No such file or directory
+\n=== ls -la ~/Library/Developer/Toolchains ===
+total 24
+drwxr-xr-x  8 meka  staff   256 Mar 29 20:25 .
+drwxr-xr-x  8 meka  staff   256 Mar 24 06:44 ..
+-rw-r--r--@ 1 meka  staff  8196 Mar 29 20:25 .DS_Store
+drwxr-xr-x  7 meka  staff   224 Mar 24 06:49 swift-4.0.3-RELEASE.xctoolchain
+drwxr-xr-x  7 meka  staff   224 Mar 24 06:47 swift-4.2.4-RELEASE.xctoolchain
+drwxr-xr-x  7 meka  staff   224 Mar 24 06:44 swift-5.0.3-RELEASE.xctoolchain
+drwxr-xr-x  7 meka  staff   224 Mar 24 06:43 swift-6.0.3-RELEASE.xctoolchain
+lrwxr-xr-x  1 meka  staff    72 Mar 24 06:49 swift-latest.xctoolchain -> /Users/meka/Library/Developer/Toolchains/swift-4.0.3-RELEASE.xctoolchain
+\n=== xcrun --sdk macosx --show-sdk-path ===
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.4.sdk
+\n=== xcrun --toolchain default --find swiftc ===
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc
+\n=== sw_vers ===
+ProductName:		macOS
+ProductVersion:		26.4
+BuildVersion:		25E246
+\n=== grep -n "Swift" /Applications/Xcode.app/Contents/Developer/Toolchains/* 2>/dev/null ===
+\n=== find repo for binary artifacts (first 200 matches) ===
+./mdviewer/.build/plugins/cache/SwiftFormatPlugin.dSYM/Contents/Resources/Swift/aarch64/PackagePlugin.swiftinterface
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemePalette~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/RenderErrors~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/PipelineProtocols~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderLayoutManager~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/mdviewerApp~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/TypographyApplier~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MermaidDiagramRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/DocumentOperations~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemeData~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/BuiltinLanguages~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/FontFamilyPicker~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/SyntaxHighlighter~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/BlockSeparatorInjector~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderFontSize~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/KeybindingsView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownParser~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownRenderAttribute~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownRendering~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/GlassPanelModifier~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ContentView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/EnhancedMarkdownParser~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/StoredPreference~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderTextSpacing~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/TableLayoutMetrics~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownDocument~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/TransitionKit~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderTextView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/SettingsView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/NativeSyntaxStyle~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderContentPadding~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/RenderedMarkdown~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/LineNumberRulerView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownRenderService~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ContentToolbar~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/AccessibilityConfiguration~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/WelcomeStartView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/SwiftMarkdownRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ToolbarVisibilityController~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/AccessibilityAnnouncement~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderColumnWidth~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/CodeFontSize~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/AppearanceMode~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemeDefinitions~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ViewModifiers~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/PerformanceConstants~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/TypographySettingsSection~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/LargeFileThreshold~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/RenderRequest~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemePreview~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/DesignTokens~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/StarterTemplate~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/TypographyPreferences~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/FrontmatterParser~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/LanguageDefinition~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/EditorActions~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/AppTheme~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderMode~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/TableOfContentsView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/NativeMarkdownTextView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/FolderSidebarView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/RawMarkdownEditor~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/DefaultMarkdownAppRegistrar~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/AppPreferences~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderFontFamily~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/NativeThemePalette~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/LiquidBackground~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownEditor~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/Frontmatter~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/CommandLineTool.build/main~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/DefaultMarkdownAppRegistrarTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/HorizontalRuleRenderingTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/FrontmatterParserTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/VisualRegressionTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/FrontmatterParserEdgeCaseTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/ToolbarVisibilityTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/ThemeApplicationTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/LargeFileThresholdTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/ThemeSpacingTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/AccessibilityEnhancementTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/E2ERenderingTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/RendererPerformanceTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/RawViewLineNumberTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/ReaderLayoutManagerGeometryTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/RenderingStabilityTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/E2EToolbarTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/MarkdownRenderVisualTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/RenderingSanityTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/DesignSystemTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/MarkdownRenderLineBreakTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/mdviewerTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/E2EInspectorTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/SettingsAccessibilityTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/MarkdownRenderIntegrationTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/AccessibilityTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/SettingsFunctionalTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/SyntaxHighlighterTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/TableColumnDividerOpacityTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/EditorPreferencesTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/ViewBuilderPerformanceTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/MermaidDiagramRendererTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/FileSizeWarningTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/MarkdownDocumentTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/VoiceOverNavigationTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/FrontmatterValueTypeTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/FolderSidebarViewTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/HangTest~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/FrontmatterPresentationTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/ModeChangeAccessibilityTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewerTests.build/ListRenderingStabilityTests~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Observation-1OCU82LG4KALY.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/QuartzCore-1X1P60M6YCYUE.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/simd-T6AHBM7XP2PM.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/CoreImage-N7FQ76OO6TDQ.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/LocalAuthentication-2K8NN4FI9FPN8.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Darwin-39Y6ETAFV82MN.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Dispatch-FJFL0AWVKUNI.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/_DarwinFoundation2-F2UN3B808GMG.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/CoreText-RFFO4C5WDZ3O.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/DataDetection-2DCMLUGA6MK56.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Spatial-2JXTDV72J5YGK.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/OSLog-QYW76W2NYRRO.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/_DarwinFoundation1-3N9O4KCIAAEI2.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/_DarwinFoundation3-3126QN4G91IC0.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/CoreFoundation-3FG38AY6G3QQ6.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/XPC-39IIV47FC0I4Q.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/DeveloperToolsSupport-1A5ORYLF8XKGZ.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/XCUIAutomation-2KZ1AX9XSMUKZ.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/UniformTypeIdentifiers-1SFW33L077N9O.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/CoreVideo-TWFB6LC41VNK.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Metal-3P14QLMLAMPV3.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/os-6YCDZ2MBR7WN.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/_Builtin_float-1L0HJNTVUPCOZ.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/SwiftOnoneSupport-3OC7YLUAB0DN2.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/_Concurrency-1I2A5XC0OPS90.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Symbols-1MU1RJW3ESTZB.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/CryptoKit-1TIQVHYL4FHUQ.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/ObjectiveC-2GDOGK6AY23EM.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/CoreTransferable-1ZR65AQKFF0NP.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/CoreGraphics-FWIKVVK436CK.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Foundation-C8JNF5TPOY52.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Accessibility-2R5IKT2X722GT.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/System-2MU0F3ZK9BGV7.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/SwiftUI-13UMJDMOAR7RL.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/CoreData-76VG8UVOO9VD.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Combine-3QP50RZP0TYH9.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/XCTest-1TAHGK6V15AD.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/SwiftUICore-2UOHB8ZKFFWXW.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/_StringProcessing-2SVVI34WQZ6QR.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/AppKit-308MBWIR7520F.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/Swift-3FSBVKQ1SWBCU.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/ModuleCache/IOKit-1RLD1MJ4GJ6QX.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/BeautifulMermaid~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/FlowchartParser~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/EdgeStyle~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/GraphLayout~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ShapeRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ClassTypes~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ErTypes~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/NodeShape~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/SwiftDagreAdapter~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/DiagramRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ClassDiagramRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/MermaidImageRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/SequenceRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/StateParser~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/BuiltInThemes~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/SequenceLayout~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/String+Regex~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/MermaidParser~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ERDiagramRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/Direction~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ErLayout~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ClassParser~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/SequenceParser~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/CrossPlatform~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/MermaidView~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ShapeBounds~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/Types~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ERParser~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ClassLayout~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/EdgeRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/EdgeRouting~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/LabelRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ColorUtilities~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/CGPoint+Extensions~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/RenderConfig~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/SequenceTypes~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/DiagramTheme~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/GridLayout~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/BeautifulMermaid.build/ArrowRenderer~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/SwiftFormat.build/Specifiers~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/SwiftFormat.build/DocComments~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/SwiftFormat.build/RedundantThrows~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/SwiftFormat.build/RedundantInit~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/SwiftFormat.build/ModifierOrder~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/SwiftFormat.build/WrapSwitchCases~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/SwiftFormat.build/WrapMultilineStatementBraces~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/SwiftFormat.build/RedundantOptionalBinding~partial.swiftmodule
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/SwiftFormat.build/Void~partial.swiftmodule
+\n=== Inspecting up to first 20 artifacts for swift markers ===
+\n--- ./mdviewer/.build/plugins/cache/SwiftFormatPlugin.dSYM/Contents/Resources/Swift/aarch64/PackagePlugin.swiftinterface ---
+./mdviewer/.build/plugins/cache/SwiftFormatPlugin.dSYM/Contents/Resources/Swift/aarch64/PackagePlugin.swiftinterface: ASCII text, with very long lines (363)
+strings (grep swift, case-insensitive):
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.5 clang-2100.0.123.102)
+// swift-module-flags: -target arm64-apple-macos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -O -package-description-version 999.0 -enable-experimental-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 24776 -module-name PackagePlugin -package-name swiftpm
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+import Swift
+import _SwiftConcurrencyShims
+  public init(_ arguments: [Swift.String])
+  public mutating func extractOption(named name: Swift.String) -> [Swift.String]
+  public mutating func extractFlag(named name: Swift.String) -> Swift.Int
+  public var unextractedOptionsOrFlags: [Swift.String] {
+  public var remainingArguments: [Swift.String] {
+  case buildCommand(displayName: Swift.String?, executable: Foundation.URL, arguments: [Swift.String], environment: [Swift.String : Swift.String] = [:], inputFiles: [Foundation.URL] = [], outputFiles: [Foundation.URL] = [])
+  case prebuildCommand(displayName: Swift.String?, executable: Foundation.URL, arguments: [Swift.String], environment: [Swift.String : Swift.String] = [:], outputFilesDirectory: Foundation.URL)
+  public static func buildCommand(displayName: Swift.String?, executable: PackagePlugin.Path, arguments: [any Swift.CustomStringConvertible], environment: [Swift.String : any Swift.CustomStringConvertible] = [:], inputFiles: [PackagePlugin.Path] = [], outputFiles: [PackagePlugin.Path] = []) -> PackagePlugin.Command
+  public static func buildCommand(displayName: Swift.String?, executable: PackagePlugin.Path, arguments: [any Swift.CustomStringConvertible], environment: [Swift.String : any Swift.CustomStringConvertible] = [:], workingDirectory: PackagePlugin.Path? = .none, inputFiles: [PackagePlugin.Path] = [], outputFiles: [PackagePlugin.Path] = []) -> PackagePlugin.Command
+  public static func prebuildCommand(displayName: Swift.String?, executable: PackagePlugin.Path, arguments: [any Swift.CustomStringConvertible], environment: [Swift.String : any Swift.CustomStringConvertible] = [:], outputFilesDirectory: PackagePlugin.Path) -> PackagePlugin.Command
+  public static func prebuildCommand(displayName: Swift.String?, executable: PackagePlugin.Path, arguments: [any Swift.CustomStringConvertible], environment: [Swift.String : any Swift.CustomStringConvertible] = [:], workingDirectory: PackagePlugin.Path? = .none, outputFilesDirectory: PackagePlugin.Path) -> PackagePlugin.Command
+  public func tool(named name: Swift.String) throws -> PackagePlugin.PluginContext.Tool
+    public let name: Swift.String
+  public enum Severity : Swift.String, Swift.Encodable {
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+  public static func emit(_ severity: PackagePlugin.Diagnostics.Severity, _ description: Swift.String, file: Swift.String? = #file, line: Swift.Int? = #line)
+  public static func error(_ message: Swift.String, file: Swift.String? = #file, line: Swift.Int? = #line)
+  public static func warning(_ message: Swift.String, file: Swift.String? = #file, line: Swift.Int? = #line)
+  public static func remark(_ message: Swift.String, file: Swift.String? = #file, line: Swift.Int? = #line)
+  public static func progress(_ message: Swift.String)
+public enum PluginContextError : Swift.Error {
+  case toolNotFound(name: Swift.String)
+  case toolNotSupportedOnTargetPlatform(name: Swift.String)
+  case targetNotFound(name: Swift.String, package: PackagePlugin.Package)
+  case productNotFound(name: Swift.String, package: PackagePlugin.Package)
+extension PackagePlugin.PluginContextError : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+public enum PluginDeserializationError : Swift.Error {
+  case malformedInputJSON(_: Swift.String)
+  case missingBuildToolPluginProtocolConformance(protocolName: Swift.String)
+  case missingCommandPluginProtocolConformance(protocolName: Swift.String)
+  case internalError(_: Swift.String)
+extension PackagePlugin.PluginDeserializationError : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    case all(includingTests: Swift.Bool)
+    case product(Swift.String)
+    case target(Swift.String)
+    public var echoLogs: Swift.Bool
+    public var otherCFlags: [Swift.String]
+    public var otherCxxFlags: [Swift.String]
+    public var otherSwiftcFlags: [Swift.String]
+    public var otherLinkerFlags: [Swift.String]
+    public init(configuration: PackagePlugin.PackageManager.BuildConfiguration = .debug, logging: PackagePlugin.PackageManager.BuildLogVerbosity = .concise, echoLogs: Swift.Bool = false)
+  public enum BuildConfiguration : Swift.String {
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+  public enum BuildLogVerbosity : Swift.String {
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+    public var succeeded: Swift.Bool
+    public var logText: Swift.String
+      public enum Kind : Swift.String {
+        public init?(rawValue: Swift.String)
+        public typealias RawValue = Swift.String
+        public var rawValue: Swift.String {
+    case filtered([Swift.String])
+    public var enableCodeCoverage: Swift.Bool
+    public init(enableCodeCoverage: Swift.Bool = false)
+    public var succeeded: Swift.Bool
+      public var name: Swift.String
+        public var name: Swift.String
+          public var name: Swift.String
+          public var duration: Swift.Double
+          public enum Result : Swift.String {
+            public init?(rawValue: Swift.String)
+            public typealias RawValue = Swift.String
+            public var rawValue: Swift.String {
+    public enum AccessLevel : Swift.String, Swift.CaseIterable {
+      public init?(rawValue: Swift.String)
+      public typealias RawValue = Swift.String
+      public var rawValue: Swift.String {
+    public var includeInheritedDocs: Swift.Bool
+    public var includeSynthesized: Swift.Bool
+    public var includeSPI: Swift.Bool
+    public var emitExtensionBlocks: Swift.Bool
+    public init(minimumAccessLevel: PackagePlugin.PackageManager.SymbolGraphOptions.AccessLevel = .public, includeInheritedDocs: Swift.Bool = true, includeSynthesized: Swift.Bool = false, includeSPI: Swift.Bool = false, emitExtensionBlocks: Swift.Bool = false)
+public enum PackageManagerProxyError : Swift.Error {
+  case unimplemented(_: Swift.String)
+  case unspecified(_: Swift.String)
+  public typealias ID = Swift.String
+  public let displayName: Swift.String
+  case local(path: Swift.String)
+  case repository(url: Swift.String, displayVersion: Swift.String, scmRevision: Swift.String)
+  case registry(identity: Swift.String, displayVersion: Swift.String)
+  public let major: Swift.Int
+  public let minor: Swift.Int
+  public let patch: Swift.Int
+  typealias ID = Swift.String
+  var name: Swift.String { get }
+  public let name: Swift.String
+  public let name: Swift.String
+    public static func == (a: PackagePlugin.LibraryProduct.Kind, b: PackagePlugin.LibraryProduct.Kind) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+  typealias ID = Swift.String
+  var name: Swift.String { get }
+  var moduleName: Swift.String { get }
+  var linkedLibraries: [Swift.String] { get }
+  var linkedFrameworks: [Swift.String] { get }
+  public static func == (a: PackagePlugin.ModuleKind, b: PackagePlugin.ModuleKind) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+public struct SwiftSourceModuleTarget : PackagePlugin.SourceModuleTarget {
+  public let id: PackagePlugin.SwiftSourceModuleTarget.ID
+  public let name: Swift.String
+  public let moduleName: Swift.String
+  public let compilationConditions: [Swift.String]
+  public let linkedLibraries: [Swift.String]
+  public let linkedFrameworks: [Swift.String]
+  public let name: Swift.String
+  public let moduleName: Swift.String
+  public let preprocessorDefinitions: [Swift.String]
+  public let headerSearchPaths: [Swift.String]
+  public let linkedLibraries: [Swift.String]
+  public let linkedFrameworks: [Swift.String]
+  public let name: Swift.String
+    public static func == (a: PackagePlugin.BinaryArtifactTarget.Kind, b: PackagePlugin.BinaryArtifactTarget.Kind) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+  public enum Origin : Swift.Equatable {
+    case remote(url: Swift.String)
+    public static func == (a: PackagePlugin.BinaryArtifactTarget.Origin, b: PackagePlugin.BinaryArtifactTarget.Origin) -> Swift.Bool
+  public var name: Swift.String
+  public let pkgConfig: Swift.String?
+  public let compilerFlags: [Swift.String]
+  public let linkerFlags: [Swift.String]
+extension PackagePlugin.FileList : Swift.Sequence {
+  public struct Iterator : Swift.IteratorProtocol {
+extension PackagePlugin.FileList : Swift.RandomAccessCollection {
+  public var startIndex: Swift.Int {
+  public var endIndex: Swift.Int {
+  public subscript(i: Swift.Int) -> PackagePlugin.File {
+  public typealias Index = Swift.Int
+  public typealias Indices = Swift.Range<Swift.Int>
+  public typealias SubSequence = Swift.Slice<PackagePlugin.FileList>
+  public static func == (a: PackagePlugin.FileType, b: PackagePlugin.FileType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+extension PackagePlugin.PathList : Swift.Sequence {
+  public struct Iterator : Swift.IteratorProtocol {
+public struct Path : Swift.Hashable {
+  public init(_ string: Swift.String)
+  public var string: Swift.String {
+  public var lastComponent: Swift.String {
+  public var stem: Swift.String {
+  public var `extension`: Swift.String? {
+  public func appending(subpath: Swift.String) -> PackagePlugin.Path
+  public func appending(_ components: [Swift.String]) -> PackagePlugin.Path
+  public func appending(_ components: Swift.String...) -> PackagePlugin.Path
+  public static func == (a: PackagePlugin.Path, b: PackagePlugin.Path) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+extension PackagePlugin.Path : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+extension PackagePlugin.Path : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+extension Swift.DefaultStringInterpolation {
+  func performCommand(context: PackagePlugin.PluginContext, arguments: [Swift.String]) async throws
+  public func targets(named targetNames: [Swift.String]) throws -> [any PackagePlugin.Target]
+  public func products(named productNames: [Swift.String]) throws -> [any PackagePlugin.Product]
+  public func sourceFiles(withSuffix suffix: Swift.String) -> PackagePlugin.FileList
+extension PackagePlugin.Diagnostics.Severity : Swift.Equatable {}
+extension PackagePlugin.Diagnostics.Severity : Swift.Hashable {}
+extension PackagePlugin.Diagnostics.Severity : Swift.RawRepresentable {}
+extension PackagePlugin.PackageManager.BuildConfiguration : Swift.Equatable {}
+extension PackagePlugin.PackageManager.BuildConfiguration : Swift.Hashable {}
+extension PackagePlugin.PackageManager.BuildConfiguration : Swift.RawRepresentable {}
+extension PackagePlugin.PackageManager.BuildLogVerbosity : Swift.Equatable {}
+extension PackagePlugin.PackageManager.BuildLogVerbosity : Swift.Hashable {}
+extension PackagePlugin.PackageManager.BuildLogVerbosity : Swift.RawRepresentable {}
+extension PackagePlugin.PackageManager.BuildResult.BuiltArtifact.Kind : Swift.Equatable {}
+extension PackagePlugin.PackageManager.BuildResult.BuiltArtifact.Kind : Swift.Hashable {}
+extension PackagePlugin.PackageManager.BuildResult.BuiltArtifact.Kind : Swift.RawRepresentable {}
+extension PackagePlugin.PackageManager.TestResult.TestTarget.TestCase.Test.Result : Swift.Equatable {}
+extension PackagePlugin.PackageManager.TestResult.TestTarget.TestCase.Test.Result : Swift.Hashable {}
+extension PackagePlugin.PackageManager.TestResult.TestTarget.TestCase.Test.Result : Swift.RawRepresentable {}
+extension PackagePlugin.PackageManager.SymbolGraphOptions.AccessLevel : Swift.Equatable {}
+extension PackagePlugin.PackageManager.SymbolGraphOptions.AccessLevel : Swift.Hashable {}
+extension PackagePlugin.PackageManager.SymbolGraphOptions.AccessLevel : Swift.RawRepresentable {}
+extension PackagePlugin.LibraryProduct.Kind : Swift.Equatable {}
+extension PackagePlugin.LibraryProduct.Kind : Swift.Hashable {}
+extension PackagePlugin.ModuleKind : Swift.Equatable {}
+extension PackagePlugin.ModuleKind : Swift.Hashable {}
+extension PackagePlugin.BinaryArtifactTarget.Kind : Swift.Equatable {}
+extension PackagePlugin.BinaryArtifactTarget.Kind : Swift.Hashable {}
+extension PackagePlugin.FileType : Swift.Equatable {}
+extension PackagePlugin.FileType : Swift.Hashable {}
+otool -L (if Mach-O):
+./mdviewer/.build/plugins/cache/SwiftFormatPlugin.dSYM/Contents/Resources/Swift/aarch64/PackagePlugin.swiftinterface: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemePalette~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemePalette~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemePalette~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/RenderErrors~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/RenderErrors~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/RenderErrors~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/PipelineProtocols~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/PipelineProtocols~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/PipelineProtocols~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderLayoutManager~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderLayoutManager~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderLayoutManager~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/mdviewerApp~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/mdviewerApp~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+SwiftUI
+Swift
+SwiftUICore
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/mdviewerApp~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/TypographyApplier~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/TypographyApplier~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/TypographyApplier~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MermaidDiagramRenderer~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MermaidDiagramRenderer~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+SwiftUICore
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MermaidDiagramRenderer~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/DocumentOperations~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/DocumentOperations~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+SwiftUICore
+SwiftUI
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/DocumentOperations~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemeData~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemeData~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ThemeData~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/BuiltinLanguages~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/BuiltinLanguages~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+swift
+swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/BuiltinLanguages~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/FontFamilyPicker~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/FontFamilyPicker~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+$s8mdviewer0027FontFamilyPickerswift_ovFAhfMX311_0_33_2288A18723E87D999277E978D3258B64Ll7PreviewfMf_15PreviewRegistryfMu_
+swiftUIFont
+SwiftUICore
+Swift
+$s8mdviewer0027FontFamilyPickerswift_ovFAhfMX311_0_33_2288A18723E87D999277E978D3258B64Ll7PreviewfMf_15PreviewRegistryfMu_5
+swiftUIFont
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/FontFamilyPicker~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/SyntaxHighlighter~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/SyntaxHighlighter~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/SyntaxHighlighter~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/BlockSeparatorInjector~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/BlockSeparatorInjector~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/BlockSeparatorInjector~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderFontSize~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderFontSize~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/ReaderFontSize~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/KeybindingsView~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/KeybindingsView~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+$s8mdviewer0026KeybindingsViewswift_DsAGgfMX327_0_33_7BDE4B6F65AA18D797E89A8C7564037FLl7PreviewfMf_15PreviewRegistryfMu_
+Swift
+SwiftUICore
+SwiftUI
+$s8mdviewer0026KeybindingsViewswift_DsAGgfMX327_0_33_7BDE4B6F65AA18D797E89A8C7564037FLl7PreviewfMf_15PreviewRegistryfMu_5
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/KeybindingsView~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownParser~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownParser~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownParser~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownRenderAttribute~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownRenderAttribute~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownRenderAttribute~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownRendering~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownRendering~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+Swift
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/MarkdownRendering~partial.swiftmodule: is not an object file
+\n--- ./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/GlassPanelModifier~partial.swiftmodule ---
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/GlassPanelModifier~partial.swiftmodule: data
+strings (grep swift, case-insensitive):
+6.2.3(6.2.3)/Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Swift
+SwiftOnoneSupport
+SwiftUI
+_SwiftConcurrencyShims
+SwiftUICore
+Swift
+$s8mdviewer18GlassPanelModifier33_BF847EE162379C3A17F6BF88B558CE53LLV4body7contentQr7SwiftUI05_ViewD8_ContentVyADG_tF
+$s7SwiftUI4ViewP8mdviewerE10glassPanel12cornerRadiusQr12CoreGraphics7CGFloatV_tF
+otool -L (if Mach-O):
+./mdviewer/.build/index-build/arm64-apple-macosx/debug/mdviewer.build/GlassPanelModifier~partial.swiftmodule: is not an object file
+\n=== build_tail.txt (last 400 lines) ===
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap:306:8: error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+304 | // is here to generate early errors if client search paths are set up
+305 | // incorrectly.
+306 | module _c_standard_library_obsolete [system] {
+    |        `- error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+307 |   requires found_incompatible_headers__check_search_paths
+308 | 
+
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h:28:17: note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 26 | #endif
+ 27 | 
+ 28 | #  include_next <float.h>
+    |                 `- note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 29 | 
+ 30 | /* Undefine anything that we'll be redefining below. */
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/CoreFoundation.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/CFPlugInCOM.h"
+3 | 
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:10: error: could not build module '_Builtin_float'
+ 21 | #include <ctype.h>
+ 22 | #include <errno.h>
+ 23 | #include <float.h>
+    |          `- error: could not build module '_Builtin_float'
+ 24 | #include <limits.h>
+ 25 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:1: note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 90 | 
+ 91 | // Base interfaces below the C standard library.
+ 92 | extern module os_availability "DarwinFoundation1.modulemap"
+    | `- note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 93 | extern module sys_appleapiopts "DarwinFoundation1.modulemap"
+ 94 | extern module sys_cdefs "DarwinFoundation1.modulemap"
+
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap:306:8: error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+304 | // is here to generate early errors if client search paths are set up
+305 | // incorrectly.
+306 | module _c_standard_library_obsolete [system] {
+    |        `- error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+307 |   requires found_incompatible_headers__check_search_paths
+308 | 
+
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h:28:17: note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 26 | #endif
+ 27 | 
+ 28 | #  include_next <float.h>
+    |                 `- note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 29 | 
+ 30 | /* Undefine anything that we'll be redefining below. */
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/arm64e-apple-macos.swiftinterface:5:8: error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   3 | // swift-module-flags: -target arm64e-apple-macos26.4 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3023 -module-name Combine
+   4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+   5 | import Darwin
+     |        `- error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   6 | import Swift
+   7 | import _Concurrency
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Dispatch.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/arm64e-apple-macos.swiftinterface:5:8: error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   3 | // swift-module-flags: -target arm64e-apple-macos26.4 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3023 -module-name Combine
+   4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+   5 | import Darwin
+     |        `- error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   6 | import Swift
+   7 | import _Concurrency
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Dispatch.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/System.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Package.swift:1:8: error: failed to build module 'Foundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+ 1 | import Foundation
+   |        `- error: failed to build module 'Foundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+ 2 | // swift-tools-version:5.7
+ 3 | import PackageDescription
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:6:10: note: while building module 'CoreFoundation' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:6:
+  4 | 
+  5 | 
+  6 | #include <CoreFoundation/CoreFoundation.h>
+    |          `- note: while building module 'CoreFoundation' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:6:
+  7 | 
+  8 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:10: note: while building module '_Builtin_float' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:
+ 21 | #include <ctype.h>
+ 22 | #include <errno.h>
+ 23 | #include <float.h>
+    |          `- note: while building module '_Builtin_float' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:
+ 24 | #include <limits.h>
+ 25 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:1: note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 90 | 
+ 91 | // Base interfaces below the C standard library.
+ 92 | extern module os_availability "DarwinFoundation1.modulemap"
+    | `- note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 93 | extern module sys_appleapiopts "DarwinFoundation1.modulemap"
+ 94 | extern module sys_cdefs "DarwinFoundation1.modulemap" in https://github.com/nicklockwood/SwiftFormat
+error: ExitCode(rawValue: 1)
+[0/1] Planning build
+error: Recipe `build` failed on line 15 with exit code 1
+\n=== test_tail.txt (last 400 lines) ===
+    |          `- error: could not build module '_Builtin_float'
+ 24 | #include <limits.h>
+ 25 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:26:38: note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 24 | // OS and kernel interfaces on top of Darwin/POSIX.
+ 25 | extern module Dispatch "dispatch.modulemap"
+ 26 | extern module DispatchIntrospection "dispatch.modulemap"
+    |                                      `- note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 27 | extern module kcdata "kcdata.modulemap"
+ 28 | extern module libkern "libkern.modulemap"
+
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:1: note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 90 | 
+ 91 | // Base interfaces below the C standard library.
+ 92 | extern module os_availability "DarwinFoundation1.modulemap"
+    | `- note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 93 | extern module sys_appleapiopts "DarwinFoundation1.modulemap"
+ 94 | extern module sys_cdefs "DarwinFoundation1.modulemap"
+
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap:306:8: error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+304 | // is here to generate early errors if client search paths are set up
+305 | // incorrectly.
+306 | module _c_standard_library_obsolete [system] {
+    |        `- error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+307 |   requires found_incompatible_headers__check_search_paths
+308 | 
+
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h:28:17: note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 26 | #endif
+ 27 | 
+ 28 | #  include_next <float.h>
+    |                 `- note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 29 | 
+ 30 | /* Undefine anything that we'll be redefining below. */
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/arm64e-apple-macos.swiftinterface:5:8: error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   3 | // swift-module-flags: -target arm64e-apple-macos26.4 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3023 -module-name Combine
+   4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+   5 | import Darwin
+     |        `- error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   6 | import Swift
+   7 | import _Concurrency
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Dispatch.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap:306:8: error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+304 | // is here to generate early errors if client search paths are set up
+305 | // incorrectly.
+306 | module _c_standard_library_obsolete [system] {
+    |        `- error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+307 |   requires found_incompatible_headers__check_search_paths
+308 | 
+
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/arm64e-apple-macos.swiftinterface:5:8: error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   3 | // swift-module-flags: -target arm64e-apple-macos26.4 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3023 -module-name Combine
+   4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+   5 | import Darwin
+     |        `- error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   6 | import Swift
+   7 | import _Concurrency
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Dispatch.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h:28:17: note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 26 | #endif
+ 27 | 
+ 28 | #  include_next <float.h>
+    |                 `- note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 29 | 
+ 30 | /* Undefine anything that we'll be redefining below. */
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h:28:17: note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 26 | #endif
+ 27 | 
+ 28 | #  include_next <float.h>
+    |                 `- note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 29 | 
+ 30 | /* Undefine anything that we'll be redefining below. */
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/System.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Package.swift:1:8: error: failed to build module 'Foundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+ 1 | import Foundation
+   |        `- error: failed to build module 'Foundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+ 2 | // swift-tools-version:5.7
+ 3 | import PackageDescription
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:6:10: note: while building module 'CoreFoundation' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:6:
+  4 | 
+  5 | 
+  6 | #include <CoreFoundation/CoreFoundation.h>
+    |          `- note: while building module 'CoreFoundation' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:6:
+  7 | 
+  8 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:10: note: while building module '_Builtin_float' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:
+ 21 | #include <ctype.h>
+ 22 | #include <errno.h>
+ 23 | #include <float.h>
+    |          `- note: while building module '_Builtin_float' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:
+ 24 | #include <limits.h>
+ 25 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:1: note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 90 | 
+ 91 | // Base interfaces below the C standard library.
+ 92 | extern module os_availability "DarwinFoundation1.modulemap"
+    | `- note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 93 | extern module sys_appleapiopts "DarwinFoundation1.modulemap"
+ 94 | extern module sys_cdefs "DarwinFoundation1.modulemap" in https://github.com/nicklockwood/SwiftFormat
+error: ExitCode(rawValue: 1)
+[0/1] Planning build
+\n=== repo root listing (first 200 entries) ===
+total 392
+drwxr-xr-x   32 meka  staff   1024 Mar 30 17:59 .
+drwxr-xr-x  103 meka  staff   3296 Mar 30 10:58 ..
+drwxr-xr-x    7 meka  staff    224 Mar 11 21:17 .claude
+-rw-r--r--@   1 meka  staff  12292 Mar 30 18:33 .DS_Store
+-rw-r--r--@   1 meka  staff    443 Mar 10 15:37 .editorconfig
+drwxr-xr-x   19 meka  staff    608 Mar 30 18:36 .git
+drwxr-xr-x   10 meka  staff    320 Mar 30 17:59 .github
+-rw-r--r--    1 meka  staff    454 Mar 11 22:51 .gitignore
+drwxr-xr-x    4 meka  staff    128 Mar 28 15:33 .junie
+-rw-r--r--@   1 meka  staff      6 Mar 10 15:37 .swift-version
+-rw-r--r--@   1 meka  staff   6827 Mar 10 15:37 .swiftlint.yml
+drwxr-xr-x    4 meka  staff    128 Mar 25 12:31 .vscode
+-rw-r--r--    1 meka  staff   5807 Mar 30 15:26 AGENTS.md
+-rw-r--r--    1 meka  staff  29491 Mar 30 17:07 build_output.txt
+-rw-r--r--    1 meka  staff  20868 Mar 30 17:07 build_tail.txt
+-rw-r--r--@   1 meka  staff   2613 Mar 10 15:37 CHANGELOG.md
+lrwxr-xr-x    1 meka  staff      9 Mar 10 15:37 CLAUDE.md -> AGENTS.md
+-rw-r--r--@   1 meka  staff   2728 Mar 10 15:37 CONTRIBUTING.md
+-rw-r--r--    1 meka  staff   3907 Mar 30 15:26 GEMINI.md
+-rw-r--r--    1 meka  staff   6294 Mar 11 17:47 Justfile
+-rw-r--r--    1 meka  staff    607 Mar 10 15:37 lefthook.yml
+drwxr-xr-x   16 meka  staff    512 Mar 30 15:27 mdviewer
+-rw-r--r--@   1 meka  staff   4517 Mar 24 06:18 README.md
+drwxr-xr-x    4 meka  staff    128 Mar 28 14:59 release
+drwxr-xr-x   14 meka  staff    448 Mar 30 17:05 scripts
+-rw-r--r--@   1 meka  staff   1518 Mar 11 18:13 SECURITY.md
+-rw-r--r--    1 meka  staff  31027 Mar 30 17:07 test_output.txt
+-rw-r--r--    1 meka  staff  20863 Mar 30 17:07 test_tail.txt
+-rw-r--r--@   1 meka  staff    436 Mar 12 13:44 test_workspace.swift
+drwxr-xr-x    5 meka  staff    160 Mar 11 15:32 Tests
+drwxr-xr-x    8 meka  staff    256 Mar 11 23:41 tmp
+drwxr-xr-x    8 meka  staff    256 Mar 27 20:49 traces
+\n=== Toolchain: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain ===
+Contents:
+total 8
+drwxr-xr-x  5 meka  staff  160 Mar 27 17:38 .
+drwxr-xr-x  3 meka  staff   96 Mar 29  2023 ..
+drwxr-xr-x  3 meka  staff   96 Mar  7 07:10 Developer
+-rw-r--r--  1 meka  staff   95 Feb 27 17:28 ToolchainInfo.plist
+drwxr-xr-x  7 meka  staff  224 Mar 17 14:10 usr
+Swift in /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain:
+swift-driver version: 1.148.6 Apple Swift version 6.3 (swiftlang-6.3.0.123.5 clang-2100.0.123.102)
+Target: arm64-apple-macosx26.0
+\nDiagnostics done.
+___BEGIN___COMMAND_DONE_MARKER___0

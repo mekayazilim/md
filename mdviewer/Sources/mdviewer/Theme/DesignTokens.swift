@@ -483,7 +483,7 @@ extension View {
         _ value: Value,
         duration: TimeInterval = DesignTokens.Animation.normal
     ) -> some View {
-        animation(.easeInOut(duration: duration), value: value)
+        animation(DesignTokens.AnimationPreset.forDuration(duration), value: value)
     }
 
     /// Applies a smooth spring animation for interactive elements.
@@ -492,7 +492,7 @@ extension View {
         response: TimeInterval = 0.28,
         damping: CGFloat = 0.82
     ) -> some View {
-        animation(.spring(response: response, dampingFraction: damping), value: value)
+        animation(DesignTokens.AnimationPreset.spring(response: response, damping: damping), value: value)
     }
 
     /// Applies a modern smooth animation.
@@ -500,7 +500,7 @@ extension View {
         _ value: Value,
         duration: TimeInterval = DesignTokens.Animation.normal
     ) -> some View {
-        animation(.smooth(duration: duration), value: value)
+        animation(DesignTokens.AnimationPreset.forDuration(duration), value: value)
     }
 
     /// Applies a concentric corner radius based on a parent's radius and padding.

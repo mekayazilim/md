@@ -208,11 +208,20 @@ private final class MermaidImageCache: @unchecked Sendable {
     }
 
     func object(forKey key: NSString) -> NSImage? {
-        cache.object(forKey: key)
+        if Thread.isMainThread {
+            return cache.object(forKey: key)
+        } else {
+            return DispatchQueue.main.sync { cache.object(forKey: key) }
+        }
     }
 
     func setObject(_ image: NSImage, forKey key: NSString) {
-        cache.setObject(image, forKey: key, cost: imageCost(for: image))
+        // Ensure cost calculation and cache mutation happen on the main thread
+        if Thread.isMainThread {
+            cache.setObject(image, forKey: key, cost: imageCost(for: image))
+        } else {
+            DispatchQueue.main.sync { cache.setObject(image, forKey: key, cost: imageCost(for: image)) }
+        }
     }
 
     private func imageCost(for image: NSImage) -> Int {

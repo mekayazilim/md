@@ -200,6 +200,11 @@ struct mdviewerApp: App {
         func applicationDidFinishLaunching(_ notification: Notification) {
             NSWindow.allowsAutomaticWindowTabbing = true
 
+            // Ensure AppPreferences.shared is instantiated on the MainActor early so
+            // that code using `MainActor.assumeIsolated` (e.g., PreferencesKey.defaultValue)
+            // has a valid, already-initialized shared instance.
+            let _ = AppPreferences.shared
+
             // Yield the first frame, then prewarm heavy services at utility priority.
             Task(priority: .utility) {
                 try? await Task.sleep(for: .seconds(PerformanceConstants.startupPrewarmDelay))

@@ -37,12 +37,13 @@
         override func accessibilitySubrole() -> NSAccessibility.Subrole? { .init(rawValue: "Heading") }
 
         override nonisolated func accessibilityFrame() -> NSRect {
-            let targetView = parentView
             let headingRange = info.range
-            return MainActor.assumeIsolated {
-                guard
-                    let targetView, let lm = targetView.layoutManager,
-                    let tc = targetView.textContainer else { return .zero }
+
+            // Fast-path when already on the main thread
+            if Thread.isMainThread {
+                guard let targetView = parentView,
+                      let lm = targetView.layoutManager,
+                      let tc = targetView.textContainer else { return .zero }
                 let glyphRange = lm.glyphRange(forCharacterRange: headingRange, actualCharacterRange: nil)
                 let rect = lm.boundingRect(forGlyphRange: glyphRange, in: tc)
                 let viewRect = NSRect(
@@ -53,20 +54,41 @@
                 )
                 return targetView.window?.convertToScreen(targetView.convert(viewRect, to: nil)) ?? .zero
             }
+
+            // If called off the main thread, synchronously hop to the main queue
+            var frame = NSRect.zero
+            DispatchQueue.main.sync {
+                guard let targetView = parentView,
+                      let lm = targetView.layoutManager,
+                      let tc = targetView.textContainer else { frame = .zero; return }
+                let glyphRange = lm.glyphRange(forCharacterRange: headingRange, actualCharacterRange: nil)
+                let rect = lm.boundingRect(forGlyphRange: glyphRange, in: tc)
+                let viewRect = NSRect(
+                    x: rect.origin.x + targetView.textContainerInset.width,
+                    y: rect.origin.y + targetView.textContainerInset.height,
+                    width: rect.width,
+                    height: rect.height
+                )
+                frame = targetView.window?.convertToScreen(targetView.convert(viewRect, to: nil)) ?? .zero
+            }
+            return frame
         }
 
         override nonisolated func accessibilityParent() -> Any? {
-            parentView
+            if Thread.isMainThread {
+                return parentView
+            }
+            var pv: ReaderTextView?
+            DispatchQueue.main.sync { pv = parentView }
+            return pv
         }
 
-        override nonisolated func accessibilityPerformPress() -> Bool {
-            let targetView = parentView
-            let headingRange = info.range
-            return MainActor.assumeIsolated {
-                targetView?.setSelectedRange(headingRange)
-                targetView?.scrollRangeToVisible(headingRange)
-                return true
-            }
+        @MainActor
+        override func accessibilityPerformPress() -> Bool {
+            guard let targetView = parentView else { return false }
+            targetView.setSelectedRange(info.range)
+            targetView.scrollRangeToVisible(info.range)
+            return true
         }
     }
 

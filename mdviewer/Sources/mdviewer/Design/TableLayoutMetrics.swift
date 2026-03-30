@@ -25,7 +25,10 @@
         }
 
         static let maximumTabStops = 8
-        private nonisolated(unsafe) static let tabStopCache: NSCache<NSString, TabStopCacheEntry> = {
+        // Cache of computed tab stops. NSTextTab instances are AppKit types and
+        // must be created/accessed on the main thread; ensure callers that are
+        // off-main access the cache on the main thread below.
+        private static let tabStopCache: NSCache<NSString, TabStopCacheEntry> = {
             let cache = NSCache<NSString, TabStopCacheEntry>()
             cache.countLimit = 24
             return cache
@@ -67,20 +70,37 @@
         static func tabStops(readableWidth: CGFloat, columnCount: Int) -> [NSTextTab] {
             let resolvedColumnCount = max(1, min(maximumTabStops, columnCount))
             let cacheKey = tabStopCacheKey(readableWidth: readableWidth, columnCount: resolvedColumnCount)
-            if let cachedStops = tabStopCache.object(forKey: cacheKey) {
-                return cachedStops.stops
+
+            // Fast-path on main thread to avoid dispatch overhead for UI callers.
+            if Thread.isMainThread {
+                if let cachedStops = tabStopCache.object(forKey: cacheKey) { return cachedStops.stops }
+                let width = columnWidth(readableWidth: readableWidth, columnCount: resolvedColumnCount)
+                let stops = (0 ..< max(0, resolvedColumnCount - 1)).map { index in
+                    NSTextTab(
+                        textAlignment: .left,
+                        location: contentInset + (width * CGFloat(index + 1)),
+                        options: [:]
+                    )
+                }
+                tabStopCache.setObject(TabStopCacheEntry(stops: stops), forKey: cacheKey)
+                return stops
             }
 
-            let width = columnWidth(readableWidth: readableWidth, columnCount: resolvedColumnCount)
-            let stops = (0 ..< max(0, resolvedColumnCount - 1)).map { index in
-                NSTextTab(
-                    textAlignment: .left,
-                    location: contentInset + (width * CGFloat(index + 1)),
-                    options: [:]
-                )
+            // Ensure creation and cache access happen on the main thread when
+            // callers are off-main – NSTextTab is an AppKit type.
+            return DispatchQueue.main.sync {
+                if let cachedStops = tabStopCache.object(forKey: cacheKey) { return cachedStops.stops }
+                let width = columnWidth(readableWidth: readableWidth, columnCount: resolvedColumnCount)
+                let stops = (0 ..< max(0, resolvedColumnCount - 1)).map { index in
+                    NSTextTab(
+                        textAlignment: .left,
+                        location: contentInset + (width * CGFloat(index + 1)),
+                        options: [:]
+                    )
+                }
+                tabStopCache.setObject(TabStopCacheEntry(stops: stops), forKey: cacheKey)
+                return stops
             }
-            tabStopCache.setObject(TabStopCacheEntry(stops: stops), forKey: cacheKey)
-            return stops
         }
 
         static func tabStopLocations(paragraphStyle: NSParagraphStyle, columnCount: Int) -> [CGFloat] {

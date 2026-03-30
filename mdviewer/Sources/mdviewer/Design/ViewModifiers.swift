@@ -293,7 +293,7 @@ extension View {
     /// Smoothly animates visibility with fade and size change
     func smoothVisibility(
         _ isVisible: Bool,
-        animation: Animation = .easeInOut(duration: DesignTokens.Animation.normal)
+        animation: Animation = DesignTokens.AnimationPreset.forDuration(DesignTokens.Animation.normal)
     ) -> some View {
         modifier(VisibilityModifier(isVisible: isVisible, animation: animation))
     }
@@ -580,7 +580,7 @@ struct TooltipModifier: ViewModifier {
                         .foregroundColor(.primary)
                         .clipShape(RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.small))
                         .transition(.opacity)
-                        .animation(.easeInOut(duration: 0.15), value: isHovered)
+                        .animation(DesignTokens.AnimationPreset.fast, value: isHovered)
                         .offset(y: -DesignTokens.Spacing.relaxed)
                 }
             }

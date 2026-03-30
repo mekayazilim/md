@@ -1,0 +1,271 @@
+cd mdviewer && swift build
+Updating https://github.com/lukilabs/beautiful-mermaid-swift
+Updating https://github.com/lukilabs/dagre-swift
+Updating https://github.com/nicklockwood/SwiftFormat
+Updated https://github.com/lukilabs/dagre-swift (1.04s)
+Updated https://github.com/lukilabs/beautiful-mermaid-swift (1.04s)
+Updated https://github.com/nicklockwood/SwiftFormat (1.04s)
+Computing version for https://github.com/lukilabs/beautiful-mermaid-swift
+Computed https://github.com/lukilabs/beautiful-mermaid-swift at 0.1.1 (0.02s)
+Computing version for https://github.com/nicklockwood/SwiftFormat
+error: Invalid manifest (compiled with: ["/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/bin/swiftc", "-vfsoverlay", "/var/folders/ft/tphwr1lx2wjbqz__18c6sm5w0000gp/T/TemporaryDirectory.LANlzo/vfs.yaml", "-L", "/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/pm/ManifestAPI", "-lPackageDescription", "-Xlinker", "-rpath", "-Xlinker", "/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/pm/ManifestAPI", "-target", "arm64-apple-macosx13.0", "-I", "/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/macosx/testing", "-L", "/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/macosx/testing", "-plugin-path", "/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/host/plugins/testing", "-sdk", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk", "-F", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks", "-I", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib", "-L", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib", "-swift-version", "5", "-I", "/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/pm/ManifestAPI", "-sdk", "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk", "-package-description-version", "5.7.0", "/Package.swift", "-o", "/var/folders/ft/tphwr1lx2wjbqz__18c6sm5w0000gp/T/TemporaryDirectory.BUrtuV/swiftformat-manifest"])
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:1: note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 90 | 
+ 91 | // Base interfaces below the C standard library.
+ 92 | extern module os_availability "DarwinFoundation1.modulemap"
+    | `- note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 93 | extern module sys_appleapiopts "DarwinFoundation1.modulemap"
+ 94 | extern module sys_cdefs "DarwinFoundation1.modulemap"
+
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap:306:8: error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+304 | // is here to generate early errors if client search paths are set up
+305 | // incorrectly.
+306 | module _c_standard_library_obsolete [system] {
+    |        `- error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+307 |   requires found_incompatible_headers__check_search_paths
+308 | 
+
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h:28:17: note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 26 | #endif
+ 27 | 
+ 28 | #  include_next <float.h>
+    |                 `- note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 29 | 
+ 30 | /* Undefine anything that we'll be redefining below. */
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/arm64e-apple-macos.swiftinterface:5:8: error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   3 | // swift-module-flags: -target arm64e-apple-macos26.4 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3023 -module-name Combine
+   4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+   5 | import Darwin
+     |        `- error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   6 | import Swift
+   7 | import _Concurrency
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Modules/Foundation.swiftmodule/arm64e-apple-macos.swiftinterface:6:8: error: failed to build module 'Combine'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+    4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+    5 | import Builtin
+    6 | import Combine
+      |        `- error: failed to build module 'Combine'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+    7 | import CoreFoundation
+    8 | @preconcurrency import Darwin
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:10: note: while building module '_Builtin_float' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:
+ 21 | #include <ctype.h>
+ 22 | #include <errno.h>
+ 23 | #include <float.h>
+    |          `- note: while building module '_Builtin_float' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:
+ 24 | #include <limits.h>
+ 25 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:1: note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 90 | 
+ 91 | // Base interfaces below the C standard library.
+ 92 | extern module os_availability "DarwinFoundation1.modulemap"
+    | `- note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 93 | extern module sys_appleapiopts "DarwinFoundation1.modulemap"
+ 94 | extern module sys_cdefs "DarwinFoundation1.modulemap"
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap:306:8: error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+304 | // is here to generate early errors if client search paths are set up
+305 | // incorrectly.
+306 | module _c_standard_library_obsolete [system] {
+    |        `- error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+307 |   requires found_incompatible_headers__check_search_paths
+308 | 
+
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h:28:17: note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 26 | #endif
+ 27 | 
+ 28 | #  include_next <float.h>
+    |                 `- note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 29 | 
+ 30 | /* Undefine anything that we'll be redefining below. */
+
+<module-includes>:1:9: note: in file included from <module-includes>:1:
+1 | #import "Headers/CoreFoundation.h"
+  |         `- note: in file included from <module-includes>:1:
+2 | #import "Headers/CFPlugInCOM.h"
+3 | 
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:10: error: could not build module '_Builtin_float'
+ 21 | #include <ctype.h>
+ 22 | #include <errno.h>
+ 23 | #include <float.h>
+    |          `- error: could not build module '_Builtin_float'
+ 24 | #include <limits.h>
+ 25 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/CoreFoundation.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:1: note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 90 | 
+ 91 | // Base interfaces below the C standard library.
+ 92 | extern module os_availability "DarwinFoundation1.modulemap"
+    | `- note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 93 | extern module sys_appleapiopts "DarwinFoundation1.modulemap"
+ 94 | extern module sys_cdefs "DarwinFoundation1.modulemap"
+
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap:306:8: error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+304 | // is here to generate early errors if client search paths are set up
+305 | // incorrectly.
+306 | module _c_standard_library_obsolete [system] {
+    |        `- error: module '_c_standard_library_obsolete' requires feature 'found_incompatible_headers__check_search_paths'
+307 |   requires found_incompatible_headers__check_search_paths
+308 | 
+
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h:28:17: note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 26 | #endif
+ 27 | 
+ 28 | #  include_next <float.h>
+    |                 `- note: submodule of top-level module '_c_standard_library_obsolete' implicitly imported here
+ 29 | 
+ 30 | /* Undefine anything that we'll be redefining below. */
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/arm64e-apple-macos.swiftinterface:5:8: error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   3 | // swift-module-flags: -target arm64e-apple-macos26.4 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3023 -module-name Combine
+   4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+   5 | import Darwin
+     |        `- error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   6 | import Swift
+   7 | import _Concurrency
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Dispatch.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Combine.framework/Modules/Combine.swiftmodule/arm64e-apple-macos.swiftinterface:5:8: error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   3 | // swift-module-flags: -target arm64e-apple-macos26.4 -target-variant arm64e-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3023 -module-name Combine
+   4 | // swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3
+   5 | import Darwin
+     |        `- error: failed to build module 'Darwin'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+   6 | import Swift
+   7 | import _Concurrency
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Dispatch.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Darwin.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/System.swiftmodule/arm64e-apple-macos.swiftinterface: 0:
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap: 0:
+<unknown>:0: error: could not build Objective-C module '_Builtin_float'
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/DarwinFoundation1.modulemap: 0:
+/Users/meka/Library/Developer/Toolchains/swift-6.0.3-RELEASE.xctoolchain/usr/lib/swift/clang/include/float.h: 0:
+/Package.swift:1:8: error: failed to build module 'Foundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+ 1 | import Foundation
+   |        `- error: failed to build module 'Foundation'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.3 effective-5.10 (swiftlang-6.3.0.123.4 clang-2100.0.123.2)', while this compiler is 'Apple Swift version 6.0.3 (swift-6.0.3-RELEASE)'). Please select a toolchain which matches the SDK.
+ 2 | // swift-tools-version:5.7
+ 3 | import PackageDescription
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:6:10: note: while building module 'CoreFoundation' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:6:
+  4 | 
+  5 | 
+  6 | #include <CoreFoundation/CoreFoundation.h>
+    |          `- note: while building module 'CoreFoundation' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h:6:
+  7 | 
+  8 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:10: note: while building module '_Builtin_float' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:
+ 21 | #include <ctype.h>
+ 22 | #include <errno.h>
+ 23 | #include <float.h>
+    |          `- note: while building module '_Builtin_float' imported from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CoreFoundation.h:23:
+ 24 | #include <limits.h>
+ 25 | #if !0
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:1: note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 90 | 
+ 91 | // Base interfaces below the C standard library.
+ 92 | extern module os_availability "DarwinFoundation1.modulemap"
+    | `- note: in file included from /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/module.modulemap:92:
+ 93 | extern module sys_appleapiopts "DarwinFoundation1.modulemap"
+ 94 | extern module sys_cdefs "DarwinFoundation1.modulemap" in https://github.com/nicklockwood/SwiftFormat
+error: ExitCode(rawValue: 1)
+[0/1] Planning build
+error: Recipe `build` failed on line 15 with exit code 1

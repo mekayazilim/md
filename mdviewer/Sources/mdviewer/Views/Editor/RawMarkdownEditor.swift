@@ -426,6 +426,7 @@ private struct RawEditorRepresentable: NSViewRepresentable {
 // MARK: - Raw Editor Text View
 
 /// Custom NSTextView that stores configuration for highlighting updates.
+@MainActor
 private final class RawEditorTextView: NSTextView {
     var fontSize: CGFloat = 14
     var colorScheme: ColorScheme = .light
@@ -519,6 +520,7 @@ private final class RawEditorTextView: NSTextView {
 
 /// Custom ruler view that draws line numbers synchronized with scroll.
 /// Provides high-contrast line numbers that adapt to accessibility settings.
+@MainActor
 private final class RawLineNumberRulerView: NSRulerView {
     var fontSize: CGFloat = 14
     var colorScheme: ColorScheme = .light
