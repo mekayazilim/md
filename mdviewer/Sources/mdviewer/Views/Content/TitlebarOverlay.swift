@@ -18,6 +18,10 @@ struct TitlebarOverlay: View {
     let hasFrontmatter: Bool
     let fileURL: URL?
 
+    // Dynamic titlebar height measured from the hosting NSWindow so the overlay
+    // fully covers the native titlebar / toolbar area across toolbar styles.
+    @State private var titlebarHeight: CGFloat = 44
+
     var body: some View {
         ZStack {
             if #available(macOS 26.0, *) {
@@ -94,8 +98,20 @@ struct TitlebarOverlay: View {
             .padding(.horizontal, DesignTokens.Spacing.tight)
             .padding(.vertical, 6)
         }
-        .frame(height: 44)
+        .frame(height: titlebarHeight)
         .ignoresSafeArea(edges: .top)
+        .onAppear {
+            updateTitlebarHeight()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didResizeNotification)) { _ in
+            updateTitlebarHeight()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didMoveNotification)) { _ in
+            updateTitlebarHeight()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didBecomeKeyNotification)) { _ in
+            updateTitlebarHeight()
+        }
         .accessibilityElement(children: .contain)
     }
 
@@ -115,5 +131,23 @@ struct TitlebarOverlay: View {
         } else if sidebarMode == .metadata, !hasFrontmatter, fileURL != nil {
             sidebarMode = .folder
         }
+    }
+
+    private func updateTitlebarHeight() {
+        #if os(macOS)
+        DispatchQueue.main.async {
+            guard let window = NSApplication.shared.keyWindow ?? NSApplication.shared.windows.first else { return }
+
+            var height: CGFloat = 44
+            if let close = window.standardWindowButton(.closeButton) {
+                // close.frame is in the contentView coordinate space; maxY approximates the titlebar area.
+                let closeMaxY = close.frame.maxY
+                // Add a small padding to ensure overlap with any toolbar or accessory view.
+                height = max(44, closeMaxY + 8)
+            }
+
+            titlebarHeight = height
+        }
+        #endif
     }
 }
