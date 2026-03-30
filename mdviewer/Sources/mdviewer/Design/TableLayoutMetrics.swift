@@ -28,7 +28,7 @@
         // Cache of computed tab stops. NSTextTab instances are AppKit types and
         // must be created/accessed on the main thread; ensure callers that are
         // off-main access the cache on the main thread below.
-        private static let tabStopCache: NSCache<NSString, TabStopCacheEntry> = {
+        @MainActor private static let tabStopCache: NSCache<NSString, TabStopCacheEntry> = {
             let cache = NSCache<NSString, TabStopCacheEntry>()
             cache.countLimit = 24
             return cache

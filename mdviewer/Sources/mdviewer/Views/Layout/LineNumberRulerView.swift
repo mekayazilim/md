@@ -9,7 +9,6 @@
     // MARK: - Line Number Ruler
 
     /// A custom ruler view that displays line numbers for NSTextView
-    @MainActor
     final class LineNumberRulerView: NSRulerView {
         private var font: NSFont = .monospacedSystemFont(ofSize: 11, weight: .regular)
         private var textColor: NSColor = .secondaryLabelColor
@@ -33,7 +32,7 @@
             fatalError("init(coder:) has not been implemented")
         }
 
-        override func awakeFromNib() {
+        @MainActor override func awakeFromNib() {
             super.awakeFromNib()
             // awakeFromNib is always called on the main thread; perform UI updates directly.
             ruleThickness = 40

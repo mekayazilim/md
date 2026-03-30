@@ -782,7 +782,7 @@ struct TypographyApplier: TypographyApplying {
     // Use a plain static NSCache and ensure any AppKit interactions (NSFont
     // creation / caching) happen on the main thread to avoid thread-safety
     // issues. Access is synchronous to preserve the existing API.
-    private static let fontCache = NSCache<NSString, NSFont>()
+    @MainActor private static let fontCache = NSCache<NSString, NSFont>()
     private func cachedFontByApplyingTraits(_ base: NSFont, bold: Bool, italic: Bool) -> NSFont {
         let key = "\(base.fontName)-\(base.pointSize)-\(bold)-\(italic)" as NSString
         if let c = Self.fontCache.object(forKey: key) { return c }
