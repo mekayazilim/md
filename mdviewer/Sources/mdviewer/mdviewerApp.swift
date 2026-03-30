@@ -27,7 +27,7 @@ struct mdviewerApp: App {
                 .frame(minWidth: 600, minHeight: 400)
                 .configureNativeWindow()
                 .toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
-                .containerBackground(.ultraThinMaterial, for: .window)
+                .containerBackground(Color(nsColor: NSColor.windowBackgroundColor), for: .window)
                 .environment(\.preferences, AppPreferences.shared)
                 .sheet(isPresented: $showingKeybindings) {
                     KeybindingsView()
