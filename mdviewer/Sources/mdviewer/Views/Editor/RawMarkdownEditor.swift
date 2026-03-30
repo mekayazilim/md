@@ -762,7 +762,7 @@ private final class ScrollTrackingScrollView: NSScrollView {
         isScrolling = true
 
         // Suspend decoration drawing in ReaderLayoutManager to avoid heavy computation during active scroll.
-        if let lm = documentView?.layoutManager as? ReaderLayoutManager {
+        if let lm = (documentView as? NSTextView)?.layoutManager as? ReaderLayoutManager {
             lm.setDecorationDrawingSuspended(true)
         }
 
@@ -778,7 +778,7 @@ private final class ScrollTrackingScrollView: NSScrollView {
             isScrolling = false
 
             // Resume decoration drawing and invalidate cache so decorations reappear after scroll settles.
-            if let lm = documentView?.layoutManager as? ReaderLayoutManager {
+            if let lm = (documentView as? NSTextView)?.layoutManager as? ReaderLayoutManager {
                 lm.setDecorationDrawingSuspended(false)
                 lm.invalidateDecorationCache()
             }
