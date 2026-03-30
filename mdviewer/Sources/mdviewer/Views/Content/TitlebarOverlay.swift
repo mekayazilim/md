@@ -28,7 +28,7 @@ struct TitlebarOverlay: View {
                 // Use native Liquid Glass when available
                 Rectangle()
                     .foregroundStyle(.clear)
-                    .glassEffect(.regular, in: .rect)
+                    .background(.ultraThinMaterial)
             } else {
                 // Fallback to ultra thin material
                 Rectangle()

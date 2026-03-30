@@ -56,11 +56,6 @@ struct LiquidBackground: View {
                     colors: colors
                 )
                 .opacity(DesignTokens.Opacity.high)
-                // Rasterize the mesh into a single drawing before blurring for better GPU performance
-                .drawingGroup()
-                .blur(radius: DesignTokens.Effects.backgroundBlurRadius)
-                .animation(.easeInOut(duration: 2.0), value: colorScheme)
-                .transition(.opacity.animation(.easeIn(duration: 0.4)))
             } else {
                 // Fallback for macOS 14 - use radial gradient with safer blur & rasterization
                 fallbackGradient
@@ -85,9 +80,7 @@ struct LiquidBackground: View {
                     startRadius: 0,
                     endRadius: 400
                 )
-                .opacity(0.2)
-                .drawingGroup()
-                .blur(radius: DesignTokens.Effects.fallbackBackgroundBlurRadius)
+                .opacity(DesignTokens.Opacity.medium)
             }
         }
         .animation(reduceMotion ? .none : .easeInOut(duration: 2.0), value: colorScheme)
