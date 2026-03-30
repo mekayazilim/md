@@ -23,12 +23,14 @@ private final class PaletteCache: @unchecked Sendable {
             return cached
         }
 
-        // Slow path: create with barrier write
+        // Slow path: create palette and insert under a barrier to avoid races.
         let palette = NativeThemePalette(theme: theme, scheme: scheme)
-        queue.async(flags: .barrier) { [weak self] in
-            self?.cache[key] = palette
+        queue.sync(flags: .barrier) {
+            if cache[key] == nil {
+                cache[key] = palette
+            }
         }
-        return palette
+        return queue.sync { cache[key]! }
     }
 
     func clear() {
