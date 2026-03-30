@@ -406,6 +406,10 @@ private struct ReaderContentView: View {
     /// Namespace for matched geometry effects between modes
     @Namespace private var animationNamespace
 
+    // Cached readable width to reduce rebuilds of NativeMarkdownTextView on small layout changes
+    @State private var cachedReadableWidth: CGFloat = 0
+    private let readableWidthUpdateThreshold: CGFloat = 2.0
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -413,6 +417,29 @@ private struct ReaderContentView: View {
 
                 contentView(geometry: geometry)
                     .matchedGeometryEffect(id: "contentContainer", in: animationNamespace)
+            }
+            // Compute desired readable width once per layout pass and update cached value only when it changes beyond threshold.
+            .onAppear {
+                let computed = max(0, min(preferences.readerColumnWidth.points, geometry.size.width - (preferences.readerContentPadding.points * 2)))
+                cachedReadableWidth = computed
+            }
+            .onChange(of: geometry.size.width) { newWidth in
+                let computed = max(0, min(preferences.readerColumnWidth.points, newWidth - (preferences.readerContentPadding.points * 2)))
+                if abs(computed - cachedReadableWidth) > readableWidthUpdateThreshold {
+                    cachedReadableWidth = computed
+                }
+            }
+            .onChange(of: preferences.readerColumnWidth) { _ in
+                let computed = max(0, min(preferences.readerColumnWidth.points, geometry.size.width - (preferences.readerContentPadding.points * 2)))
+                if abs(computed - cachedReadableWidth) > readableWidthUpdateThreshold {
+                    cachedReadableWidth = computed
+                }
+            }
+            .onChange(of: preferences.readerContentPadding) { _ in
+                let computed = max(0, min(preferences.readerColumnWidth.points, geometry.size.width - (preferences.readerContentPadding.points * 2)))
+                if abs(computed - cachedReadableWidth) > readableWidthUpdateThreshold {
+                    cachedReadableWidth = computed
+                }
             }
         }
     }
@@ -451,10 +478,7 @@ private struct ReaderContentView: View {
             appTheme: appTheme,
             colorScheme: preferences.effectiveColorScheme ?? colorScheme,
             textSpacing: preferences.readerTextSpacing,
-            readableWidth: max(0, min(
-                preferences.readerColumnWidth.points,
-                geometry.size.width - (preferences.readerContentPadding.points * 2)
-            )),
+            readableWidth: cachedReadableWidth,
             contentPadding: preferences.readerContentPadding.points,
             showLineNumbers: preferences.showLineNumbers,
             typographyPreferences: preferences.typographyPreferences,
