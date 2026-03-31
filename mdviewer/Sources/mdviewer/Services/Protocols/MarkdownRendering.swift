@@ -43,7 +43,7 @@ protocol MarkdownRendering: Actor {
     ///
     /// - Parameter request: The render request containing markdown content and styling options
     /// - Returns: A rendered markdown result with attributed string
-    func render(_ request: RenderRequest) -> RenderedMarkdown
+    func render(_ request: RenderRequest) async -> RenderedMarkdown
 
     /// Returns a snapshot of current cache statistics for monitoring performance.
     ///

@@ -32,10 +32,14 @@
             fatalError("init(coder:) has not been implemented")
         }
 
-        @MainActor override func awakeFromNib() {
+        override func awakeFromNib() {
             super.awakeFromNib()
-            // awakeFromNib is always called on the main thread; perform UI updates directly.
-            ruleThickness = 40
+            // Ensure mutation happens on the main thread
+            if Thread.isMainThread {
+                ruleThickness = 40
+            } else {
+                DispatchQueue.main.sync { ruleThickness = 40 }
+            }
         }
 
         /// Define the required thickness for the ruler

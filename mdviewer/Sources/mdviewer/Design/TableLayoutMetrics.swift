@@ -67,7 +67,7 @@
             return max(minimumColumnWidth, usableWidth / CGFloat(resolvedColumnCount))
         }
 
-        static func tabStops(readableWidth: CGFloat, columnCount: Int) -> [NSTextTab] {
+        @MainActor static func tabStops(readableWidth: CGFloat, columnCount: Int) -> [NSTextTab] {
             let resolvedColumnCount = max(1, min(maximumTabStops, columnCount))
             let cacheKey = tabStopCacheKey(readableWidth: readableWidth, columnCount: resolvedColumnCount)
 

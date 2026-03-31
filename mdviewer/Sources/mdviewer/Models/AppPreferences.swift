@@ -323,6 +323,7 @@ private struct PreferencesKey: EnvironmentKey {
     ///   `EnvironmentValues.preferences`.
     /// - Or provide a nonisolated, thread-safe wrapper exposing the minimal data needed
     ///   by background threads so actor isolation is not bypassed.
+    @MainActor
     static var defaultValue: AppPreferences {
         AppPreferences.shared
     }

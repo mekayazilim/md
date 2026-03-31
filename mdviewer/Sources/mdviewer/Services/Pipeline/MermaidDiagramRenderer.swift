@@ -211,7 +211,9 @@ private final class MermaidImageCache: @unchecked Sendable {
         if Thread.isMainThread {
             return cache.object(forKey: key)
         } else {
-            return DispatchQueue.main.sync { cache.object(forKey: key) }
+            // Copy key to String (Sendable) to avoid capturing an actor-isolated reference
+            let keyString = key as String
+            return DispatchQueue.main.sync { cache.object(forKey: NSString(string: keyString)) }
         }
     }
 
@@ -220,7 +222,9 @@ private final class MermaidImageCache: @unchecked Sendable {
         if Thread.isMainThread {
             cache.setObject(image, forKey: key, cost: imageCost(for: image))
         } else {
-            DispatchQueue.main.sync { cache.setObject(image, forKey: key, cost: imageCost(for: image)) }
+            let keyString = key as String
+            // Perform the mutation on the main thread using a newly-created NSString
+            DispatchQueue.main.sync { cache.setObject(image, forKey: NSString(string: keyString), cost: imageCost(for: image)) }
         }
     }
 

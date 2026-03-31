@@ -123,7 +123,7 @@ internal import SwiftUI
         ///
         /// - Parameter request: The render request containing markdown content and styling options
         /// - Returns: A rendered markdown result with attributed string
-        func render(_ request: RenderRequest) -> RenderedMarkdown {
+        func render(_ request: RenderRequest) async -> RenderedMarkdown {
             // Tier 1: Check themed cache first (includes theme colors)
             let cacheKey = NSString(string: request.cacheKey)
             if let cached = cache.object(forKey: cacheKey) {
@@ -153,7 +153,7 @@ internal import SwiftUI
                 // Reuse cached structure and apply theme colors
                 os_signpost(.begin, log: signpostLog, name: "ApplyThemeToStructure", signpostID: signpostID)
                 mutable = NSMutableAttributedString(attributedString: cachedStructure.attributedString)
-                applyTypographyAndStyling(to: mutable, request: request)
+                await applyTypographyAndStyling(to: mutable, request: request)
                 os_signpost(.end, log: signpostLog, name: "ApplyThemeToStructure", signpostID: signpostID)
                 logger.debug("Structure cache hit, applying theme colors only")
             } else {
@@ -166,7 +166,7 @@ internal import SwiftUI
                     cost: structureToCache.length * MemoryLayout<unichar>.size
                 )
                 mutable = NSMutableAttributedString(attributedString: structureToCache)
-                applyTypographyAndStyling(to: mutable, request: request)
+                await applyTypographyAndStyling(to: mutable, request: request)
             }
 
             // End performance tracking
@@ -223,6 +223,7 @@ internal import SwiftUI
 
             let structure = executeStructureOnlyPipeline(request: warmupRequest)
             let mutable = NSMutableAttributedString(attributedString: structure)
+            // Perform warmup synchronously to avoid sending mutable attributed strings
             applyTypographyAndStyling(to: mutable, request: warmupRequest)
             logger.debug("MarkdownRenderService prewarm completed")
         }
@@ -249,7 +250,11 @@ internal import SwiftUI
             let pipelineSignpostID = OSSignpostID(log: signpostLog)
 
             os_signpost(.begin, log: signpostLog, name: "ApplyTypography", signpostID: pipelineSignpostID)
-            typographyApplier.applyTypography(to: mutable, request: request)
+            if Thread.isMainThread {
+                typographyApplier.applyTypography(to: mutable, request: request)
+            } else {
+                DispatchQueue.main.sync { typographyApplier.applyTypography(to: mutable, request: request) }
+            }
             os_signpost(.end, log: signpostLog, name: "ApplyTypography", signpostID: pipelineSignpostID)
 
             os_signpost(.begin, log: signpostLog, name: "ApplyCodeStyling", signpostID: pipelineSignpostID)

@@ -197,6 +197,9 @@ struct TypographyApplier: TypographyApplying {
 
         text.addAttribute(.kern, value: totalBaseKern, range: fullRange)
 
+        // Collect font mutations (emphasis/strong) to apply them on the main actor after scanning.
+        var fontMutations: [(range: NSRange, baseName: String, baseSize: Double, bold: Bool, italic: Bool)] = []
+
         text
             .enumerateAttribute(
                 MarkdownRenderAttribute.presentationIntent,
@@ -287,7 +290,7 @@ struct TypographyApplier: TypographyApplying {
                 let rawValue = (value as? NSNumber)?.uintValue ?? 0
                 guard rawValue != 0 else { return }
                 let intent = InlinePresentationIntent(rawValue: rawValue)
-                applyInlineStyles(to: text, range: range, intent: intent, palette: palette, request: request)
+                applyInlineStyles(to: text, range: range, intent: intent, palette: palette, request: request, fontMutations: &fontMutations)
 
                 if intent.contains(.code) {
                     text.addAttribute(
@@ -305,6 +308,15 @@ struct TypographyApplier: TypographyApplying {
         ) { value, range, _ in
             guard value != nil else { return }
             applyFootnoteReferenceStyle(to: text, range: range, request: request)
+        }
+
+        // Apply deferred font mutations on the main thread
+        for mut in fontMutations {
+            DispatchQueue.main.sync {
+                let baseFont = NSFont(name: mut.baseName, size: CGFloat(mut.baseSize)) ?? NSFont.systemFont(ofSize: CGFloat(mut.baseSize))
+                let newFont = cachedFontByApplyingTraits(baseFont, bold: mut.3, italic: mut.4)
+                text.addAttribute(.font, value: newFont, range: mut.range)
+            }
         }
     }
 
@@ -555,10 +567,12 @@ struct TypographyApplier: TypographyApplying {
             paragraphSpacingBefore: cellSpacing,
             alignment: request.typographyPreferences.justification.nsAlignment
         )
-        style.tabStops = TableLayoutMetrics.tabStops(
-            readableWidth: request.readableWidth,
-            columnCount: columnCount
-        )
+        // TableLayoutMetrics.tabStops is MainActor-isolated; call synchronously on main thread
+        var tabStops: [NSTextTab] = []
+        DispatchQueue.main.sync {
+            tabStops = TableLayoutMetrics.tabStops(readableWidth: request.readableWidth, columnCount: columnCount)
+        }
+        style.tabStops = tabStops
         style.lineBreakMode = .byTruncatingTail
         style.headIndent = TableLayoutMetrics.contentInset
         style.firstLineHeadIndent = TableLayoutMetrics.contentInset
@@ -694,7 +708,8 @@ struct TypographyApplier: TypographyApplying {
         range: NSRange,
         intent: InlinePresentationIntent,
         palette: NativeThemePalette,
-        request: RenderRequest
+        request: RenderRequest,
+        fontMutations: inout [(range: NSRange, baseName: String, baseSize: Double, bold: Bool, italic: Bool)]
     ) {
         var font = text.attribute(.font, at: range.location, effectiveRange: nil) as? NSFont
         if intent.contains(.code) {
@@ -710,15 +725,10 @@ struct TypographyApplier: TypographyApplying {
             )
         }
         if intent.contains(.stronglyEmphasized) || intent.contains(.emphasized) {
-            if let f = font { text.addAttribute(
-                .font,
-                value: cachedFontByApplyingTraits(
-                    f,
-                    bold: intent.contains(.stronglyEmphasized),
-                    italic: intent.contains(.emphasized)
-                ),
-                range: range
-            ) }
+            if let f = font {
+                // Defer font trait application to the main actor to avoid crossing actor boundaries
+                fontMutations.append((range: range, baseName: f.fontName, baseSize: Double(f.pointSize), intent.contains(.stronglyEmphasized), intent.contains(.emphasized)))
+            }
         }
         if intent.contains(.strikethrough) {
             text.addAttributes(
@@ -783,7 +793,7 @@ struct TypographyApplier: TypographyApplying {
     // creation / caching) happen on the main thread to avoid thread-safety
     // issues. Access is synchronous to preserve the existing API.
     @MainActor private static let fontCache = NSCache<NSString, NSFont>()
-    private func cachedFontByApplyingTraits(_ base: NSFont, bold: Bool, italic: Bool) -> NSFont {
+    @MainActor private func cachedFontByApplyingTraits(_ base: NSFont, bold: Bool, italic: Bool) -> NSFont {
         let key = "\(base.fontName)-\(base.pointSize)-\(bold)-\(italic)" as NSString
         if let c = Self.fontCache.object(forKey: key) { return c }
 

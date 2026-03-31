@@ -83,12 +83,23 @@
             return pv
         }
 
-        @MainActor
-        override func accessibilityPerformPress() -> Bool {
-            guard let targetView = parentView else { return false }
-            targetView.setSelectedRange(info.range)
-            targetView.scrollRangeToVisible(info.range)
-            return true
+        override nonisolated func accessibilityPerformPress() -> Bool {
+            // Ensure UI interactions happen on the main thread synchronously
+            if Thread.isMainThread {
+                guard let targetView = parentView else { return false }
+                targetView.setSelectedRange(info.range)
+                targetView.scrollRangeToVisible(info.range)
+                return true
+            } else {
+                var result = false
+                DispatchQueue.main.sync {
+                    guard let targetView = parentView else { result = false; return }
+                    targetView.setSelectedRange(info.range)
+                    targetView.scrollRangeToVisible(info.range)
+                    result = true
+                }
+                return result
+            }
         }
     }
 
@@ -96,7 +107,6 @@
 
     /// Custom NSTextView subclass that constrains its text container to a readable
     /// width and centers the column horizontally within the enclosing scroll view.
-    @MainActor
     final class ReaderTextView: NSTextView, @unchecked Sendable {
         enum OutlineNavigationTarget: Equatable {
             case heading(Int)
