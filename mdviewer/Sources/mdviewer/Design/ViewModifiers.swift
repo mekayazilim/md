@@ -541,7 +541,7 @@ struct ShimmerModifier: ViewModifier {
                 }
             )
             .onPreferenceChange(MeasuredWidthPreferenceKey.self) { newWidth in
-                if measuredWidth == 0 && newWidth > 0 {
+                if measuredWidth == 0, newWidth > 0 {
                     measuredWidth = newWidth
                 } else if abs(newWidth - measuredWidth) > 2.0 {
                     measuredWidth = newWidth

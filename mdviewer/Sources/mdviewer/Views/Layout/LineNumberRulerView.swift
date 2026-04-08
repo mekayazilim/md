@@ -32,16 +32,6 @@
             fatalError("init(coder:) has not been implemented")
         }
 
-        override func awakeFromNib() {
-            super.awakeFromNib()
-            // Ensure mutation happens on the main thread
-            if Thread.isMainThread {
-                ruleThickness = 40
-            } else {
-                DispatchQueue.main.sync { ruleThickness = 40 }
-            }
-        }
-
         /// Define the required thickness for the ruler
         override var requiredThickness: CGFloat {
             40

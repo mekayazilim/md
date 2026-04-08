@@ -5,7 +5,7 @@
 
 internal import SwiftUI
 #if os(macOS)
-internal import AppKit
+    internal import AppKit
 #endif
 
 @MainActor
@@ -20,8 +20,8 @@ struct TitlebarOverlay: View {
     /// Whether the document content is currently being scrolled. When true, we avoid live backdrop sampling.
     var isScrolling: Bool = false
 
-    // Dynamic titlebar height measured from the hosting NSWindow so the overlay
-    // fully covers the native titlebar / toolbar area across toolbar styles.
+    /// Dynamic titlebar height measured from the hosting NSWindow so the overlay
+    /// fully covers the native titlebar / toolbar area across toolbar styles.
     @State private var titlebarHeight: CGFloat = 44
 
     var body: some View {
@@ -144,19 +144,19 @@ struct TitlebarOverlay: View {
 
     private func updateTitlebarHeight() {
         #if os(macOS)
-        DispatchQueue.main.async {
-            guard let window = NSApplication.shared.keyWindow ?? NSApplication.shared.windows.first else { return }
+            DispatchQueue.main.async {
+                guard let window = NSApplication.shared.keyWindow ?? NSApplication.shared.windows.first else { return }
 
-            var height: CGFloat = 44
-            if let close = window.standardWindowButton(.closeButton) {
-                // close.frame is in the contentView coordinate space; maxY approximates the titlebar area.
-                let closeMaxY = close.frame.maxY
-                // Add a small padding to ensure overlap with any toolbar or accessory view.
-                height = max(44, closeMaxY + 8)
+                var height: CGFloat = 44
+                if let close = window.standardWindowButton(.closeButton) {
+                    // close.frame is in the contentView coordinate space; maxY approximates the titlebar area.
+                    let closeMaxY = close.frame.maxY
+                    // Add a small padding to ensure overlap with any toolbar or accessory view.
+                    height = max(44, closeMaxY + 8)
+                }
+
+                titlebarHeight = height
             }
-
-            titlebarHeight = height
-        }
         #endif
     }
 }

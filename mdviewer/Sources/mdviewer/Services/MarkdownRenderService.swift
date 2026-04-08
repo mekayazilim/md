@@ -17,7 +17,7 @@ internal import SwiftUI
     /// Contains the parsed attributed string with block separators injected,
     /// but before theme-specific colors are applied. This enables sharing
     /// parsed structure across windows and theme changes.
-    final class ParsedMarkdownStructure {
+    final class ParsedMarkdownStructure: @unchecked Sendable {
         let attributedString: NSAttributedString
         let timestamp: Date
 
@@ -72,6 +72,7 @@ internal import SwiftUI
         private let cache: NSCache<NSString, RenderedMarkdown>
         /// Cache for parsed markdown structure (theme-agnostic, reusable across theme changes)
         private let structureCache: NSCache<NSString, ParsedMarkdownStructure>
+        private var inFlightRenders: [String: Task<RenderedMarkdown, Never>] = [:]
         private var stats = RenderStats()
         private var hasPrewarmed = false
 
@@ -124,14 +125,34 @@ internal import SwiftUI
         /// - Parameter request: The render request containing markdown content and styling options
         /// - Returns: A rendered markdown result with attributed string
         func render(_ request: RenderRequest) async -> RenderedMarkdown {
+            let cacheKeyString = request.cacheKey
+
             // Tier 1: Check themed cache first (includes theme colors)
-            let cacheKey = NSString(string: request.cacheKey)
+            let cacheKey = NSString(string: cacheKeyString)
             if let cached = cache.object(forKey: cacheKey) {
                 stats.cacheHits += 1
-                logger.debug("Themed cache hit for key: \(String(request.cacheKey.prefix(8)), privacy: .public)...")
+                logger.debug("Themed cache hit for key: \(String(cacheKeyString.prefix(8)), privacy: .public)...")
                 return cached
             }
+
+            if let inFlight = inFlightRenders[cacheKeyString] {
+                stats.cacheHits += 1
+                return await inFlight.value
+            }
+
             stats.cacheMisses += 1
+
+            let renderTask = Task { [self] in
+                await performRender(request)
+            }
+            inFlightRenders[cacheKeyString] = renderTask
+            let rendered = await renderTask.value
+            inFlightRenders.removeValue(forKey: cacheKeyString)
+            return rendered
+        }
+
+        private func performRender(_ request: RenderRequest) async -> RenderedMarkdown {
+            let cacheKey = NSString(string: request.cacheKey)
 
             // Begin performance tracking
             let signpostID = OSSignpostID(log: signpostLog)
@@ -147,13 +168,13 @@ internal import SwiftUI
 
             // Tier 2: Try to reuse parsed structure from theme-agnostic cache
             let structureKey = NSString(string: request.structureCacheKey)
-            let mutable: NSMutableAttributedString
+            let rendered: RenderedMarkdown
 
             if let cachedStructure = structureCache.object(forKey: structureKey) {
                 // Reuse cached structure and apply theme colors
                 os_signpost(.begin, log: signpostLog, name: "ApplyThemeToStructure", signpostID: signpostID)
-                mutable = NSMutableAttributedString(attributedString: cachedStructure.attributedString)
-                await applyTypographyAndStyling(to: mutable, request: request)
+                let mutable = NSMutableAttributedString(attributedString: cachedStructure.attributedString)
+                rendered = await applyTypographyAndStyling(to: mutable, request: request)
                 os_signpost(.end, log: signpostLog, name: "ApplyThemeToStructure", signpostID: signpostID)
                 logger.debug("Structure cache hit, applying theme colors only")
             } else {
@@ -165,8 +186,8 @@ internal import SwiftUI
                     forKey: structureKey,
                     cost: structureToCache.length * MemoryLayout<unichar>.size
                 )
-                mutable = NSMutableAttributedString(attributedString: structureToCache)
-                await applyTypographyAndStyling(to: mutable, request: request)
+                let mutable = NSMutableAttributedString(attributedString: structureToCache)
+                rendered = await applyTypographyAndStyling(to: mutable, request: request)
             }
 
             // End performance tracking
@@ -175,8 +196,7 @@ internal import SwiftUI
             stats.lastRenderDurationMs = elapsedMs
 
             // Create and cache themed result
-            let rendered = RenderedMarkdown(attributedString: mutable)
-            let cost = mutable.length * MemoryLayout<unichar>.size
+            let cost = rendered.attributedString.length * MemoryLayout<unichar>.size
             cache.setObject(rendered, forKey: cacheKey, cost: cost)
 
             logger
@@ -198,7 +218,7 @@ internal import SwiftUI
         ///
         /// This primes parser, layout, typography, and syntax highlighting code paths so
         /// the first real document render does less cold-start work on the critical path.
-        func prewarm() {
+        func prewarm() async {
             guard !hasPrewarmed else { return }
             hasPrewarmed = true
 
@@ -223,8 +243,7 @@ internal import SwiftUI
 
             let structure = executeStructureOnlyPipeline(request: warmupRequest)
             let mutable = NSMutableAttributedString(attributedString: structure)
-            // Perform warmup synchronously to avoid sending mutable attributed strings
-            applyTypographyAndStyling(to: mutable, request: warmupRequest)
+            _ = await applyTypographyAndStyling(to: mutable, request: warmupRequest)
             logger.debug("MarkdownRenderService prewarm completed")
         }
 
@@ -246,25 +265,30 @@ internal import SwiftUI
 
         /// Applies typography and styling to a pre-parsed attributed string.
         /// Used when reusing cached structure for theme changes.
-        private func applyTypographyAndStyling(to mutable: NSMutableAttributedString, request: RenderRequest) {
+        private func applyTypographyAndStyling(
+            to mutable: NSMutableAttributedString,
+            request: RenderRequest
+        ) async -> RenderedMarkdown {
             let pipelineSignpostID = OSSignpostID(log: signpostLog)
 
             os_signpost(.begin, log: signpostLog, name: "ApplyTypography", signpostID: pipelineSignpostID)
-            if Thread.isMainThread {
-                typographyApplier.applyTypography(to: mutable, request: request)
-            } else {
-                DispatchQueue.main.sync { typographyApplier.applyTypography(to: mutable, request: request) }
-            }
+            typographyApplier.applyTypography(to: mutable, request: request)
             os_signpost(.end, log: signpostLog, name: "ApplyTypography", signpostID: pipelineSignpostID)
 
             os_signpost(.begin, log: signpostLog, name: "ApplyCodeStyling", signpostID: pipelineSignpostID)
             applyCodeStyling(mutable, request: request)
             os_signpost(.end, log: signpostLog, name: "ApplyCodeStyling", signpostID: pipelineSignpostID)
 
-            // Mermaid pass runs last
+            let styledMarkdown = RenderedMarkdown(
+                attributedString: NSAttributedString(attributedString: mutable)
+            )
+
+            // Mermaid pass runs last on MainActor using an immutable, sendable wrapper.
             os_signpost(.begin, log: signpostLog, name: "RenderMermaid", signpostID: pipelineSignpostID)
-            mermaidRenderer.renderDiagrams(in: mutable, request: request)
+            let rendered = await mermaidRenderer.renderDiagrams(in: styledMarkdown, request: request)
             os_signpost(.end, log: signpostLog, name: "RenderMermaid", signpostID: pipelineSignpostID)
+
+            return rendered
         }
 
         /// Executes only the parsing and block separator injection phases.
@@ -299,6 +323,10 @@ internal import SwiftUI
         ///
         /// Clears both caches and resets statistics.
         func resetForTesting() {
+            for task in inFlightRenders.values {
+                task.cancel()
+            }
+            inFlightRenders.removeAll()
             cache.removeAllObjects()
             structureCache.removeAllObjects()
             stats = RenderStats()

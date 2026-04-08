@@ -418,29 +418,37 @@ private struct ReaderContentView: View {
                 contentView(geometry: geometry)
                     .matchedGeometryEffect(id: "contentContainer", in: animationNamespace)
             }
-            // Compute desired readable width once per layout pass and update cached value only when it changes beyond threshold.
+            // Compute desired readable width once per layout pass and update the
+            // cached value only when it changes beyond the invalidation threshold.
             .onAppear {
-                let computed = max(0, min(preferences.readerColumnWidth.points, geometry.size.width - (preferences.readerContentPadding.points * 2)))
-                cachedReadableWidth = computed
+                cachedReadableWidth = computedReadableWidth(for: geometry.size.width)
             }
-            .onChange(of: geometry.size.width) { newWidth in
-                let computed = max(0, min(preferences.readerColumnWidth.points, newWidth - (preferences.readerContentPadding.points * 2)))
-                if abs(computed - cachedReadableWidth) > readableWidthUpdateThreshold {
-                    cachedReadableWidth = computed
-                }
+            .onChange(of: geometry.size.width) { _, newWidth in
+                updateCachedReadableWidth(for: newWidth)
             }
-            .onChange(of: preferences.readerColumnWidth) { _ in
-                let computed = max(0, min(preferences.readerColumnWidth.points, geometry.size.width - (preferences.readerContentPadding.points * 2)))
-                if abs(computed - cachedReadableWidth) > readableWidthUpdateThreshold {
-                    cachedReadableWidth = computed
-                }
+            .onChange(of: preferences.readerColumnWidth) { _, _ in
+                updateCachedReadableWidth(for: geometry.size.width)
             }
-            .onChange(of: preferences.readerContentPadding) { _ in
-                let computed = max(0, min(preferences.readerColumnWidth.points, geometry.size.width - (preferences.readerContentPadding.points * 2)))
-                if abs(computed - cachedReadableWidth) > readableWidthUpdateThreshold {
-                    cachedReadableWidth = computed
-                }
+            .onChange(of: preferences.readerContentPadding) { _, _ in
+                updateCachedReadableWidth(for: geometry.size.width)
             }
+        }
+    }
+
+    private func computedReadableWidth(for availableWidth: CGFloat) -> CGFloat {
+        max(
+            0,
+            min(
+                preferences.readerColumnWidth.points,
+                availableWidth - (preferences.readerContentPadding.points * 2)
+            )
+        )
+    }
+
+    private func updateCachedReadableWidth(for availableWidth: CGFloat) {
+        let computed = computedReadableWidth(for: availableWidth)
+        if abs(computed - cachedReadableWidth) > readableWidthUpdateThreshold {
+            cachedReadableWidth = computed
         }
     }
 
@@ -966,13 +974,10 @@ private struct EmptyFolderState: View {
 #Preview("Content View - With Content") {
     ContentView(document: .constant(MarkdownDocument(text: """
         # Hello World
-
         This is a **markdown** document.
-
         - Item 1
         - Item 2
         - Item 3
-
         ```swift
         let greeting = "Hello"
         debugLog(greeting)

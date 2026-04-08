@@ -6,7 +6,7 @@
 internal import SwiftUI
 
 #if os(macOS)
-internal import AppKit
+    internal import AppKit
 #endif
 
 extension View {
@@ -15,20 +15,20 @@ extension View {
     /// when the original helper modifier is missing.
     func configureNativeWindow() -> some View {
         #if os(macOS)
-        return self.onAppear {
-            DispatchQueue.main.async {
-                guard let window = NSApplication.shared.windows.first else { return }
-                let className = window.className
-                guard className != "NSOpenPanel" && className != "NSSavePanel" else { return }
-                window.tabbingMode = .preferred
-                if !window.styleMask.contains(.fullSizeContentView) {
-                    window.styleMask.insert(.fullSizeContentView)
+            return onAppear {
+                DispatchQueue.main.async {
+                    guard let window = NSApplication.shared.windows.first else { return }
+                    let className = window.className
+                    guard className != "NSOpenPanel", className != "NSSavePanel" else { return }
+                    window.tabbingMode = .preferred
+                    if !window.styleMask.contains(.fullSizeContentView) {
+                        window.styleMask.insert(.fullSizeContentView)
+                    }
+                    window.isMovableByWindowBackground = true
                 }
-                window.isMovableByWindowBackground = true
             }
-        }
         #else
-        return self
+            return self
         #endif
     }
 }

@@ -19,20 +19,44 @@
             }
         }
 
+        private final class TabStopCache: @unchecked Sendable {
+            private let cache = NSCache<NSString, TabStopCacheEntry>()
+            private let lock = NSLock()
+
+            init() {
+                cache.countLimit = 24
+            }
+
+            func stops(
+                forKey key: NSString,
+                create: () -> [NSTextTab]
+            ) -> [NSTextTab] {
+                lock.lock()
+                if let cached = cache.object(forKey: key)?.stops {
+                    lock.unlock()
+                    return cached
+                }
+                lock.unlock()
+
+                let created = create()
+
+                lock.lock()
+                defer { lock.unlock() }
+                if let cached = cache.object(forKey: key)?.stops {
+                    return cached
+                }
+                cache.setObject(TabStopCacheEntry(stops: created), forKey: key)
+                return created
+            }
+        }
+
         struct RowInsets: Hashable {
             let top: CGFloat
             let bottom: CGFloat
         }
 
         static let maximumTabStops = 8
-        // Cache of computed tab stops. NSTextTab instances are AppKit types and
-        // must be created/accessed on the main thread; ensure callers that are
-        // off-main access the cache on the main thread below.
-        @MainActor private static let tabStopCache: NSCache<NSString, TabStopCacheEntry> = {
-            let cache = NSCache<NSString, TabStopCacheEntry>()
-            cache.countLimit = 24
-            return cache
-        }()
+        private static let tabStopCache = TabStopCache()
 
         static var contentInset: CGFloat {
             DesignTokens.Component.Table.contentInset
@@ -67,39 +91,19 @@
             return max(minimumColumnWidth, usableWidth / CGFloat(resolvedColumnCount))
         }
 
-        @MainActor static func tabStops(readableWidth: CGFloat, columnCount: Int) -> [NSTextTab] {
+        static func tabStops(readableWidth: CGFloat, columnCount: Int) -> [NSTextTab] {
             let resolvedColumnCount = max(1, min(maximumTabStops, columnCount))
             let cacheKey = tabStopCacheKey(readableWidth: readableWidth, columnCount: resolvedColumnCount)
 
-            // Fast-path on main thread to avoid dispatch overhead for UI callers.
-            if Thread.isMainThread {
-                if let cachedStops = tabStopCache.object(forKey: cacheKey) { return cachedStops.stops }
+            return tabStopCache.stops(forKey: cacheKey) {
                 let width = columnWidth(readableWidth: readableWidth, columnCount: resolvedColumnCount)
-                let stops = (0 ..< max(0, resolvedColumnCount - 1)).map { index in
+                return (0 ..< max(0, resolvedColumnCount - 1)).map { index in
                     NSTextTab(
                         textAlignment: .left,
                         location: contentInset + (width * CGFloat(index + 1)),
                         options: [:]
                     )
                 }
-                tabStopCache.setObject(TabStopCacheEntry(stops: stops), forKey: cacheKey)
-                return stops
-            }
-
-            // Ensure creation and cache access happen on the main thread when
-            // callers are off-main – NSTextTab is an AppKit type.
-            return DispatchQueue.main.sync {
-                if let cachedStops = tabStopCache.object(forKey: cacheKey) { return cachedStops.stops }
-                let width = columnWidth(readableWidth: readableWidth, columnCount: resolvedColumnCount)
-                let stops = (0 ..< max(0, resolvedColumnCount - 1)).map { index in
-                    NSTextTab(
-                        textAlignment: .left,
-                        location: contentInset + (width * CGFloat(index + 1)),
-                        options: [:]
-                    )
-                }
-                tabStopCache.setObject(TabStopCacheEntry(stops: stops), forKey: cacheKey)
-                return stops
             }
         }
 

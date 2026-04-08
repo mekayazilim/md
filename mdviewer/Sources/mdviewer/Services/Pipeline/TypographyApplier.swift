@@ -12,6 +12,41 @@ internal import Foundation
 
 /// Applies professional typography styling including fonts, colors, and spacing.
 struct TypographyApplier: TypographyApplying {
+    private struct FontMutation {
+        let range: NSRange
+        let baseName: String
+        let baseSize: Double
+        let isBold: Bool
+        let isItalic: Bool
+    }
+
+    private final class FontCache: @unchecked Sendable {
+        private let cache = NSCache<NSString, NSFont>()
+        private let lock = NSLock()
+
+        func font(
+            forKey key: NSString,
+            create: () -> NSFont
+        ) -> NSFont {
+            lock.lock()
+            if let cached = cache.object(forKey: key) {
+                lock.unlock()
+                return cached
+            }
+            lock.unlock()
+
+            let created = create()
+
+            lock.lock()
+            defer { lock.unlock() }
+            if let cached = cache.object(forKey: key) {
+                return cached
+            }
+            cache.setObject(created, forKey: key)
+            return created
+        }
+    }
+
     // MARK: - Typography Application
 
     func applyTypography(to text: NSMutableAttributedString, request: RenderRequest) {
@@ -197,8 +232,9 @@ struct TypographyApplier: TypographyApplying {
 
         text.addAttribute(.kern, value: totalBaseKern, range: fullRange)
 
-        // Collect font mutations (emphasis/strong) to apply them on the main actor after scanning.
-        var fontMutations: [(range: NSRange, baseName: String, baseSize: Double, bold: Bool, italic: Bool)] = []
+        // Collect font mutations (emphasis/strong) and apply them after scanning so
+        // the attribute walk stays single-pass.
+        var fontMutations: [FontMutation] = []
 
         text
             .enumerateAttribute(
@@ -310,13 +346,11 @@ struct TypographyApplier: TypographyApplying {
             applyFootnoteReferenceStyle(to: text, range: range, request: request)
         }
 
-        // Apply deferred font mutations on the main thread
+        // Apply deferred font mutations
         for mut in fontMutations {
-            DispatchQueue.main.sync {
-                let baseFont = NSFont(name: mut.baseName, size: CGFloat(mut.baseSize)) ?? NSFont.systemFont(ofSize: CGFloat(mut.baseSize))
-                let newFont = cachedFontByApplyingTraits(baseFont, bold: mut.3, italic: mut.4)
-                text.addAttribute(.font, value: newFont, range: mut.range)
-            }
+            let baseFont = NSFont(name: mut.baseName, size: CGFloat(mut.baseSize)) ?? NSFont.systemFont(ofSize: CGFloat(mut.baseSize))
+            let newFont = cachedFontByApplyingTraits(baseFont, bold: mut.isBold, italic: mut.isItalic)
+            text.addAttribute(.font, value: newFont, range: mut.range)
         }
     }
 
@@ -567,11 +601,8 @@ struct TypographyApplier: TypographyApplying {
             paragraphSpacingBefore: cellSpacing,
             alignment: request.typographyPreferences.justification.nsAlignment
         )
-        // TableLayoutMetrics.tabStops is MainActor-isolated; call synchronously on main thread
-        var tabStops: [NSTextTab] = []
-        DispatchQueue.main.sync {
-            tabStops = TableLayoutMetrics.tabStops(readableWidth: request.readableWidth, columnCount: columnCount)
-        }
+        // Compute tab stops
+        let tabStops = TableLayoutMetrics.tabStops(readableWidth: request.readableWidth, columnCount: columnCount)
         style.tabStops = tabStops
         style.lineBreakMode = .byTruncatingTail
         style.headIndent = TableLayoutMetrics.contentInset
@@ -709,7 +740,7 @@ struct TypographyApplier: TypographyApplying {
         intent: InlinePresentationIntent,
         palette: NativeThemePalette,
         request: RenderRequest,
-        fontMutations: inout [(range: NSRange, baseName: String, baseSize: Double, bold: Bool, italic: Bool)]
+        fontMutations: inout [FontMutation]
     ) {
         var font = text.attribute(.font, at: range.location, effectiveRange: nil) as? NSFont
         if intent.contains(.code) {
@@ -726,8 +757,17 @@ struct TypographyApplier: TypographyApplying {
         }
         if intent.contains(.stronglyEmphasized) || intent.contains(.emphasized) {
             if let f = font {
-                // Defer font trait application to the main actor to avoid crossing actor boundaries
-                fontMutations.append((range: range, baseName: f.fontName, baseSize: Double(f.pointSize), intent.contains(.stronglyEmphasized), intent.contains(.emphasized)))
+                // Defer trait application until after the inline scan so we only
+                // derive the final font once per range.
+                fontMutations.append(
+                    FontMutation(
+                        range: range,
+                        baseName: f.fontName,
+                        baseSize: Double(f.pointSize),
+                        isBold: intent.contains(.stronglyEmphasized),
+                        isItalic: intent.contains(.emphasized)
+                    )
+                )
             }
         }
         if intent.contains(.strikethrough) {
@@ -789,31 +829,15 @@ struct TypographyApplier: TypographyApplying {
         return max(1, tabCount + 1)
     }
 
-    // Use a plain static NSCache and ensure any AppKit interactions (NSFont
-    // creation / caching) happen on the main thread to avoid thread-safety
-    // issues. Access is synchronous to preserve the existing API.
-    @MainActor private static let fontCache = NSCache<NSString, NSFont>()
-    @MainActor private func cachedFontByApplyingTraits(_ base: NSFont, bold: Bool, italic: Bool) -> NSFont {
-        let key = "\(base.fontName)-\(base.pointSize)-\(bold)-\(italic)" as NSString
-        if let c = Self.fontCache.object(forKey: key) { return c }
+    private static let fontCache = FontCache()
 
-        // Ensure NSFont creation and cache mutations run on the main thread.
-        if Thread.isMainThread {
+    private func cachedFontByApplyingTraits(_ base: NSFont, bold: Bool, italic: Bool) -> NSFont {
+        let key = "\(base.fontName)-\(base.pointSize)-\(bold)-\(italic)" as NSString
+        return Self.fontCache.font(forKey: key) {
             var traits = base.fontDescriptor.symbolicTraits
             if bold { traits.insert(.bold) }
             if italic { traits.insert(.italic) }
-            let f = NSFont(descriptor: base.fontDescriptor.withSymbolicTraits(traits), size: base.pointSize) ?? base
-            Self.fontCache.setObject(f, forKey: key)
-            return f
-        } else {
-            return DispatchQueue.main.sync {
-                var traits = base.fontDescriptor.symbolicTraits
-                if bold { traits.insert(.bold) }
-                if italic { traits.insert(.italic) }
-                let f = NSFont(descriptor: base.fontDescriptor.withSymbolicTraits(traits), size: base.pointSize) ?? base
-                Self.fontCache.setObject(f, forKey: key)
-                return f
-            }
+            return NSFont(descriptor: base.fontDescriptor.withSymbolicTraits(traits), size: base.pointSize) ?? base
         }
     }
 

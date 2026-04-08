@@ -19,6 +19,14 @@
         }
     }
 
+    private final class HeadingSnapshot: @unchecked Sendable {
+        let attributedString: NSAttributedString
+
+        init(attributedString: NSAttributedString) {
+            self.attributedString = attributedString
+        }
+    }
+
     // MARK: - Accessibility Elements
 
     /// Represents a heading in the document for semantic VoiceOver navigation.
@@ -38,68 +46,81 @@
 
         override nonisolated func accessibilityFrame() -> NSRect {
             let headingRange = info.range
+            let parentSnapshot = parentView
 
-            // Fast-path when already on the main thread
             if Thread.isMainThread {
-                guard let targetView = parentView,
-                      let lm = targetView.layoutManager,
-                      let tc = targetView.textContainer else { return .zero }
-                let glyphRange = lm.glyphRange(forCharacterRange: headingRange, actualCharacterRange: nil)
-                let rect = lm.boundingRect(forGlyphRange: glyphRange, in: tc)
-                let viewRect = NSRect(
-                    x: rect.origin.x + targetView.textContainerInset.width,
-                    y: rect.origin.y + targetView.textContainerInset.height,
-                    width: rect.width,
-                    height: rect.height
-                )
-                return targetView.window?.convertToScreen(targetView.convert(viewRect, to: nil)) ?? .zero
+                return MainActor.assumeIsolated {
+                    Self.accessibilityFrame(for: parentSnapshot, range: headingRange)
+                }
             }
 
-            // If called off the main thread, synchronously hop to the main queue
-            var frame = NSRect.zero
-            DispatchQueue.main.sync {
-                guard let targetView = parentView,
-                      let lm = targetView.layoutManager,
-                      let tc = targetView.textContainer else { frame = .zero; return }
-                let glyphRange = lm.glyphRange(forCharacterRange: headingRange, actualCharacterRange: nil)
-                let rect = lm.boundingRect(forGlyphRange: glyphRange, in: tc)
-                let viewRect = NSRect(
-                    x: rect.origin.x + targetView.textContainerInset.width,
-                    y: rect.origin.y + targetView.textContainerInset.height,
-                    width: rect.width,
-                    height: rect.height
-                )
-                frame = targetView.window?.convertToScreen(targetView.convert(viewRect, to: nil)) ?? .zero
+            return DispatchQueue.main.sync {
+                MainActor.assumeIsolated {
+                    Self.accessibilityFrame(for: parentSnapshot, range: headingRange)
+                }
             }
-            return frame
         }
 
         override nonisolated func accessibilityParent() -> Any? {
+            let parentSnapshot = parentView
+
             if Thread.isMainThread {
-                return parentView
+                return parentSnapshot
             }
-            var pv: ReaderTextView?
-            DispatchQueue.main.sync { pv = parentView }
-            return pv
+
+            return DispatchQueue.main.sync { parentSnapshot }
         }
 
         override nonisolated func accessibilityPerformPress() -> Bool {
-            // Ensure UI interactions happen on the main thread synchronously
+            let headingRange = info.range
+            let parentSnapshot = parentView
+
             if Thread.isMainThread {
-                guard let targetView = parentView else { return false }
-                targetView.setSelectedRange(info.range)
-                targetView.scrollRangeToVisible(info.range)
-                return true
-            } else {
-                var result = false
-                DispatchQueue.main.sync {
-                    guard let targetView = parentView else { result = false; return }
-                    targetView.setSelectedRange(info.range)
-                    targetView.scrollRangeToVisible(info.range)
-                    result = true
+                return MainActor.assumeIsolated {
+                    Self.performPress(on: parentSnapshot, range: headingRange)
                 }
-                return result
             }
+
+            return DispatchQueue.main.sync {
+                MainActor.assumeIsolated {
+                    Self.performPress(on: parentSnapshot, range: headingRange)
+                }
+            }
+        }
+
+        @MainActor
+        private static func accessibilityFrame(
+            for targetView: ReaderTextView?,
+            range: NSRange
+        ) -> NSRect {
+            guard
+                let targetView,
+                let lm = targetView.layoutManager,
+                let tc = targetView.textContainer
+            else {
+                return .zero
+            }
+
+            let glyphRange = lm.glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+            let rect = lm.boundingRect(forGlyphRange: glyphRange, in: tc)
+            let viewRect = NSRect(
+                x: rect.origin.x + targetView.textContainerInset.width,
+                y: rect.origin.y + targetView.textContainerInset.height,
+                width: rect.width,
+                height: rect.height
+            )
+            return targetView.window?.convertToScreen(targetView.convert(viewRect, to: nil)) ?? .zero
+        }
+
+        @MainActor
+        private static func performPress(
+            on targetView: ReaderTextView?,
+            range: NSRange
+        ) -> Bool {
+            guard let targetView else { return false }
+            targetView.setSelectedRange(range)
+            targetView.scrollRangeToVisible(range)
+            return true
         }
     }
 
@@ -194,17 +215,19 @@
                 return
             }
 
-            // Snapshot the immutable attributed string for background scanning.
-            nonisolated(unsafe) let snapshot = NSAttributedString(attributedString: storage)
+            let snapshot = HeadingSnapshot(
+                attributedString: NSAttributedString(attributedString: storage)
+            )
             let headingKey = MarkdownRenderAttribute.headingLevel
 
             Task.detached(priority: .utility) { [weak self] in
                 var newHeadings: [HeadingInfo] = []
-                let fullRange = NSRange(location: 0, length: snapshot.length)
+                let attributedString = snapshot.attributedString
+                let fullRange = NSRange(location: 0, length: attributedString.length)
 
-                snapshot.enumerateAttribute(headingKey, in: fullRange, options: []) { value, range, _ in
+                attributedString.enumerateAttribute(headingKey, in: fullRange, options: []) { value, range, _ in
                     guard let level = value as? Int else { return }
-                    let text = snapshot.attributedSubstring(from: range).string
+                    let text = attributedString.attributedSubstring(from: range).string
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                     newHeadings.append(HeadingInfo(range: range, level: level, text: text))
                 }
