@@ -32,13 +32,6 @@
             fatalError("init(coder:) has not been implemented")
         }
 
-        override func awakeFromNib() {
-            super.awakeFromNib()
-            MainActor.assumeIsolated {
-                self.ruleThickness = 40
-            }
-        }
-
         /// Define the required thickness for the ruler
         override var requiredThickness: CGFloat {
             40

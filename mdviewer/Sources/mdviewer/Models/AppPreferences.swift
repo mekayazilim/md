@@ -306,8 +306,23 @@ final class AppPreferences {
 // MARK: - Environment Key
 
 private struct PreferencesKey: EnvironmentKey {
-    /// Access the shared instance in a way compatible with EnvironmentKey
-    /// The MainActor isolation is handled internally by AppPreferences
+    /// Access the shared instance in a way compatible with EnvironmentKey.
+    ///
+    /// NOTE:
+    /// This currently uses an optimistic, synchronous access pattern: we return the
+    /// shared instance directly when on the main thread, and fall back to
+    /// `MainActor.assumeIsolated` for synchronous access from other threads.
+    ///
+    /// `MainActor.assumeIsolated` bypasses actor isolation and should be used only when
+    /// the shared instance is known to be initialized on the MainActor before any
+    /// background access. AppDelegate now ensures early instantiation of the singleton.
+    ///
+    /// TODO: Replace this unchecked access with a safer design:
+    /// - Initialize `AppPreferences.shared` on the MainActor synchronously at startup
+    ///   and document that it must occur before any off-main threads access
+    ///   `EnvironmentValues.preferences`.
+    /// - Or provide a nonisolated, thread-safe wrapper exposing the minimal data needed
+    ///   by background threads so actor isolation is not bypassed.
     static var defaultValue: AppPreferences {
         MainActor.assumeIsolated { AppPreferences.shared }
     }
