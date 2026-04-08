@@ -86,7 +86,7 @@ struct FontFamilyPicker: View {
 
     private func fontButton(for family: ReaderFontFamily) -> some View {
         Button {
-            withAnimation(.easeInOut(duration: DesignTokens.Animation.fast)) {
+            withAnimation(DesignTokens.AnimationPreset.fast) {
                 selection = family
             }
         } label: {

@@ -95,13 +95,14 @@ extension View {
 
     /// Applies a bouncy animation for playful interactions (macOS 15+)
     func bouncyAnimation<Value: Equatable>(_ value: Value) -> some View {
-        if #available(macOS 15.0, iOS 17.0, *) {
-            return AnyView(animation(.bouncy, value: value))
-        } else {
-            return AnyView(
-                animation(DesignTokens.AnimationPreset.spring(response: 0.35, damping: 0.7), value: value)
-            )
-        }
+        let anim: Animation = {
+            if #available(macOS 15.0, iOS 17.0, *) {
+                return .bouncy
+            } else {
+                return DesignTokens.AnimationPreset.spring(response: 0.35, damping: 0.7)
+            }
+        }()
+        return animation(anim, value: value)
     }
 }
 
@@ -143,10 +144,8 @@ extension View {
         _ anim: Animation,
         value: Value
     ) -> some View {
-        if condition {
-            return AnyView(animation(anim, value: value))
-        }
-        return AnyView(self)
+        let optionalAnim: Animation? = condition ? anim : nil
+        return animation(optionalAnim, value: value)
     }
 
     /// Applies different animations for appear and disappear
@@ -157,6 +156,6 @@ extension View {
         let anim: Animation = isAppearing
             ? DesignTokens.AnimationPreset.forDuration(DesignTokens.Animation.normal)
             : DesignTokens.AnimationPreset.fast
-        return AnyView(animation(anim, value: value))
+        return animation(anim, value: value)
     }
 }

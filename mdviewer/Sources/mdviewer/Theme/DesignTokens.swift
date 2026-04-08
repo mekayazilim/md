@@ -93,6 +93,16 @@ enum DesignTokens {
         static let veryHigh: Double = 0.5
     }
 
+    // MARK: - Effects
+
+    /// Tokens for visual effects and compositing.
+    enum Effects {
+        /// Background blur radius for large decorative elements (macOS 15+).
+        static let backgroundBlurRadius: CGFloat = 40
+        /// Fallback blur radius for older platforms or low-powered GPUs.
+        static let fallbackBackgroundBlurRadius: CGFloat = 28
+    }
+
     // MARK: - Shadow (Legacy)
 
     /// Subtle depth tokens for non-glass elements.
@@ -218,13 +228,13 @@ enum DesignTokens {
     /// Semantic color values for common UI states
     enum SemanticColors {
         /// Success/positive state color
-        static let success = Color(red: 0.2, green: 0.7, blue: 0.3)
+        static let success = Color(nsColor: NativeThemePalette.p3Color(r: 0.2, g: 0.7, b: 0.3))
         /// Warning/caution state color
-        static let warning = Color(red: 0.9, green: 0.6, blue: 0.1)
+        static let warning = Color(nsColor: NativeThemePalette.p3Color(r: 0.9, g: 0.6, b: 0.1))
         /// Error/danger state color
-        static let error = Color(red: 0.9, green: 0.25, blue: 0.2)
+        static let error = Color(nsColor: NativeThemePalette.p3Color(r: 0.9, g: 0.25, b: 0.2))
         /// Informational state color
-        static let info = Color(red: 0.1, green: 0.6, blue: 0.9)
+        static let info = Color(nsColor: NativeThemePalette.p3Color(r: 0.1, g: 0.6, b: 0.9))
     }
 
     // MARK: - Component Tokens
@@ -473,7 +483,7 @@ extension View {
         _ value: Value,
         duration: TimeInterval = DesignTokens.Animation.normal
     ) -> some View {
-        animation(.easeInOut(duration: duration), value: value)
+        animation(DesignTokens.AnimationPreset.forDuration(duration), value: value)
     }
 
     /// Applies a smooth spring animation for interactive elements.
@@ -482,7 +492,7 @@ extension View {
         response: TimeInterval = 0.28,
         damping: CGFloat = 0.82
     ) -> some View {
-        animation(.spring(response: response, dampingFraction: damping), value: value)
+        animation(DesignTokens.AnimationPreset.spring(response: response, damping: damping), value: value)
     }
 
     /// Applies a modern smooth animation.
@@ -490,7 +500,7 @@ extension View {
         _ value: Value,
         duration: TimeInterval = DesignTokens.Animation.normal
     ) -> some View {
-        animation(.smooth(duration: duration), value: value)
+        animation(DesignTokens.AnimationPreset.forDuration(duration), value: value)
     }
 
     /// Applies a concentric corner radius based on a parent's radius and padding.

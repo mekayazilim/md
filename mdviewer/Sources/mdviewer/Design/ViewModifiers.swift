@@ -293,7 +293,7 @@ extension View {
     /// Smoothly animates visibility with fade and size change
     func smoothVisibility(
         _ isVisible: Bool,
-        animation: Animation = .easeInOut(duration: DesignTokens.Animation.normal)
+        animation: Animation = DesignTokens.AnimationPreset.forDuration(DesignTokens.Animation.normal)
     ) -> some View {
         modifier(VisibilityModifier(isVisible: isVisible, animation: animation))
     }
@@ -531,18 +531,40 @@ extension View {
 /// Applies shimmer loading effect
 struct ShimmerModifier: ViewModifier {
     @State private var phase: CGFloat = 0
+    @State private var measuredWidth: CGFloat = 0
 
     func body(content: Content) -> some View {
         content
+            .background(
+                GeometryReader { proxy in
+                    Color.clear.preference(key: MeasuredWidthPreferenceKey.self, value: proxy.size.width)
+                }
+            )
+            .onPreferenceChange(MeasuredWidthPreferenceKey.self) { newWidth in
+                if measuredWidth == 0, newWidth > 0 {
+                    measuredWidth = newWidth
+                } else if abs(newWidth - measuredWidth) > 2.0 {
+                    measuredWidth = newWidth
+                }
+            }
             .overlay(
-                GeometryReader { geometry in
-                    LinearGradient(
-                        colors: [.clear, Color.white.opacity(0.5), .clear],
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                    .frame(width: geometry.size.width * 2)
-                    .offset(x: -geometry.size.width + phase * geometry.size.width * 3)
+                Group {
+                    if measuredWidth > 0 {
+                        LinearGradient(
+                            colors: [.clear, Color.white.opacity(0.5), .clear],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                        .frame(width: measuredWidth * 2)
+                        .offset(x: -measuredWidth + phase * measuredWidth * 3)
+                    } else {
+                        LinearGradient(
+                            colors: [.clear, Color.white.opacity(0.5), .clear],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                        .hidden()
+                    }
                 }
             )
             .mask(content)
@@ -558,6 +580,13 @@ extension View {
     /// Applies shimmer loading effect
     func shimmer() -> some View {
         modifier(ShimmerModifier())
+    }
+}
+
+private struct MeasuredWidthPreferenceKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }
 
@@ -580,7 +609,7 @@ struct TooltipModifier: ViewModifier {
                         .foregroundColor(.primary)
                         .clipShape(RoundedRectangle(cornerRadius: DesignTokens.CornerRadius.small))
                         .transition(.opacity)
-                        .animation(.easeInOut(duration: 0.15), value: isHovered)
+                        .animation(DesignTokens.AnimationPreset.fast, value: isHovered)
                         .offset(y: -DesignTokens.Spacing.relaxed)
                 }
             }
@@ -768,6 +797,7 @@ struct ScrollDrivenHeaderBlurModifier: ViewModifier {
 @available(macOS 15.0, *)
 struct HeaderBlurContainerModifier: ViewModifier {
     @State private var scrollOffset: CGFloat = 0
+    @State private var lastScrollUpdate: Date?
     let blurStartOffset: CGFloat
     let maxBlur: CGFloat
 
@@ -776,7 +806,20 @@ struct HeaderBlurContainerModifier: ViewModifier {
             .onScrollGeometryChange(for: CGFloat.self) { geometry in
                 geometry.contentOffset.y
             } action: { _, newOffset in
-                scrollOffset = newOffset
+                // Gate small changes to avoid layout thrashing during fast scrolls.
+                let delta = abs(newOffset - scrollOffset)
+                guard delta >= 3.0 else { return }
+
+                let now = Date()
+                if let last = lastScrollUpdate, now.timeIntervalSince(last) < (1.0 / 30.0) {
+                    // Throttle to ~30Hz
+                    return
+                }
+                lastScrollUpdate = now
+
+                // Quantize to 2px steps to reduce update frequency
+                let quantized = (newOffset / 2.0).rounded(.toNearestOrAwayFromZero) * 2.0
+                scrollOffset = quantized
             }
             .background(
                 GeometryReader { _ in
