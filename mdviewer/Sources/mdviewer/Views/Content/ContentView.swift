@@ -50,6 +50,8 @@ struct ContentView: View {
     @State private var parsedMarkdown: ParsedMarkdown?
     @State private var debouncedTheme: AppTheme?
     @State private var themeDebounceTask: Task<Void, Never>?
+    @State private var isScrolling: Bool = false
+    @State private var scrollEndTask: Task<Void, Never>? = nil
     @SceneStorage("windowReaderMode") private var windowReaderModeRaw = ReaderMode.rendered.rawValue
 
     private let logger = Logger(subsystem: "mdviewer", category: "ui")
@@ -65,9 +67,10 @@ struct ContentView: View {
         debouncedTheme ?? preferences.theme
     }
 
-    /// Effective parsed document state, ensures we always have a valid result
-    private var currentParsed: ParsedMarkdown {
-        parsedMarkdown ?? FrontmatterParser.parse(document.text)
+    /// Effective parsed document state, ensures we always have a valid result.
+    /// If nil, it means we are in the middle of an initial or updated parse.
+    private var currentParsed: ParsedMarkdown? {
+        parsedMarkdown
     }
 
     // MARK: - Helpers
@@ -110,58 +113,30 @@ struct ContentView: View {
     // MARK: - Body
 
     var body: some View {
-        let parsed = currentParsed
-        contentScaffold(parsed: parsed)
+        mainInterface
+            .task(id: document.text) {
+                parsedMarkdown = await performAsyncParse(document.text)
+            }
+            .focusedSceneValue(\.editorActions, editorActions)
+            .onAppear(perform: handleOnAppear)
+            .alert("Unable to Open Document", isPresented: errorBinding) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(openErrorMessage ?? "An unexpected error occurred while opening the document.")
+            }
     }
 
     @ViewBuilder
-    private func contentScaffold(parsed: ParsedMarkdown) -> some View {
-        ZStack(alignment: .trailing) {
-            Color(nsColor: .windowBackgroundColor)
-                .ignoresSafeArea()
-
-            // Main content with padding matching the sidebar width when visible
-            mainContent(parsed: parsed)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .ignoresSafeArea(.container, edges: .top)
-                .padding(.trailing, showMetadataInspector ? sidebarWidth : 0)
-                // Temporarily disable implicit animations on the layout frame to prevent
-                // continuous wrapping/unwrapping text relayouts while the sidebar slides.
-                .animation(nil, value: showMetadataInspector)
-
-            // Keep the sidebar mounted so showing it does not rebuild the entire
-            // inspector hierarchy on demand, which was still visible as a choppy reveal.
-            InspectorSidebar(
-                frontmatter: parsed.frontmatter,
-                documentText: document.text,
-                isPresented: $showMetadataInspector,
-                sidebarMode: $sidebarMode,
-                currentFileURL: activeFileURL,
-                folderRootFileURL: sidebarRootFileURL,
-                onOpenFile: openFileInCurrentWindow
-            )
-            .frame(width: sidebarWidth)
-            .frame(maxHeight: .infinity, alignment: .top)
-            .frame(width: showMetadataInspector ? sidebarWidth : 0, alignment: .trailing)
-            .clipped()
-            .allowsHitTesting(showMetadataInspector)
-            .accessibilityHidden(!showMetadataInspector)
-            .animation(nil, value: showMetadataInspector)
-        }
-        .preferredColorScheme(preferences.effectiveColorScheme)
-        .onChange(of: document.text) { _, newValue in
-            // Debounce frontmatter parsing during rapid edits to avoid
-            // blocking the main thread every keystroke.
-            parseDebounceTask?.cancel()
-            parseDebounceTask = Task { @MainActor in
-                try? await Task.sleep(for: .milliseconds(150))
-                guard !Task.isCancelled else { return }
-                parsedMarkdown = FrontmatterParser.parse(newValue)
+    private var mainInterface: some View {
+        Group {
+            if let parsed = currentParsed {
+                scaffoldContainer(parsed: parsed)
+            } else {
+                // Fallback for initial parse
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.ultraThinMaterial)
             }
-        }
-        .task(id: fileURL) {
-            // Re-parse when switching files to ensure metadata is fresh
-            parsedMarkdown = FrontmatterParser.parse(document.text)
         }
         .onChange(of: windowReaderMode) { _, newMode in
             AccessibilityAnnouncement.modeChanged(to: newMode == .rendered)
@@ -188,104 +163,94 @@ struct ContentView: View {
                 debouncedTheme = newTheme
             }
         }
-        .toolbar {
-            // Centered Mode Switcher
-            ToolbarItem(id: "mode", placement: .principal) {
-                HStack(spacing: 16) {
-                    Button { windowReaderMode = .rendered } label: {
-                        Image(systemName: "doc.text.image")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(windowReaderMode == .rendered ? Color.accentColor : .secondary)
-                    }
-                    .buttonStyle(.plain)
-                    .help("Rendered Mode")
+    }
 
-                    Button { windowReaderMode = .raw } label: {
-                        Image(systemName: "doc.plaintext")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(windowReaderMode == .raw ? Color.accentColor : .secondary)
-                    }
-                    .buttonStyle(.plain)
-                    .help("Raw Mode")
-                }
-                .padding(.horizontal, 12)
-                .padding(.vertical, 6)
-                .fixedSize()
+    @ViewBuilder
+    private func scaffoldContainer(parsed: ParsedMarkdown) -> some View {
+        contentScaffold(parsed: parsed)
+            .overlay(alignment: .top) {
+                TitlebarOverlay(
+                    readerMode: Binding(
+                        get: { windowReaderMode },
+                        set: { windowReaderMode = $0 }
+                    ),
+                    showMetadataInspector: $showMetadataInspector,
+                    sidebarMode: $sidebarMode,
+                    documentText: document.text,
+                    hasFrontmatter: parsed.frontmatter != nil,
+                    fileURL: activeFileURL,
+                    isScrolling: isScrolling
+                )
             }
+            .preferredColorScheme(preferences.effectiveColorScheme)
+    }
 
-            // Trailing Action Pill - Refined positioning and symmetric icons
-            ToolbarItem(id: "actions", placement: .primaryAction) {
-                HStack(spacing: 14) {
-                    Button {
-                        if canShowSidebar(parsed: parsed) {
-                            if !showMetadataInspector {
-                                if sidebarMode == .folder, activeFileURL == nil, parsed.frontmatter != nil {
-                                    sidebarMode = .metadata
-                                } else if sidebarMode == .metadata, parsed.frontmatter == nil, activeFileURL != nil {
-                                    sidebarMode = .folder
-                                }
-                            }
-                            showMetadataInspector.toggle()
-                        }
-                    } label: {
-                        Image(systemName: "sidebar.right")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 16, height: 16) // Exact square frame for symmetry
-                            .foregroundStyle(showMetadataInspector ? Color.accentColor : .secondary)
-                    }
-                    .buttonStyle(.plain)
-                    .help(sidebarHelpText(parsed: parsed))
-                    .disabled(!canShowSidebar(parsed: parsed))
-                    .opacity(canShowSidebar(parsed: parsed) ? 1.0 : 0.5)
+    private func handleOnAppear() {
+        if windowReaderModeRaw.isEmpty {
+            windowReaderModeRaw = preferences.readerMode.rawValue
+        }
+        if sidebarMode != preferences.sidebarMode {
+            sidebarMode = preferences.sidebarMode
+        }
+        if !document.isEffectivelyEmpty {
+            showStartupWelcome = false
+        }
+        if activeFileURL == nil {
+            activeFileURL = fileURL
+        }
+        if sidebarRootFileURL == nil {
+            sidebarRootFileURL = fileURL
+        }
+        // Initialize debounced theme to match current preference
+        if debouncedTheme == nil {
+            debouncedTheme = preferences.theme
+        }
+        FolderSidebarPreloader.prewarmIfNeeded(fileURL: activeFileURL)
+    }
 
-                    ShareLink(item: document.text) {
-                        Image(systemName: "square.and.arrow.up")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 16, height: 16) // Exact square frame for symmetry
-                            .foregroundStyle(.secondary)
-                    }
-                    .buttonStyle(.plain)
-                }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                // The following padding acts as a margin from the window edge
-                .padding(.trailing, 4)
-                .fixedSize()
-            }
+    @ViewBuilder
+    private func contentScaffold(parsed: ParsedMarkdown) -> some View {
+        let palette = NativeThemePalette.cached(
+            theme: effectiveTheme,
+            scheme: preferences.effectiveColorScheme ?? colorScheme
+        )
+
+        ZStack(alignment: .trailing) {
+            mainContentLayer(parsed: parsed, palette: palette)
+            sidebarLayer(parsed: parsed)
         }
-        .focusedSceneValue(\.editorActions, editorActions)
-        .onAppear {
-            if parsedMarkdown == nil {
-                parsedMarkdown = FrontmatterParser.parse(document.text)
-            }
-            if windowReaderModeRaw.isEmpty {
-                windowReaderModeRaw = preferences.readerMode.rawValue
-            }
-            if sidebarMode != preferences.sidebarMode {
-                sidebarMode = preferences.sidebarMode
-            }
-            if !document.isEffectivelyEmpty {
-                showStartupWelcome = false
-            }
-            if activeFileURL == nil {
-                activeFileURL = fileURL
-            }
-            if sidebarRootFileURL == nil {
-                sidebarRootFileURL = fileURL
-            }
-            // Initialize debounced theme to match current preference
-            if debouncedTheme == nil {
-                debouncedTheme = preferences.theme
-            }
-            FolderSidebarPreloader.prewarmIfNeeded(fileURL: activeFileURL)
+    }
+
+    @ViewBuilder
+    private func mainContentLayer(parsed: ParsedMarkdown, palette: NativeThemePalette) -> some View {
+        ZStack {
+            Color(nsColor: palette.background)
+
+            mainContent(parsed: parsed)
         }
-        .alert("Unable to Open Document", isPresented: errorBinding) {
-            Button("OK", role: .cancel) {}
-        } message: {
-            Text(openErrorMessage ?? "An unexpected error occurred while opening the document.")
-        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.trailing, showMetadataInspector ? sidebarWidth : 0)
+        .animation(nil, value: showMetadataInspector)
+    }
+
+    @ViewBuilder
+    private func sidebarLayer(parsed: ParsedMarkdown) -> some View {
+        InspectorSidebar(
+            frontmatter: parsed.frontmatter,
+            documentText: document.text,
+            isPresented: $showMetadataInspector,
+            sidebarMode: $sidebarMode,
+            currentFileURL: activeFileURL,
+            folderRootFileURL: sidebarRootFileURL,
+            onOpenFile: openFileInCurrentWindow
+        )
+        .frame(width: sidebarWidth)
+        .frame(maxHeight: .infinity, alignment: .top)
+        .frame(width: showMetadataInspector ? sidebarWidth : 0, alignment: .trailing)
+        .clipped()
+        .allowsHitTesting(showMetadataInspector)
+        .accessibilityHidden(!showMetadataInspector)
+        .animation(nil, value: showMetadataInspector)
     }
 
     // MARK: - Toolbar Helpers
@@ -302,6 +267,12 @@ struct ContentView: View {
             return "Hide Sidebar"
         }
         return "Show Sidebar"
+    }
+
+    private func performAsyncParse(_ text: String) async -> ParsedMarkdown {
+        await Task.detached(priority: .userInitiated) {
+            FrontmatterParser.parse(text)
+        }.value
     }
 
     // MARK: - File Opening
@@ -388,7 +359,17 @@ struct ContentView: View {
                     readerMode: Binding(get: { windowReaderMode }, set: { windowReaderMode = $0 }),
                     colorScheme: colorScheme,
                     reduceMotion: reduceMotion,
-                    onScroll: { _, _, _ in },
+                    onScroll: { _, _, _ in
+                        // Mark active scrolling for the titlebar material optimization.
+                        scrollEndTask?.cancel()
+                        isScrolling = true
+                        scrollEndTask = Task { @MainActor in
+                            try? await Task.sleep(for: .seconds(PerformanceConstants.scrollSettleDelay))
+                            guard !Task.isCancelled else { return }
+                            isScrolling = false
+                            scrollEndTask = nil
+                        }
+                    },
                     appTheme: effectiveTheme
                 )
                 .transition(.opacity)
@@ -425,15 +406,49 @@ private struct ReaderContentView: View {
     /// Namespace for matched geometry effects between modes
     @Namespace private var animationNamespace
 
+    // Cached readable width to reduce rebuilds of NativeMarkdownTextView on small layout changes
+    @State private var cachedReadableWidth: CGFloat = 0
+    private let readableWidthUpdateThreshold: CGFloat = 2.0
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 LiquidBackground()
-                    .ignoresSafeArea()
 
                 contentView(geometry: geometry)
                     .matchedGeometryEffect(id: "contentContainer", in: animationNamespace)
             }
+            // Compute desired readable width once per layout pass and update the
+            // cached value only when it changes beyond the invalidation threshold.
+            .onAppear {
+                cachedReadableWidth = computedReadableWidth(for: geometry.size.width)
+            }
+            .onChange(of: geometry.size.width) { _, newWidth in
+                updateCachedReadableWidth(for: newWidth)
+            }
+            .onChange(of: preferences.readerColumnWidth) { _, _ in
+                updateCachedReadableWidth(for: geometry.size.width)
+            }
+            .onChange(of: preferences.readerContentPadding) { _, _ in
+                updateCachedReadableWidth(for: geometry.size.width)
+            }
+        }
+    }
+
+    private func computedReadableWidth(for availableWidth: CGFloat) -> CGFloat {
+        max(
+            0,
+            min(
+                preferences.readerColumnWidth.points,
+                availableWidth - (preferences.readerContentPadding.points * 2)
+            )
+        )
+    }
+
+    private func updateCachedReadableWidth(for availableWidth: CGFloat) {
+        let computed = computedReadableWidth(for: availableWidth)
+        if abs(computed - cachedReadableWidth) > readableWidthUpdateThreshold {
+            cachedReadableWidth = computed
         }
     }
 
@@ -471,10 +486,7 @@ private struct ReaderContentView: View {
             appTheme: appTheme,
             colorScheme: preferences.effectiveColorScheme ?? colorScheme,
             textSpacing: preferences.readerTextSpacing,
-            readableWidth: min(
-                preferences.readerColumnWidth.points,
-                geometry.size.width - (preferences.readerContentPadding.points * 2)
-            ),
+            readableWidth: cachedReadableWidth,
             contentPadding: preferences.readerContentPadding.points,
             showLineNumbers: preferences.showLineNumbers,
             typographyPreferences: preferences.typographyPreferences,
@@ -628,7 +640,7 @@ private struct InspectorSidebar: View {
     @ViewBuilder
     private var metadataContent: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
+            LazyVStack(alignment: .leading, spacing: 0) {
                 if let frontmatter {
                     ForEach(frontmatter.entries, id: \.key) { entry in
                         MetadataRow(entry: entry)
@@ -668,8 +680,10 @@ private struct SidebarPanelBackgroundModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if #available(macOS 26.0, *) {
+            // Use ultra thin material for sidebar panels to avoid expensive backdrop sampling on large areas
+            // Prefer background(.ultraThinMaterial) for large or dynamic regions to maintain smooth scrolling.
             content
-                .glassEffect(.regular, in: .rect)
+                .background(.ultraThinMaterial)
         } else {
             content
                 .background(.ultraThinMaterial)
@@ -960,13 +974,10 @@ private struct EmptyFolderState: View {
 #Preview("Content View - With Content") {
     ContentView(document: .constant(MarkdownDocument(text: """
         # Hello World
-
         This is a **markdown** document.
-
         - Item 1
         - Item 2
         - Item 3
-
         ```swift
         let greeting = "Hello"
         debugLog(greeting)

@@ -12,6 +12,41 @@ internal import Foundation
 
 /// Applies professional typography styling including fonts, colors, and spacing.
 struct TypographyApplier: TypographyApplying {
+    private struct FontMutation {
+        let range: NSRange
+        let baseName: String
+        let baseSize: Double
+        let isBold: Bool
+        let isItalic: Bool
+    }
+
+    private final class FontCache: @unchecked Sendable {
+        private let cache = NSCache<NSString, NSFont>()
+        private let lock = NSLock()
+
+        func font(
+            forKey key: NSString,
+            create: () -> NSFont
+        ) -> NSFont {
+            lock.lock()
+            if let cached = cache.object(forKey: key) {
+                lock.unlock()
+                return cached
+            }
+            lock.unlock()
+
+            let created = create()
+
+            lock.lock()
+            defer { lock.unlock() }
+            if let cached = cache.object(forKey: key) {
+                return cached
+            }
+            cache.setObject(created, forKey: key)
+            return created
+        }
+    }
+
     // MARK: - Typography Application
 
     func applyTypography(to text: NSMutableAttributedString, request: RenderRequest) {
@@ -29,7 +64,8 @@ struct TypographyApplier: TypographyApplying {
             .foregroundColor: palette.textPrimary,
             .paragraphStyle: createBaseParagraphStyle(
                 lineSpacing: request.textSpacing.lineSpacing(for: request.readerFontSize),
-                paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize),
+                paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize) * 1.1,
+                paragraphSpacingBefore: request.textSpacing.paragraphSpacingBefore(for: request.readerFontSize) * 1.1,
                 hyphenationFactor: request.typographyPreferences.hyphenation ? request.textSpacing
                     .hyphenationFactor : 0,
                 alignment: request.typographyPreferences.justification.nsAlignment
@@ -196,6 +232,10 @@ struct TypographyApplier: TypographyApplying {
 
         text.addAttribute(.kern, value: totalBaseKern, range: fullRange)
 
+        // Collect font mutations (emphasis/strong) and apply them after scanning so
+        // the attribute walk stays single-pass.
+        var fontMutations: [FontMutation] = []
+
         text
             .enumerateAttribute(
                 MarkdownRenderAttribute.presentationIntent,
@@ -208,6 +248,14 @@ struct TypographyApplier: TypographyApplying {
                 var isHeading = false
                 var headingLevel = 0
                 var isBlockQuote = false
+
+                // Pre-calculate list depth for consistent indentation
+                let listDepth = intent.components.filter {
+                    if case .unorderedList = $0.kind { return true }
+                    if case .orderedList = $0.kind { return true }
+                    return false
+                }.count
+
                 let hasListItem = intent.components.contains {
                     if case .listItem = $0.kind { return true }
                     return false
@@ -222,14 +270,14 @@ struct TypographyApplier: TypographyApplying {
                         applyHeadingStyle(to: text, range: range, request: request, level: level, palette: palette)
                     case .codeBlock:
                         isCodeBlock = true
-                        applyCodeBlockStyle(to: text, range: range, request: request, palette: palette)
+                        applyCodeBlockStyle(to: text, range: range, request: request, palette: palette, depth: listDepth)
                     case .blockQuote:
                         isBlockQuote = true
                         applyBlockquoteStyle(to: text, range: range, request: request, palette: palette, intent: intent)
                     case .paragraph:
-                        applyParagraphStyle(to: text, range: range, request: request)
+                        applyParagraphStyle(to: text, range: range, request: request, depth: listDepth)
                     case .unorderedList, .orderedList:
-                        applyListParagraphStyle(to: text, range: range, request: request)
+                        applyListParagraphStyle(to: text, range: range, request: request, depth: listDepth)
                     case .tableHeaderRow:
                         applyTableHeaderStyle(
                             to: text,
@@ -278,7 +326,7 @@ struct TypographyApplier: TypographyApplying {
                 let rawValue = (value as? NSNumber)?.uintValue ?? 0
                 guard rawValue != 0 else { return }
                 let intent = InlinePresentationIntent(rawValue: rawValue)
-                applyInlineStyles(to: text, range: range, intent: intent, palette: palette, request: request)
+                applyInlineStyles(to: text, range: range, intent: intent, palette: palette, request: request, fontMutations: &fontMutations)
 
                 if intent.contains(.code) {
                     text.addAttribute(
@@ -296,6 +344,13 @@ struct TypographyApplier: TypographyApplying {
         ) { value, range, _ in
             guard value != nil else { return }
             applyFootnoteReferenceStyle(to: text, range: range, request: request)
+        }
+
+        // Apply deferred font mutations
+        for mut in fontMutations {
+            let baseFont = NSFont(name: mut.baseName, size: CGFloat(mut.baseSize)) ?? NSFont.systemFont(ofSize: CGFloat(mut.baseSize))
+            let newFont = cachedFontByApplyingTraits(baseFont, bold: mut.isBold, italic: mut.isItalic)
+            text.addAttribute(.font, value: newFont, range: mut.range)
         }
     }
 
@@ -325,7 +380,8 @@ struct TypographyApplier: TypographyApplying {
         to text: NSMutableAttributedString,
         range: NSRange,
         request: RenderRequest,
-        palette: NativeThemePalette
+        palette: NativeThemePalette,
+        depth: Int
     ) {
         let codeFont = request.readerFontFamily.nsFont(size: request.codeFontSize, monospaced: true)
         text.addAttributes([
@@ -336,7 +392,13 @@ struct TypographyApplier: TypographyApplying {
         if request.showLineNumbers {
             text.addAttribute(MarkdownRenderAttribute.codeBlock, value: true, range: range)
         }
-        applyCodeBlockParagraphStyle(to: text, range: range, request: request, hasLineNumbers: request.showLineNumbers)
+        applyCodeBlockParagraphStyle(
+            to: text,
+            range: range,
+            request: request,
+            hasLineNumbers: request.showLineNumbers,
+            depth: depth
+        )
     }
 
     private func applyBlockquoteStyle(
@@ -480,27 +542,43 @@ struct TypographyApplier: TypographyApplying {
         text.addAttribute(.paragraphStyle, value: style, range: range)
     }
 
-    private func applyParagraphStyle(to text: NSMutableAttributedString, range: NSRange, request: RenderRequest) {
+    private func applyParagraphStyle(
+        to text: NSMutableAttributedString,
+        range: NSRange,
+        request: RenderRequest,
+        depth: Int
+    ) {
         let style = createBaseParagraphStyle(
             lineSpacing: request.textSpacing.lineSpacing(for: request.readerFontSize),
-            paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize),
+            paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize) * 1.1,
+            paragraphSpacingBefore: request.textSpacing.paragraphSpacingBefore(for: request.readerFontSize) * 1.1,
             hyphenationFactor: request.typographyPreferences.hyphenation ? max(
                 0,
                 request.textSpacing.hyphenationFactor - 0.05
             ) : 0,
             alignment: request.typographyPreferences.justification.nsAlignment
         )
+        let indent = CGFloat(max(0, depth)) * 24
+        style.headIndent = indent
+        style.firstLineHeadIndent = indent
         text.addAttribute(.paragraphStyle, value: style, range: range)
     }
 
-    private func applyListParagraphStyle(to text: NSMutableAttributedString, range: NSRange, request: RenderRequest) {
+    private func applyListParagraphStyle(
+        to text: NSMutableAttributedString,
+        range: NSRange,
+        request: RenderRequest,
+        depth: Int
+    ) {
+        let lineHeight = request.readerFontSize * request.textSpacing.lineHeightMultiplier
         let style = createBaseParagraphStyle(
             lineSpacing: request.textSpacing.lineSpacing(for: request.readerFontSize),
-            paragraphSpacing: request.textSpacing.paragraphSpacing(for: request.readerFontSize) * 0.5,
+            paragraphSpacing: lineHeight * 0.375,
             alignment: request.typographyPreferences.justification.nsAlignment
         )
-        style.headIndent = 24
-        style.firstLineHeadIndent = 0
+        let indent = CGFloat(max(1, depth)) * 24
+        style.headIndent = indent
+        style.firstLineHeadIndent = 0 // List markers use tab to align
         text.addAttribute(.paragraphStyle, value: style, range: range)
     }
 
@@ -523,10 +601,9 @@ struct TypographyApplier: TypographyApplying {
             paragraphSpacingBefore: cellSpacing,
             alignment: request.typographyPreferences.justification.nsAlignment
         )
-        style.tabStops = TableLayoutMetrics.tabStops(
-            readableWidth: request.readableWidth,
-            columnCount: columnCount
-        )
+        // Compute tab stops
+        let tabStops = TableLayoutMetrics.tabStops(readableWidth: request.readableWidth, columnCount: columnCount)
+        style.tabStops = tabStops
         style.lineBreakMode = .byTruncatingTail
         style.headIndent = TableLayoutMetrics.contentInset
         style.firstLineHeadIndent = TableLayoutMetrics.contentInset
@@ -593,12 +670,25 @@ struct TypographyApplier: TypographyApplying {
         level: Int
     ) {
         let headingSize = fontSizeForHeader(level: level, baseSize: request.readerFontSize)
-        let baseSpacing = request.textSpacing.paragraphSpacing(for: headingSize)
-        let mult: CGFloat = level == 1 ? 0.72 : (level == 2 ? 0.62 : (level == 3 ? 0.54 : 0.46))
+        let lineHeight = headingSize * request.textSpacing.lineHeightMultiplier
+
+        // Space before: Switch to more moderate multipliers (1.1x to 0.8x)
+        // H1: 1.1x, H2: 1.0x, H3: 0.9x, H4+: 0.8x
+        let spaceBeforeMultiplier: CGFloat
+        switch level {
+        case 1: spaceBeforeMultiplier = 1.1
+        case 2: spaceBeforeMultiplier = 1.0
+        case 3: spaceBeforeMultiplier = 0.9
+        default: spaceBeforeMultiplier = 0.8
+        }
+
+        // Space after: half of space before (connects heading to content)
+        let spaceAfterMultiplier = 0.5
+
         text.addAttribute(.paragraphStyle, value: createBaseParagraphStyle(
             lineSpacing: request.textSpacing.lineSpacing(for: headingSize),
-            paragraphSpacing: baseSpacing * mult,
-            paragraphSpacingBefore: baseSpacing * mult,
+            paragraphSpacing: lineHeight * spaceAfterMultiplier,
+            paragraphSpacingBefore: lineHeight * spaceBeforeMultiplier,
             alignment: request.typographyPreferences.justification.nsAlignment
         ), range: range)
     }
@@ -613,21 +703,33 @@ struct TypographyApplier: TypographyApplying {
         to text: NSMutableAttributedString,
         range: NSRange,
         request: RenderRequest,
-        hasLineNumbers: Bool
+        hasLineNumbers: Bool,
+        depth: Int
     ) {
         let style = createBaseParagraphStyle(
-            lineSpacing: request.codeFontSize * DesignTokens.TypographySpacing.codeBlockLineMultiplier,
-            paragraphSpacing: 0,
+            lineSpacing: 0, // Zero line spacing for code blocks to preserve ASCII art
+            paragraphSpacing: 0, // NO spacing between lines!
             paragraphSpacingBefore: 0
         )
-        // Enable soft word wrapping for code blocks (matching reference image)
+        // Set fixed line height to ensure ASCII alignment with some breathing room (1.4x)
+        let adjustedLineHeight = request.codeFontSize * 1.4
+        style.minimumLineHeight = adjustedLineHeight
+        style.maximumLineHeight = adjustedLineHeight
+        style.lineHeightMultiple = 1.0
+
+        // Enable soft word wrapping for code blocks
         style.lineBreakMode = .byWordWrapping
+        // Indent code blocks to match list content (depth * 24)
+        let indent = CGFloat(max(0, depth)) * 24
         if hasLineNumbers {
             let gutter = (request.codeFontSize * DesignTokens.TypographySpacing
                 .codeBlockCharWidthMultiplier * DesignTokens.TypographySpacing.codeBlockGutterChars) +
                 (request.codeFontSize * DesignTokens.TypographySpacing.codeBlockGutterPaddingMultiplier)
-            style.headIndent = gutter
-            style.firstLineHeadIndent = gutter
+            style.headIndent = gutter + indent
+            style.firstLineHeadIndent = gutter + indent
+        } else {
+            style.headIndent = indent
+            style.firstLineHeadIndent = indent
         }
         text.addAttribute(.paragraphStyle, value: style, range: range)
     }
@@ -637,7 +739,8 @@ struct TypographyApplier: TypographyApplying {
         range: NSRange,
         intent: InlinePresentationIntent,
         palette: NativeThemePalette,
-        request: RenderRequest
+        request: RenderRequest,
+        fontMutations: inout [FontMutation]
     ) {
         var font = text.attribute(.font, at: range.location, effectiveRange: nil) as? NSFont
         if intent.contains(.code) {
@@ -653,15 +756,19 @@ struct TypographyApplier: TypographyApplying {
             )
         }
         if intent.contains(.stronglyEmphasized) || intent.contains(.emphasized) {
-            if let f = font { text.addAttribute(
-                .font,
-                value: cachedFontByApplyingTraits(
-                    f,
-                    bold: intent.contains(.stronglyEmphasized),
-                    italic: intent.contains(.emphasized)
-                ),
-                range: range
-            ) }
+            if let f = font {
+                // Defer trait application until after the inline scan so we only
+                // derive the final font once per range.
+                fontMutations.append(
+                    FontMutation(
+                        range: range,
+                        baseName: f.fontName,
+                        baseSize: Double(f.pointSize),
+                        isBold: intent.contains(.stronglyEmphasized),
+                        isItalic: intent.contains(.emphasized)
+                    )
+                )
+            }
         }
         if intent.contains(.strikethrough) {
             text.addAttributes(
@@ -722,15 +829,16 @@ struct TypographyApplier: TypographyApplying {
         return max(1, tabCount + 1)
     }
 
-    private nonisolated(unsafe) static let fontCache = NSCache<NSString, NSFont>()
+    private static let fontCache = FontCache()
+
     private func cachedFontByApplyingTraits(_ base: NSFont, bold: Bool, italic: Bool) -> NSFont {
         let key = "\(base.fontName)-\(base.pointSize)-\(bold)-\(italic)" as NSString
-        if let c = Self.fontCache.object(forKey: key) { return c }
-        var traits = base.fontDescriptor.symbolicTraits
-        if bold { traits.insert(.bold) }
-        if italic { traits.insert(.italic) }
-        let f = NSFont(descriptor: base.fontDescriptor.withSymbolicTraits(traits), size: base.pointSize) ?? base
-        Self.fontCache.setObject(f, forKey: key); return f
+        return Self.fontCache.font(forKey: key) {
+            var traits = base.fontDescriptor.symbolicTraits
+            if bold { traits.insert(.bold) }
+            if italic { traits.insert(.italic) }
+            return NSFont(descriptor: base.fontDescriptor.withSymbolicTraits(traits), size: base.pointSize) ?? base
+        }
     }
 
     /// Pre-compiled regex for task list checkbox detection.

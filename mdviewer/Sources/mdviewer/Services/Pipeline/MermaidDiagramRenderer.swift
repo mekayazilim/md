@@ -39,18 +39,26 @@ struct MermaidDiagramRenderer {
     /// - Parameters:
     ///   - text: The attributed string produced by the render pipeline.
     ///   - request: The current render request (used for theme and container width).
-    func renderDiagrams(in text: NSMutableAttributedString, request: RenderRequest) {
+    @MainActor
+    func renderDiagrams(in rendered: RenderedMarkdown, request: RenderRequest) async -> RenderedMarkdown {
+        let text = NSMutableAttributedString(attributedString: rendered.attributedString)
         let theme = diagramTheme(for: request.appTheme, scheme: request.colorScheme)
         let blocks = collectMermaidBlocks(in: text)
-        guard !blocks.isEmpty else { return }
+        guard !blocks.isEmpty else { return rendered }
 
         // Replace back-to-front to preserve valid ranges for earlier blocks.
         for (range, source) in blocks.reversed() {
-            guard let image = render(source: source, theme: theme, containerWidth: request.readableWidth)
+            guard let image = await render(
+                source: source,
+                theme: theme,
+                containerWidth: request.readableWidth
+            )
             else { continue }
             let replacement = attachmentString(for: image, containerWidth: request.readableWidth)
             text.replaceCharacters(in: range, with: replacement)
         }
+
+        return RenderedMarkdown(attributedString: NSAttributedString(attributedString: text))
     }
 
     // MARK: - Block Detection
@@ -93,13 +101,17 @@ struct MermaidDiagramRenderer {
     ///
     /// Returns `nil` and logs a warning if BeautifulMermaid cannot parse or
     /// render the source, allowing the caller to leave the raw code block visible.
+    @MainActor
     private func render(
         source: String,
         theme: DiagramTheme,
         containerWidth: CGFloat
-    ) -> NSImage? {
+    ) async -> NSImage? {
         let cacheKey = cacheKey(for: source, theme: theme)
-        if let cached = Self.imageCache.object(forKey: cacheKey as NSString) {
+        if
+            let cachedData = await Self.imageCache.data(forKey: cacheKey),
+            let cached = NSImage(data: cachedData)
+        {
             return cached
         }
 
@@ -110,7 +122,9 @@ struct MermaidDiagramRenderer {
                 Self.logger.warning("Mermaid render returned no image")
                 return nil
             }
-            Self.imageCache.setObject(image, forKey: cacheKey as NSString)
+            if let imageData = image.tiffRepresentation {
+                await Self.imageCache.set(imageData, forKey: cacheKey)
+            }
             return image
         } catch {
             Self.logger.warning("Mermaid render failed: \(error.localizedDescription, privacy: .public)")
@@ -122,6 +136,7 @@ struct MermaidDiagramRenderer {
 
     /// Wraps an NSImage in a paragraph-style-aware NSTextAttachment string, inset
     /// to match the table/blockquote margin convention (16pt on each side).
+    @MainActor
     private func attachmentString(
         for image: NSImage,
         containerWidth: CGFloat
@@ -169,6 +184,7 @@ struct MermaidDiagramRenderer {
     /// theme catalogue. Dark variants are used when `scheme == .dark`; otherwise
     /// the light variant is selected. Themes without a distinct light/dark split
     /// (dracula, monokai) always use their canonical colour set regardless of scheme.
+    @MainActor
     private func diagramTheme(for appTheme: AppTheme, scheme: ColorScheme) -> DiagramTheme {
         switch appTheme {
         case .basic:
@@ -199,29 +215,46 @@ struct MermaidDiagramRenderer {
     }
 }
 
-private final class MermaidImageCache: @unchecked Sendable {
-    private let cache = NSCache<NSString, NSImage>()
-
-    init() {
-        cache.countLimit = Self.countLimit
-        cache.totalCostLimit = Self.totalCostLimit
+private actor MermaidImageCache {
+    private struct Entry: Sendable {
+        let data: Data
+        let cost: Int
     }
 
-    func object(forKey key: NSString) -> NSImage? {
-        cache.object(forKey: key)
+    private var entries: [String: Entry] = [:]
+    private var insertionOrder: [String] = []
+    private var totalCost = 0
+
+    func data(forKey key: String) -> Data? {
+        entries[key]?.data
     }
 
-    func setObject(_ image: NSImage, forKey key: NSString) {
-        cache.setObject(image, forKey: key, cost: imageCost(for: image))
-    }
+    func set(_ data: Data, forKey key: String) {
+        let cost = data.count
 
-    private func imageCost(for image: NSImage) -> Int {
-        if let data = image.tiffRepresentation {
-            return data.count
+        if let existing = entries[key] {
+            totalCost -= existing.cost
+            insertionOrder.removeAll { $0 == key }
         }
-        let width = max(1, Int(image.size.width))
-        let height = max(1, Int(image.size.height))
-        return width * height * 4
+
+        entries[key] = Entry(data: data, cost: cost)
+        insertionOrder.append(key)
+        totalCost += cost
+
+        trimIfNeeded()
+    }
+
+    private func trimIfNeeded() {
+        while
+            entries.count > Self.countLimit
+            || totalCost > Self.totalCostLimit
+        {
+            guard let oldestKey = insertionOrder.first else { break }
+            insertionOrder.removeFirst()
+            if let removed = entries.removeValue(forKey: oldestKey) {
+                totalCost -= removed.cost
+            }
+        }
     }
 
     private static var countLimit: Int {

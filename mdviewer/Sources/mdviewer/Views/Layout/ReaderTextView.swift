@@ -19,6 +19,14 @@
         }
     }
 
+    private final class HeadingSnapshot: @unchecked Sendable {
+        let attributedString: NSAttributedString
+
+        init(attributedString: NSAttributedString) {
+            self.attributedString = attributedString
+        }
+    }
+
     // MARK: - Accessibility Elements
 
     /// Represents a heading in the document for semantic VoiceOver navigation.
@@ -37,36 +45,82 @@
         override func accessibilitySubrole() -> NSAccessibility.Subrole? { .init(rawValue: "Heading") }
 
         override nonisolated func accessibilityFrame() -> NSRect {
-            let targetView = parentView
             let headingRange = info.range
-            return MainActor.assumeIsolated {
-                guard
-                    let targetView, let lm = targetView.layoutManager,
-                    let tc = targetView.textContainer else { return .zero }
-                let glyphRange = lm.glyphRange(forCharacterRange: headingRange, actualCharacterRange: nil)
-                let rect = lm.boundingRect(forGlyphRange: glyphRange, in: tc)
-                let viewRect = NSRect(
-                    x: rect.origin.x + targetView.textContainerInset.width,
-                    y: rect.origin.y + targetView.textContainerInset.height,
-                    width: rect.width,
-                    height: rect.height
-                )
-                return targetView.window?.convertToScreen(targetView.convert(viewRect, to: nil)) ?? .zero
+            let parentSnapshot = parentView
+
+            if Thread.isMainThread {
+                return MainActor.assumeIsolated {
+                    Self.accessibilityFrame(for: parentSnapshot, range: headingRange)
+                }
+            }
+
+            return DispatchQueue.main.sync {
+                MainActor.assumeIsolated {
+                    Self.accessibilityFrame(for: parentSnapshot, range: headingRange)
+                }
             }
         }
 
         override nonisolated func accessibilityParent() -> Any? {
-            parentView
+            let parentSnapshot = parentView
+
+            if Thread.isMainThread {
+                return parentSnapshot
+            }
+
+            return DispatchQueue.main.sync { parentSnapshot }
         }
 
         override nonisolated func accessibilityPerformPress() -> Bool {
-            let targetView = parentView
             let headingRange = info.range
-            return MainActor.assumeIsolated {
-                targetView?.setSelectedRange(headingRange)
-                targetView?.scrollRangeToVisible(headingRange)
-                return true
+            let parentSnapshot = parentView
+
+            if Thread.isMainThread {
+                return MainActor.assumeIsolated {
+                    Self.performPress(on: parentSnapshot, range: headingRange)
+                }
             }
+
+            return DispatchQueue.main.sync {
+                MainActor.assumeIsolated {
+                    Self.performPress(on: parentSnapshot, range: headingRange)
+                }
+            }
+        }
+
+        @MainActor
+        private static func accessibilityFrame(
+            for targetView: ReaderTextView?,
+            range: NSRange
+        ) -> NSRect {
+            guard
+                let targetView,
+                let lm = targetView.layoutManager,
+                let tc = targetView.textContainer
+            else {
+                return .zero
+            }
+
+            let glyphRange = lm.glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+            let rect = lm.boundingRect(forGlyphRange: glyphRange, in: tc)
+            let viewRect = NSRect(
+                x: rect.origin.x + targetView.textContainerInset.width,
+                y: rect.origin.y + targetView.textContainerInset.height,
+                width: rect.width,
+                height: rect.height
+            )
+            return targetView.window?.convertToScreen(targetView.convert(viewRect, to: nil)) ?? .zero
+        }
+
+        @MainActor
+        private static func performPress(
+            on targetView: ReaderTextView?,
+            range: NSRange
+        ) -> Bool {
+            guard let targetView else { return false }
+            targetView.setSelectedRange(range)
+            targetView.scrollRangeToVisible(range)
+            return true
         }
     }
 
@@ -74,7 +128,6 @@
 
     /// Custom NSTextView subclass that constrains its text container to a readable
     /// width and centers the column horizontally within the enclosing scroll view.
-    @MainActor
     final class ReaderTextView: NSTextView, @unchecked Sendable {
         enum OutlineNavigationTarget: Equatable {
             case heading(Int)
@@ -100,20 +153,45 @@
         /// Cached accessibility elements for headings
         private var accessibilityHeadings: [AccessibilityHeading] = []
 
-        /// Triggered when the view is added to the window hierarchy — the scroll view
-        /// is guaranteed to exist here, so we can do the initial geometry pass.
+        /// Triggered when the view is added to or removed from a window hierarchy.
+        override func viewWillMove(toWindow newWindow: NSWindow?) {
+            super.viewWillMove(toWindow: newWindow)
+
+            // Remove existing observer before potentially adding a new one or closing
+            NotificationCenter.default.removeObserver(
+                self,
+                name: NSNotification.Name("JumpToLine"),
+                object: nil
+            )
+
+            if newWindow != nil {
+                // Moving to a new window
+                NotificationCenter.default.addObserver(
+                    self,
+                    selector: #selector(handleJumpToLine),
+                    name: NSNotification.Name("JumpToLine"),
+                    object: nil
+                )
+            } else {
+                // Removing from window - cancel any pending background tasks
+                deferredHeightRecomputeTask?.cancel()
+                deferredHeightRecomputeTask = nil
+
+                // Safely break associations during dismantle pass
+                delegate = nil
+            }
+        }
+
         override func viewDidMoveToWindow() {
             super.viewDidMoveToWindow()
             guard window != nil else { return }
             recomputeGeometry(force: true)
             scheduleHeadingCacheUpdate()
+        }
 
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(handleJumpToLine),
-                name: NSNotification.Name("JumpToLine"),
-                object: nil
-            )
+        deinit {
+            deferredHeightRecomputeTask?.cancel()
+            NotificationCenter.default.removeObserver(self)
         }
 
         override func layout() {
@@ -137,17 +215,19 @@
                 return
             }
 
-            // Snapshot the immutable attributed string for background scanning.
-            nonisolated(unsafe) let snapshot = NSAttributedString(attributedString: storage)
+            let snapshot = HeadingSnapshot(
+                attributedString: NSAttributedString(attributedString: storage)
+            )
             let headingKey = MarkdownRenderAttribute.headingLevel
 
             Task.detached(priority: .utility) { [weak self] in
                 var newHeadings: [HeadingInfo] = []
-                let fullRange = NSRange(location: 0, length: snapshot.length)
+                let attributedString = snapshot.attributedString
+                let fullRange = NSRange(location: 0, length: attributedString.length)
 
-                snapshot.enumerateAttribute(headingKey, in: fullRange, options: []) { value, range, _ in
+                attributedString.enumerateAttribute(headingKey, in: fullRange, options: []) { value, range, _ in
                     guard let level = value as? Int else { return }
-                    let text = snapshot.attributedSubstring(from: range).string
+                    let text = attributedString.attributedSubstring(from: range).string
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                     newHeadings.append(HeadingInfo(range: range, level: level, text: text))
                 }

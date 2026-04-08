@@ -28,7 +28,7 @@ enum PerformanceConstants {
     static let scrollCoalescingDelay: TimeInterval = 0.001
 
     /// Minimum scroll delta to report (sub-pixel precision for smooth 120fps).
-    static let minScrollDelta: CGFloat = 0.5
+    static let minScrollDelta: CGFloat = 1.0
 
     /// Delay before considering a scroll gesture settled.
     static let scrollSettleDelay: TimeInterval = 0.05

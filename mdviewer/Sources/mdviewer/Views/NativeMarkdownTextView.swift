@@ -69,6 +69,8 @@ internal import SwiftUI
             textView.isEditable = false
             textView.isSelectable = true
             textView.drawsBackground = false
+            textView.usesFontPanel = false
+            textView.isRulerVisible = false
             textView.focusRingType = NSFocusRingType.none
             textView.usesFindBar = true
             textView.isRichText = true
@@ -95,6 +97,9 @@ internal import SwiftUI
             scrollView.autohidesScrollers = true
             scrollView.documentView = textView
             scrollView.onScroll = onScroll
+
+            // Allow content to flow under title bar with automatic inset management
+            scrollView.automaticallyAdjustsContentInsets = true
 
             // Optimize scroller for 120fps
             scrollView.verticalScroller?.wantsLayer = true
@@ -138,8 +143,11 @@ internal import SwiftUI
             // Avoid redundant renders if the visual state hasn't changed.
             // This is critical for 120fps scrolling where SwiftUI may call
             // updateNSView frequently due to parent state changes.
+            let hasContent = (textView.textStorage?.length ?? 0) > 0
             if let current = coordinator.currentRequest, current == request {
-                return
+                if hasContent {
+                    return
+                }
             }
 
             let previousRequest = coordinator.currentRequest
@@ -170,8 +178,9 @@ internal import SwiftUI
             let generation = coordinator.generation
             coordinator.renderTask?.cancel()
 
-            // Width-only changes do not require a full render for regular markdown.
-            if isWidthOnlyChange, !request.requiresWidthAwareRerender {
+            // Width-only changes do not require a full render for regular markdown,
+            // UNLESS we have no content yet (startup case).
+            if isWidthOnlyChange, !request.requiresWidthAwareRerender, hasContent {
                 return
             }
 
@@ -246,6 +255,8 @@ internal import SwiftUI
         }
 
         static func dismantleNSView(_ nsView: NSScrollView, coordinator: Coordinator) {
+            // ONLY cancel the render task. Do NOT touch the view or layout manager
+            // during the dismantle pass, as this is the primary cause of deadlocks.
             coordinator.renderTask?.cancel()
             coordinator.renderTask = nil
         }
@@ -307,6 +318,12 @@ internal import SwiftUI
         private func boundsDidChange() {
             let isFirstScroll = !isScrolling
             isScrolling = true
+
+            // Suspend decoration drawing in ReaderLayoutManager to avoid heavy computation during active scroll.
+            if let lm = (documentView as? NSTextView)?.layoutManager as? ReaderLayoutManager {
+                lm.setDecorationDrawingSuspended(true)
+            }
+
             reportScrollPosition(force: isFirstScroll)
             scheduleScrollEndDetection()
         }
@@ -317,6 +334,12 @@ internal import SwiftUI
                 try? await Task.sleep(for: .seconds(PerformanceConstants.scrollSettleDelay))
                 guard !Task.isCancelled, let self else { return }
                 isScrolling = false
+
+                // Resume decoration drawing and invalidate cache so decorations reappear after scroll settles.
+                if let lm = (documentView as? NSTextView)?.layoutManager as? ReaderLayoutManager {
+                    lm.setDecorationDrawingSuspended(false)
+                    lm.invalidateDecorationCache()
+                }
             }
         }
 
@@ -342,6 +365,7 @@ internal import SwiftUI
 
         deinit {
             scrollEndTask?.cancel()
+            NotificationCenter.default.removeObserver(self)
         }
     }
 #endif
